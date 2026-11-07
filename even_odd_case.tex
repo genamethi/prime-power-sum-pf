@@ -1,0 +1,803 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\title{Two representations of a prime: $\Delta m$ even, $\Delta n$ odd}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Setup}
+
+Let $p$ be prime with two partitions sharing the same base $q$:
+\[
+p = 2^{m_1} + q^{n_1} = 2^{m_2} + q^{n_2}, \qquad m_1 > m_2, \quad n_2 > n_1,
+\]
+and set $\Delta m = m_1 - m_2$, $\Delta n = n_2 - n_1$. Subtracting gives
+\[
+2^{m_2}\left(2^{\Delta m} - 1\right) = q^{n_1}\left(q^{\Delta n} - 1\right).
+\]
+Since $\gcd(2,q) = 1$, we have $2^{m_2} \mid q^{\Delta n} - 1$ and $q^{n_1} \mid 2^{\Delta m} - 1$. Define
+\[
+A = \frac{2^{\Delta m} - 1}{q^{n_1}} = \frac{q^{\Delta n} - 1}{2^{m_2}},
+\]
+so that
+\[
+A\,q^{n_1} = 2^{\Delta m} - 1, \qquad A\,2^{m_2} = q^{\Delta n} - 1, \qquad A < 2^{\Delta m}, \quad A < q^{\Delta n}.
+\]
+Writing $p = A\,2^{m_2}q^{n_1} + 2^{m_2} + q^{n_1}$, multiplying by $A$, adding $1$:
+\[
+Ap + 1 = \left(A2^{m_2} + 1\right)\left(Aq^{n_1} + 1\right) = q^{\Delta n} \cdot 2^{\Delta m},
+\]
+\[
+\boxed{\,Ap = 2^{\Delta m} q^{\Delta n} - 1\,}
+\]
+This document treats the case $A > 1$.
+
+\section*{Why $\Delta m$ is even}
+
+For $p > 3$ we have $p \not\equiv 0 \pmod 3$. Since $2^m \equiv 2 \pmod 3$ for odd $m$ and $2^m \equiv 1 \pmod 3$ for even $m$, the condition $3 \mid p - 2^m$ holds for exactly one parity class of $m$. For $m$ in that class, $q^n = p - 2^m$ is divisible by $3$, so $q = 3$; for $m$ outside it, $q \neq 3$.
+
+In order to have the same $q$ value they therefore require $m_1 \equiv m_2 \pmod 2$, i.e. $\Delta m$ even.
+
+\section*{The quadratic form}
+
+Write $\Delta m = 2k$ and $\Delta n = 2j + 1$. With $D = 2^{e_2}q^{e_q}$ the squarefree coefficient and $X = 2^k q^j$, the master identity becomes $Ap = DX^2 - 1$. Here $e_2 = 0$, $e_q = 1$, so $D = q$:
+\[
+Ap = qX^2 - 1, \qquad X = 2^k q^j.
+\]
+Since $D \neq 1$, there is no difference of squares. Reducing modulo $p$ gives $qX^2 \equiv 1$, hence
+\[
+\left(\frac{q}{p}\right) = 1.
+\]
+Reducing modulo $q$ gives $Ap \equiv -1 \pmod q$, fixing $p \bmod q$.
+
+Size bound: from $A < 2^{\Delta m}$ and $A < q^{\Delta n}$ we get $A^2 < 2^{\Delta m}q^{\Delta n} = qX^2$, so $A < X\sqrt{q}$.
+
+\section*{Mod 3 inside the case}
+
+$\Delta m$ even gives $2^{m_1} \equiv 2^{m_2} \pmod 3$, so subtracting the two partitions yields
+\[
+q^{n_1} \equiv q^{n_2} \pmod 3.
+\]
+$\Delta n$ odd gives $n_1, n_2$ of opposite parity. If $q \equiv 2 \pmod 3$ then $q^{\text{even}} \equiv 1$, $q^{\text{odd}} \equiv -1$, forcing $1 \equiv -1 \pmod 3$. Hence
+\[
+q \equiv 1 \pmod 3.
+\]
+
+\section*{The Legendre reduction}
+
+Since $p = 2^{m_2} + q^{n_2}$, we have $p \equiv 2^{m_2} \pmod q$, so
+\[
+\left(\frac{p}{q}\right) = \left(\frac{2}{q}\right)^{m_2}.
+\]
+For $q \equiv 1 \pmod 4$, reciprocity gives $\left(\frac{q}{p}\right) = \left(\frac{p}{q}\right)$, so the condition $\left(\frac{q}{p}\right) = 1$ is equivalent to $\left(\frac{2}{q}\right)^{m_2} = 1$. Because $\Delta m$ is even, $m_1 \equiv m_2 \pmod 2$, so $\left(\frac{2}{q}\right)^{m_1}$ takes the same value.
+
+\subsection*{$q \equiv 5 \pmod 8$}
+
+Here $\left(\frac{2}{q}\right) = -1$, so $m_1$ and $m_2$ are even.
+
+Suppose $m_2 \geq 3$. Then $m_1 > m_2 \geq 3$, so $2^{m_1} \equiv 2^{m_2} \equiv 0 \pmod 8$ and
+\[
+p \equiv q^{n_1} \equiv q^{n_2} \pmod 8.
+\]
+For $q \equiv 5 \pmod 8$, $q^n \bmod 8$ equals $1$ for even $n$ and $5$ for odd $n$; $n_1, n_2$ have opposite parity, a contradiction. So $m_2 \leq 2$, and being positive and even,
+\[
+m_2 = 2.
+\]
+
+\subsection*{$q \equiv 1 \pmod 8$}
+
+Here $q^n \equiv 1 \pmod 8$ for every $n$. Since $\Delta m \geq 2$, $m_1 \geq 3$, so $p \equiv 0 + 1 \equiv 1 \pmod 8$. From $p \equiv 2^{m_2} + 1 \pmod 8$ we need $2^{m_2} \equiv 0 \pmod 8$, hence
+\[
+m_2 \geq 3.
+\]
+
+\section*{Synthesis}
+
+\subsection*{\S1. Mod 3 splits the case into two disjoint branches}
+
+$\Delta m$ even places $m_1, m_2$ in the same parity class, so both representations sit on the same side of the $3 \mid p - 2^m$ divide:
+\begin{itemize}
+\item both inside the class: $q = 3$;
+\item both outside: $q \neq 3$, so the alternation argument applies, giving $q \equiv 1 \pmod 3$.
+\end{itemize}
+
+\S5.4 places this result inside a family: it is the $\ell = 3$ instance of an odd-order condition running over all prime factors of $2^{\Delta m}-1$.
+
+\subsection*{\S2. The $q = 3$ branch is determined}
+
+$3^2 \equiv 1 \pmod 8$, so $3^{\Delta n} \equiv 3 \pmod 8$ for odd $\Delta n$, giving $v_2(3^{\Delta n} - 1) = 1$. From $A2^{m_2} = 3^{\Delta n} - 1$:
+\[
+m_2 = 1, \quad A \text{ odd}, \quad p = 2 + 3^{n_2}, \quad m_1 \text{ odd with } m_1 \geq 3.
+\]
+Applying $\left(\frac{3}{p}\right) = 1$: from $p \equiv 2 \pmod 3$ we get $\left(\frac{p}{3}\right) = \left(\frac{2}{3}\right) = -1$, so reciprocity gives $\left(\frac{3}{p}\right) = -(-1)^{(p-1)/2}$. The condition holds only for $p \equiv 3 \pmod 4$, which requires $n_2$ even, $n_1$ odd.
+
+\subsection*{\S3. The mod 8 constraint is an equivalence}
+
+$q^2 \equiv 1 \pmod 8$ for every odd $q$, so $q^n \bmod 8$ depends only on the parity of $n$: it equals $q$ for odd $n$, $1$ for even $n$. $\Delta n$ odd makes $q^{n_1}, q^{n_2}$ take both values.
+
+If $m_2 \geq 3$ then $m_1 > m_2 \geq 3$, both powers of two vanish mod $8$, forcing $q^{n_1} \equiv p \equiv q^{n_2} \pmod 8$, hence $q \equiv 1 \pmod 8$. Conversely $q \equiv 1 \pmod 8$ gives $p \equiv 1 \pmod 8$ from $m_1 \geq 3$, then $p \equiv 2^{m_2} + 1$ forces $m_2 \geq 3$.
+\[
+\boxed{\,m_2 \geq 3 \iff q \equiv 1 \pmod 8\,}
+\]
+Every $q \not\equiv 1 \pmod 8$ therefore has $m_2 \in \{1,2\}$. The hypothesis $q \equiv 5 \pmod 8$ is not needed for the upper direction.
+
+\S5.2 sharpens the equivalence to an exact valuation, $m_2 = v_2(q-1)$, from which both directions follow at once.
+
+\subsection*{\S4. $\left(\frac{q}{p}\right) = 1$ resolved across all residues of $q$ mod $8$}
+
+Reciprocity gives $\left(\frac{q}{p}\right) = \left(\frac{p}{q}\right)$ when $q \equiv 1 \pmod 4$, and $\left(\frac{q}{p}\right) = \left(\frac{p}{q}\right)(-1)^{(p-1)/2}$ when $q \equiv 3 \pmod 4$, with $\left(\frac{p}{q}\right) = \left(\frac{2}{q}\right)^{m_2}$ throughout.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+$q \bmod 8$ & $m_2$ & consequence of $\left(\frac{q}{p}\right) = 1$ \\
+\hline
+$1$ & $\geq 3$ & $\left(\frac{2}{q}\right) = 1$: holds for every $m_2, n_2$ \\
+$5$ & $\leq 2$ & $\left(\frac{2}{q}\right) = -1$ requires $m_2$ even, so $m_2 = 2$; no constraint on $n_2$ \\
+$3$ & $1$ or $2$ & $n_2$ even for either value of $m_2$ \\
+$7$ & $1$ or $2$ & $m_2 = 1 \Rightarrow n_2$ odd; $m_2 = 2 \Rightarrow n_2$ even \\
+\hline
+\end{tabular}
+\end{center}
+
+The $q \equiv 3 \pmod 4$ rows come from $p = 2^{m_2} + q^{n_2}$ read modulo $4$. For $m_2 = 2$, $\left(\frac{2}{q}\right)^2 = 1$ leaves the requirement $p \equiv 1 \pmod 4$, so $q^{n_2} \equiv 1 \pmod 4$, so $n_2$ is even. For $m_2 = 1$, $p \equiv 1 \pmod 4$ when $n_2$ is odd, $p \equiv 3 \pmod 4$ when $n_2$ is even; matching the required sign against $\left(\frac{2}{q}\right)$ selects $n_2$ odd for $q \equiv 7 \pmod 8$, $n_2$ even for $q \equiv 3 \pmod 8$.
+
+The ambiguity $m_2 \in \{1,2\}$ in the last two rows is resolved in \S5.2, where $m_2 = v_2(q-1) = 1$ for every $q \equiv 3 \pmod 4$; the surviving statements are $n_2$ even for $q \equiv 3 \pmod 8$, $n_2$ odd for $q \equiv 7 \pmod 8$.
+
+\subsection*{\S5. The arithmetic of $A$}
+
+\subsubsection*{\S5.1 $A$ is odd, coprime to $q$}
+
+$A q^{n_1} = 2^{\Delta m} - 1$ is odd, so $A$ is odd. Reducing $A 2^{m_2} = q^{\Delta n} - 1$ modulo $q$ gives $A2^{m_2} \equiv -1$, so $q \nmid A$. Together these give
+\[
+n_1 = v_q\!\left(2^{\Delta m} - 1\right), \qquad
+A = \frac{2^{\Delta m}-1}{q^{n_1}} = \text{the } q\text{-free part of } 2^{\Delta m}-1 .
+\]
+$A$ is therefore not a free divisor of the Mersenne number: it is determined by the pair $(q, \Delta m)$, and every prime $\ell \neq q$ dividing $2^{\Delta m}-1$ divides $A$ to full multiplicity.
+
+\subsubsection*{\S5.2 $m_2 = v_2(q-1)$}
+
+$A$ odd applied to $A2^{m_2} = q^{\Delta n} - 1$ gives $m_2 = v_2(q^{\Delta n}-1)$. For odd $q$ with $\Delta n$ odd,
+\[
+q^{\Delta n} - 1 = (q-1)\left(q^{\Delta n - 1} + \cdots + q + 1\right),
+\]
+the second factor being a sum of $\Delta n$ odd terms, hence odd. So $v_2(q^{\Delta n}-1) = v_2(q-1)$ and
+\[
+\boxed{\,m_2 = v_2(q-1)\,}
+\]
+Reading this against the residue classes of \S3 and \S4:
+\begin{center}
+\begin{tabular}{ll}
+\hline
+$q \bmod 8$ & $m_2$ \\
+\hline
+$3,\ 7$ & $1$ \\
+$5$ & $2$ \\
+$1$ & $v_2(q-1) \geq 3$ \\
+\hline
+\end{tabular}
+\end{center}
+The equivalence $m_2 \geq 3 \iff q \equiv 1 \pmod 8$ of \S3 is the statement $v_2(q-1) \geq 3 \iff 8 \mid q-1$. The value $m_2 = 2$ for $q \equiv 5 \pmod 8$ agrees with \S4. The $q = 3$ determination of \S2 is the instance $v_2(2) = 1$.
+
+\subsubsection*{\S5.3 The case reduces to one equation in $(q, \Delta m)$}
+
+Since $q^{n_1} \mid 2^{\Delta m}-1$, the base $q$ is a prime factor of $2^{\Delta m}-1$. For fixed $\Delta m$ there are only $\omega\!\left(2^{\Delta m}-1\right)$ such primes, and each one determines $n_1$ and $A$ by \S5.1, then $m_2$ by \S5.2. The single remaining unknown $\Delta n$ is read off from $A2^{m_2} = q^{\Delta n}-1$.
+
+\medskip
+\noindent\textbf{Decision procedure.} For even $\Delta m$, for each prime $q \mid 2^{\Delta m}-1$: set
+\[
+n_1 = v_q\!\left(2^{\Delta m}-1\right), \qquad A = \frac{2^{\Delta m}-1}{q^{n_1}}, \qquad m_2 = v_2(q-1).
+\]
+A configuration exists exactly when $A\cdot 2^{m_2} + 1$ is an \emph{odd} power of $q$. In that case $\Delta n$ is its exponent, $m_1 = m_2 + \Delta m$, $n_2 = n_1 + \Delta n$, $p = 2^{m_2} + q^{n_2}$.
+
+\medskip
+The parity requirement on $\Delta n$ is carried inside the procedure rather than imposed separately. Verification costs $O(1)$ per candidate once $2^{\Delta m}-1$ is factored, so each $\Delta m$ admits at most $\omega\!\left(2^{\Delta m}-1\right)$ candidates in place of a search over $(m_1, m_2, n_1, n_2)$.
+
+The reconstruction is exact: with $A q^{n_1} = 2^{\Delta m}-1$ and $A2^{m_2} = q^{\Delta n}-1$,
+\[
+2^{m_1} + q^{n_1} = 2^{m_2}\!\left(Aq^{n_1}+1\right) + q^{n_1} = \left(q^{\Delta n}-1\right)q^{n_1} + 2^{m_2} + q^{n_1} = 2^{m_2} + q^{n_2}.
+\]
+
+At the bottom of the range, $\Delta m = 2$ gives $q^{n_1} = 3$ and $A = 1$, so this case has $\Delta m \geq 4$. Running the procedure:
+\begin{center}
+\begin{tabular}{rlll}
+\hline
+$\Delta m$ & $2^{\Delta m}-1$ & candidates $q$ & surviving \\
+\hline
+$4$ & $3\cdot 5$ & $3, 5$ & --- \\
+$6$ & $3^2\cdot 7$ & $3, 7$ & --- \\
+$8$ & $3\cdot 5\cdot 17$ & $3, 5, 17$ & --- \\
+$10$ & $3\cdot 11\cdot 31$ & $3, 11, 31$ & --- \\
+$12$ & $3^2\cdot 5\cdot 7\cdot 13$ & $3, 5, 7, 13$ & --- \\
+$14$ & $3\cdot 43\cdot 127$ & $3, 43, 127$ & --- \\
+$18$ & $3^3\cdot 7\cdot 19\cdot 73$ & $3, 7, 19, 73$ & --- \\
+$22$ & $3\cdot 23\cdot 89\cdot 683$ & $3, 23, 89, 683$ & --- \\
+$26$ & $3\cdot 2731\cdot 8191$ & $3, 2731, 8191$ & --- \\
+$30$ & $3^2\cdot 7\cdot 11\cdot 31\cdot 151\cdot 331$ & six & --- \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{\S5.4 Subgroup exclusion as a closure condition on one Mersenne number}
+
+From $A 2^{m_2} = q^{\Delta n}-1$ we have $A \mid q^{\Delta n}-1$ with $\Delta n$ odd, so $\operatorname{ord}_\ell(q) \mid \Delta n$ is odd for every prime $\ell \mid A$. By \S5.1 the primes dividing $A$ are exactly the primes of $2^{\Delta m}-1$ other than $q$:
+\[
+q \text{ admissible} \iff \operatorname{ord}_\ell(q) \text{ is odd for every prime } \ell \mid 2^{\Delta m}-1,\ \ell \neq q .
+\]
+The force of this is that $q$ and the $\ell$ are drawn from the same factorization. It is a closure condition internal to $2^{\Delta m}-1$: its prime factors must be mutually compatible under odd-order membership, with $q$ the distinguished element. It is not a condition on $q$ ranging freely over the primes.
+
+Equivalently, $q$ lies in the odd-order subgroup of $(\mathbb{Z}/\ell\mathbb{Z})^\times$, of index $2^{s_\ell}$ with $s_\ell = v_2(\ell-1)$; in particular $\left(\frac{q}{\ell}\right) = 1$. Since $\operatorname{ord}_\ell(2) \mid \Delta m$ forces $\ell \equiv 1 \pmod{\operatorname{ord}_\ell(2)}$, we get $s_\ell \geq v_2\!\left(\operatorname{ord}_\ell(2)\right)$, so the indices are driven by the even divisors of $\Delta m$.
+
+Instances: $3 \mid 2^{\Delta m}-1$ for every even $\Delta m$, and the odd-order subgroup of $(\mathbb{Z}/3\mathbb{Z})^\times$ is trivial, so $q \equiv 1 \pmod 3$ for $q \neq 3$ --- the result of \S1. When $4 \mid \Delta m$, $\ell = 5$ gives $q \equiv 1 \pmod 5$. When $3 \mid \Delta m$, $\ell = 7$ gives $q \equiv 1, 2, 4 \pmod 7$. When $8 \mid \Delta m$, $\ell = 17$ gives $q \equiv 1 \pmod{17}$.
+
+\medskip
+\noindent\textbf{The shape of escape.} A $\Delta m$ with many divisors makes $2^{\Delta m}-1$ prime-rich with large $s_\ell$, and admissibility fails. For $\Delta m = 12$ the four candidates carry $\sum s_\ell = 6$ and every one fails: $\operatorname{ord}_5(3) = 4$, $\operatorname{ord}_3(5) = 2$, $\operatorname{ord}_5(7) = 4$, $\operatorname{ord}_5(13) = 4$. Escape requires $2^{\Delta m}-1$ sparse in primes, pushing toward $\Delta m = 2k$ with $k$ an odd prime, where $2^{\Delta m}-1 = (2^k-1)(2^k+1)$ with $3 \mid 2^k+1$. Every candidate surviving the closure condition in the range above has that shape, with $q = 2^k-1$ a Mersenne prime:
+\[
+\Delta m = 6,\ q = 7; \qquad \Delta m = 10,\ q = 31; \qquad \Delta m = 14,\ q = 127; \qquad \Delta m = 26,\ q = 8191 .
+\]
+These pass because $\operatorname{ord}_3(2^k-1) = 1$ for odd $k$, with the remaining prime factors of $2^k+1$ carrying odd order at $q$.
+
+\subsubsection*{\S5.5 The Mersenne survivors are eliminated in closed form}
+
+Let $q = 2^k-1$ be prime with $\Delta m = 2k$, $k \geq 3$. Then $n_1 = 1$ and
+\[
+A = \frac{2^{2k}-1}{2^k-1} = 2^k+1, \qquad m_2 = v_2\!\left(2^k-2\right) = 1,
+\]
+so \S5.3 requires
+\[
+\left(2^k-1\right)^{\Delta n} = 2A + 1 = 2^{k+1}+3 .
+\]
+For $\Delta n = 1$ this reads $2^k - 1 = 2^{k+1}+3$, impossible. For odd $\Delta n \geq 3$, $\left(2^k-1\right)^3 > 2^{k+1}+3$ for all $k \geq 2$. There are no solutions, for any $k$.
+
+The Fermat analogue is excluded upstream: if $q = 2^k+1$ is prime with $k \geq 2$ then $k$ is even, so $q \equiv 2 \pmod 3$, failing \S5.4 at $\ell = 3$.
+
+\subsubsection*{\S5.6 Removing the Wieferich exposure}
+
+Let $d = \operatorname{ord}_q(2)$, so $d \mid \Delta m$ and $q \nmid d$. Lifting the exponent gives
+\[
+n_1 = v_q\!\left(2^{\Delta m}-1\right) = v_q\!\left(2^{d}-1\right) + v_q(k), \qquad \Delta m = 2k .
+\]
+Reducing this to $n_1 = 1 + v_q(k)$ requires $v_q(2^d-1) = 1$, which is verified only for $q < 2^{64}$ outside the two known exceptions. Two unconditional substitutes:
+
+\begin{enumerate}
+\item Use $n_1 = v_q\!\left(2^{\Delta m}-1\right)$ directly, as in \S5.1. This is exact with no hypothesis, and it is a valuation of a number already factored in order to enumerate the candidates $q$.
+\item $\Delta m$ even splits $2^{\Delta m}-1 = \left(2^k-1\right)\left(2^k+1\right)$ into coprime factors --- both odd, differing by $2$ --- so the prime power $q^{n_1}$ divides exactly one of them:
+\[
+q^{n_1} \leq 2^k+1 \quad\Longrightarrow\quad n_1 \leq \log_q\!\left(2^{\Delta m/2}+1\right),
+\]
+with $A \geq 2^{\Delta m/2}-1$ from the complementary factor. Which factor absorbs $q^{n_1}$ also fixes the order: $d \mid k$ in the first case, $d \mid 2k$ with $d \nmid k$ in the second.
+\end{enumerate}
+Neither substitute refers to the Wieferich status of $q$.
+
+\subsection*{\S6. The common divisor $d = \gcd(\Delta m, \Delta n)$}
+
+The surviving space requires $\Delta m$ and $\Delta n$ coprime. This section records how far that requirement is proved. The letter $X$ is reserved above for the quadratic-form root $2^k q^j$; the block used here is written $Y$.
+
+\subsubsection*{\S6.1 Notation}
+
+Assume $d = \gcd(\Delta m, \Delta n) \geq 2$ and write
+\[
+\Delta m = c_1 d, \qquad \Delta n = c_2 d, \qquad \gcd(c_1,c_2) = 1,
+\]
+\[
+U = 2^{c_1} \ (\text{even}, \ \geq 2), \qquad V = q^{c_2} \ (\text{odd prime power}, \ \geq 3), \qquad Y = UV \geq 6 .
+\]
+Then $Y^d = 2^{\Delta m} q^{\Delta n}$, so the master identity reads
+\[
+A p = Y^d - 1 .
+\]
+Write $\Phi_e$ for the $e$-th cyclotomic polynomial, so that $Y^d - 1 = \prod_{e \mid d} \Phi_e(Y)$ with $\Phi_1(Y) = Y-1$.
+
+\subsubsection*{\S6.2 The bound on $A$}
+
+From the gap equations, $A < 2^{\Delta m}/q^{n_1}$ and $A < q^{\Delta n}/2^{m_2}$. Multiplying, with $m_2 \geq 1$, $n_1 \geq 1$, $q \geq 3$ giving $2^{m_2} q^{n_1} \geq 6$:
+\[
+A^2 < \frac{2^{\Delta m} q^{\Delta n}}{2^{m_2} q^{n_1}} \leq \frac{Y^d}{6},
+\qquad\text{so}\qquad
+\boxed{\,A < \frac{Y^{d/2}}{\sqrt 6}\,}
+\]
+
+\subsubsection*{\S6.3 Primality selects $\Phi_d$}
+
+The prime $p$ divides at least one factor $\Phi_e(Y)$ with $e \mid d$. Fix such an $e$; since $p \leq \Phi_e(Y)$,
+\[
+A = \frac{Y^d - 1}{p} \geq \frac{Y^d-1}{\Phi_e(Y)} .
+\]
+
+\emph{$e = 1$ is impossible.} It would give $A \geq \frac{Y^d-1}{Y-1} > Y^{d-1} \geq Y^{d/2}$ for $d \geq 2$, against \S6.2.
+
+\emph{$1 < e < d$ is impossible.} Such an $e$ satisfies $e \leq d/2$, and $\Phi_e(Y) \mid Y^e - 1 < Y^{d/2}$, so
+\[
+A > \frac{Y^d-1}{Y^{d/2}} = Y^{d/2} - Y^{-d/2} .
+\]
+Against \S6.2 this requires $\left(1 - 1/\sqrt6\right) Y^{d/2} < Y^{-d/2}$, i.e. $0.59\,Y^{d/2} < Y^{-d/2}$, false for $Y \geq 6$.
+
+Hence $p \mid \Phi_d(Y)$, with three consequences:
+\begin{enumerate}
+\item[(C1)] $\displaystyle \prod_{e \mid d,\ e < d} \Phi_e(Y) = \frac{Y^d-1}{\Phi_d(Y)}$ divides $A$.
+\item[(C2)] $\operatorname{ord}_p(Y) = d$, since $p \nmid d$ and $p \nmid Y$; hence $p \equiv 1 \pmod d$.
+\item[(C3)] $\Phi_d(Y)/p$ is a positive integer, equal to $A \big/ \frac{Y^d-1}{\Phi_d(Y)}$.
+\end{enumerate}
+
+\subsubsection*{\S6.4 Every even $d$ is closed}
+
+For even $d$, $\Phi_d(Y)$ does not divide $Y^{d/2}-1$, so it divides the complementary factor:
+\[
+\Phi_d(Y) \ \Big| \ \frac{Y^d-1}{Y^{d/2}-1} = Y^{d/2}+1 .
+\]
+Therefore
+\[
+A \geq \frac{Y^d-1}{Y^{d/2}+1} = Y^{d/2}-1,
+\]
+contradicting \S6.2 by the computation above. At $d = 2$ this is $\Phi_2(Y) = Y+1$, recovering the difference-of-squares obstruction.
+
+\subsubsection*{\S6.5 Odd $d$ reduces to a prime}
+
+Let $r$ be any prime dividing $d$ and set $s = d/r$. Define
+\[
+U' = U^{s} = 2^{a}, \quad a = c_1 s; \qquad V' = V^{s} = q^{b}, \quad b = c_2 s; \qquad Y' = Y^{s} = U'V' .
+\]
+Then $U'^{\,r} = 2^{\Delta m}$ and $V'^{\,r} = q^{\Delta n}$, so $(U', V', r)$ is a configuration with the same $p$, $A$, $m_2$, $n_1$, $\Delta m$, $\Delta n$, satisfying the same gap equations, the same identity $Ap = Y'^{\,r}-1$, and the same bound $A < Y'^{\,r/2}/\sqrt6$. Prime exponents therefore suffice.
+
+\subsubsection*{\S6.6 $r = 3$ is closed}
+
+By (C1) the only proper divisor is $e = 1$, so $(Y'-1) \mid A$. Feeding this into the gap equations,
+\[
+(Y'-1) \mid U'^{\,3}-1, \qquad (Y'-1) \mid V'^{\,3}-1 .
+\]
+Modulo $Y'-1$ we have $U'V' \equiv 1$, so $V' \equiv U'^{-1}$ and the two divisibilities are a single condition. Write it for whichever of $U', V'$ is smaller, calling it $W$ and the other $Z$:
+\[
+W^2 \equiv Z \pmod{ZW-1}, \qquad\text{i.e.}\qquad W^2 = i(ZW-1) + Z, \quad i \geq 0 .
+\]
+Since $W < Z$ we have $W^2 < ZW$. If $i \geq 1$ the right side is at least $ZW - 1 + Z > ZW$, a contradiction. So $i = 0$ and $W^2 = Z$, meaning $2^{2a} = q^{b}$ or $q^{2b} = 2^{a}$, impossible for distinct prime bases.
+
+With \S6.5, every $d$ divisible by $3$ is closed.
+
+\subsubsection*{\S6.7 $r$ prime, $r \geq 5$}
+
+The congruence of \S6.6 becomes $W^{r-1} \equiv Z \pmod{ZW-1}$, so
+\[
+Z = \frac{W^{r-1}+i}{iW+1}, \qquad i \geq 0 .
+\]
+Multiplying the numerator by $i^{r-1}$ and reducing modulo $iW+1$, where $iW \equiv -1$ and $r-1$ is even, gives $i^{r-1}\left(W^{r-1}+i\right) \equiv 1 + i^{r}$, hence
+\[
+(iW+1) \mid \left(i^{r}+1\right).
+\]
+Three regimes:
+\begin{itemize}
+\item $i = 0$ gives $Z = W^{r-1}$, impossible on distinct prime bases.
+\item $i = 1$ requires $(W+1) \mid \left(W^{r-1}+1\right)$. Since $W \equiv -1 \pmod{W+1}$ with $r-1$ even, $W^{r-1} \equiv 1$, so this needs $(W+1) \mid 2$. No solutions. The parametric family present at even exponents does not exist here.
+\item $i \geq 2$ is the live regime, bounded only weakly: $W \leq i^{r-1}$ from the divisibility, and $i \lesssim W^{r-3}$ from $Z > W$.
+\end{itemize}
+
+\medskip
+\noindent\textbf{Where the $r=3$ argument stops.} The contradiction in \S6.6 needs $W^{r-1} \leq ZW$, that is
+\[
+Z \geq W^{r-2} .
+\]
+At $r=3$ this reads $Z \geq W$, true by construction. At $r \geq 5$ it is an additional hypothesis, and every pair with $W < Z < W^{r-2}$ escapes. The escape band widens with $r$.
+
+\medskip
+\noindent\textbf{Order reformulation.} Put $N = Y'-1 = 2^{a}q^{b}-1$, coprime to $q$ since $N \equiv -1 \pmod q$. By (C1), $N \mid A$, and $A q^{n_1} = 2^{ar}-1$, so
+\[
+\boxed{\,N = 2^{a}q^{b}-1 \ \text{ divides } \ 2^{ar}-1\,}
+\]
+Thus $\operatorname{ord}_N(2^{a}) \mid r$. It is not $1$, since $N \mid 2^a-1$ would force $N \leq 2^a - 1 < N$. As $r$ is prime, $\operatorname{ord}_N(2^{a}) = r$ exactly, and symmetrically $\operatorname{ord}_N(q^{b}) = r$. Consequently, for each prime $\ell \mid N$,
+\[
+\ell \mid 2^{a}-1 \qquad\text{or}\qquad \ell \equiv 1 \pmod r,
+\]
+with at least one $\ell$ of the second kind.
+
+\subsubsection*{\S6.8 Specialization to $\Delta m$ even, $\Delta n$ odd}
+
+Here $d$ is odd, so $c_2$ and $b$ are odd, while $c_1$ and $a$ are even --- so $U' = 2^{a}$ is a perfect square. By \S6.6 every prime factor of $d$ is at least $5$. Carried in from \S5: $m_2 = v_2(q-1)$, $n_1 = v_q\!\left(2^{\Delta m}-1\right)$, and $A$ is the $q$-free part of $2^{\Delta m}-1$.
+
+Two conditions on the primes of $N$ arrive from different directions and hold simultaneously:
+\begin{itemize}
+\item From \S6.7: every prime $\ell \mid N$ divides $2^{a}-1$ or satisfies $\ell \equiv 1 \pmod r$.
+\item From \S5.4: $N \mid 2^{\Delta m}-1$ and $\Delta n$ is odd, so every prime $\ell \mid N$ with $\ell \neq q$ has $\operatorname{ord}_\ell(q)$ odd, hence $\left(\frac{q}{\ell}\right) = 1$.
+\end{itemize}
+Alongside these, (C2) gives $p \equiv 1 \pmod r$, and (C3) caps the cofactor $\Phi_r(Y')/p$ below roughly $Y'^{\,r/2-1}/\sqrt6$, forcing $p$ to be a nearly full-size factor of $\Phi_r(Y')$ while $\operatorname{ord}_p(Y') = r$.
+
+\subsubsection*{\S6.9 The congruence modulo $V'+1$}
+
+Take the divisibility of \S6.6 in the form that solves for $U'$:
+\[
+V'^{\,r-1} - U' = t\left(U'V'-1\right), \qquad t \geq 0 .
+\]
+Since $U' < U'V'-1$, $U'$ is the least positive residue of $V'^{\,r-1}$ modulo $U'V'-1$, so $t \geq 0$; and $t = 0$ would give $U' = V'^{\,r-1}$, impossible on distinct prime bases. Hence $t \geq 1$ and
+\[
+U' = \frac{V'^{\,r-1}+t}{tV'+1} .
+\]
+
+\medskip
+\noindent\textbf{$t$ is odd.} Were $t$ even, both $V'^{\,r-1}+t$ and $tV'+1$ would be odd, making $U'$ odd; but $U' = 2^{a}$ with $a \geq 1$.
+
+\medskip
+\noindent\textbf{The congruence.} Reduce $U'\left(tV'+1\right) = V'^{\,r-1}+t$ modulo $V'+1$, where $V' \equiv -1$ and $r-1$ is even:
+\[
+\boxed{\,U'(1-t) \equiv 1+t \pmod{V'+1}\,}
+\]
+
+\medskip
+\noindent\textbf{The $2$-adic split.} By \S6.8 the exponent $b$ is odd, so lifting the exponent gives $v_2(V'-1) = v_2(q-1) = m_2$. For $q \equiv 1 \pmod 4$, $m_2 \geq 2$, hence $V' \equiv 1 \pmod 4$ and
+\[
+v_2(V'+1) = 1, \qquad V'+1 = 2w \quad\text{with } w \text{ odd},\ w \geq 3 .
+\]
+Modulo $2$ the congruence holds identically, since $U'$ is even and $t$ is odd. Setting $\alpha = (t-1)/2$ and $\beta = (t+1)/2$, so that $\beta = \alpha+1$ and $\gcd(\alpha,\beta) = 1$, division by $2$ gives
+\[
+U'\alpha \equiv -\beta \pmod{w} .
+\]
+
+\begin{enumerate}
+\item[(P1)] $\gcd\!\left(\frac{t-1}{2},\ \frac{V'+1}{2}\right) = 1$. A common prime would divide $\beta$, against $\gcd(\alpha,\beta) = 1$.
+\item[(P2)] $\alpha$ is invertible modulo $w$, so
+\[
+U' \equiv -\frac{t+1}{t-1} \pmod{w} .
+\]
+\item[(P3)] Since $U' = 2^{a}$, this class lies in $\langle 2 \rangle \subseteq \left(\mathbb{Z}/w\mathbb{Z}\right)^\times$, of index $\varphi(w)/\operatorname{ord}_w(2)$.
+\item[(P4)] By \S6.8 the exponent $a$ is even, so $U'$ is a perfect square. Since
+\[
+-\frac{t+1}{t-1} = \frac{1-t^2}{(t-1)^2}
+\]
+with $(t-1)^2$ a unit square modulo $w$ by (P1), every prime $\ell \mid w$ satisfies
+\[
+\left(\frac{1-t^{2}}{\ell}\right) = 1 .
+\]
+\end{enumerate}
+
+Because $b$ is odd, $q+1$ divides $q^{b}+1$, and $v_2(q+1) = 1$ for $q \equiv 1 \pmod 4$, so $(q+1)/2$ is an odd divisor of $w$. Hence $1-t^{2}$ is a quadratic residue modulo every prime dividing $(q+1)/2$, independent of $b$.
+
+\medskip
+\noindent\textbf{The symmetric side.} Writing $U'^{\,r-1} - V' = s\left(U'V'-1\right)$ and reducing $V'\left(sU'+1\right) = U'^{\,r-1}+s$ modulo the odd number $U'+1$ gives $s$ odd together with
+\[
+\gcd\!\left(\frac{s-1}{2},\ U'+1\right) = 1, \qquad V' \equiv -\frac{s+1}{s-1} \pmod{2^{a}+1} .
+\]
+
+\medskip
+\noindent\textbf{Scope.} The split uses $q \equiv 1 \pmod 4$. For $q \equiv 3 \pmod 4$, $m_2 = 1$, so $V' \equiv 3 \pmod 4$ and $v_2(V'+1) \geq 2$; that sub-branch needs separate treatment.
+
+\medskip
+\begin{center}
+\begin{tabular}{ll}
+\hline
+$d = \gcd(\Delta m, \Delta n)$ & status \\
+\hline
+even & closed, \S6.4 \\
+odd, divisible by $3$ & closed, \S6.5 then \S6.6 \\
+odd, least prime factor $\geq 5$ & open, \S6.7 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{\S7. The parity of $n_1$}
+
+\subsubsection*{\S7.1 Both parities are fixed wherever \S4 speaks}
+
+$\Delta n$ odd makes $n_1$ and $n_2$ of opposite parity, so the $n_2$ column of \S4 determines $n_1$ as well:
+\[
+q \equiv 3 \!\!\pmod 8 \ \Rightarrow\ n_2 \text{ even},\ n_1 \text{ odd}; \qquad
+q \equiv 7 \!\!\pmod 8 \ \Rightarrow\ n_2 \text{ odd},\ n_1 \text{ even}.
+\]
+For $q \equiv 1 \pmod 4$ the Legendre condition is already satisfied by \S5.2, so it fixes neither parity.
+
+\subsubsection*{\S7.2 $q \equiv 7 \pmod 8$ forces a square divisor}
+
+Here $n_1$ is even with $n_1 \geq 1$, hence $n_1 \geq 2$, hence
+\[
+\boxed{\,q^{2} \mid 2^{\Delta m}-1, \qquad\text{equivalently}\qquad \operatorname{ord}_{q^{2}}(2) \mid \Delta m\,}
+\]
+Since $\operatorname{ord}_{q^2}(2)$ equals $\operatorname{ord}_q(2)$ or $q\cdot\operatorname{ord}_q(2)$, reading this as $q \mid \Delta m$ would require $q$ to be non-Wieferich for base $2$. Stated as the divisibility above it carries no such hypothesis.
+
+\subsubsection*{\S7.3 The parity condition on $v_q(\Delta m)$}
+
+By \S5.6, with $e = \operatorname{ord}_q(2)$,
+\[
+n_1 = v_q\!\left(2^{\Delta m}-1\right) = v_q\!\left(2^{e}-1\right) + v_q(\Delta m),
+\]
+so \S7.1 becomes a congruence on $v_q(\Delta m)$ modulo $2$. For $q = 3$, where $e = 2$ and $v_3\!\left(2^2-1\right) = 1$, this reads $n_1 = 1 + v_3(\Delta m)$, and $3 \equiv 3 \pmod 8$ requires $n_1$ odd, so
+\[
+v_3(\Delta m) \text{ is even},
+\]
+removing $\Delta m = 6, 12, 24, 30, 48, \dots$ from the $q = 3$ branch.
+
+\subsubsection*{\S7.4 A perfect square}
+
+Exactly one of $n_1, n_2$ is even, so exactly one of $q^{n_1}, q^{n_2}$ is a perfect square, hence exactly one of $p - 2^{m_1}$, $p - 2^{m_2}$ is. Since $2^{m_2}$ is fixed by $q$ through \S5.2:
+\[
+q \equiv 3 \!\!\pmod 8: \quad p - 2 = \left(q^{n_2/2}\right)^{2}, \qquad
+q \equiv 7 \!\!\pmod 8: \quad p - 2^{m_1} = \left(q^{n_1/2}\right)^{2}.
+\]
+In the first case $q^{n_2/2}$ is odd, so $p \equiv 3 \pmod 8$. The statement is unconditional, but silent for $q \equiv 1 \pmod 4$, where \S4 leaves the parity of $n_2$ free.
+
+\subsubsection*{\S7.5 Where the branches stand}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+$q \bmod 8$ & $m_2$ & available from \S4 \\
+\hline
+$3$ & $1$ & $n_1$ odd; $p - 2$ a perfect square \\
+$7$ & $1$ & $n_1$ even, so $\operatorname{ord}_{q^2}(2) \mid \Delta m$; $p - 2^{m_1}$ a perfect square \\
+$5$ & $2$ & symbol automatic --- no parity information \\
+$1$ & $v_2(q-1) \geq 3$ & symbol automatic --- no parity information \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{\S8. The factorization $A = u\Psi$}
+
+\subsubsection*{\S8.1 The factorization}
+
+Write $u$ for the odd part of $q-1$, so $q - 1 = 2^{m_2}u$ by \S5.2, and
+\[
+\Psi = \frac{q^{\Delta n}-1}{q-1} = 1 + q + \cdots + q^{\Delta n-1},
+\]
+a sum of $\Delta n$ odd terms with $\Delta n$ odd, hence odd. From $A\,2^{m_2} = q^{\Delta n}-1 = 2^{m_2}u\Psi$,
+\[
+\boxed{\,A = u\,\Psi\,}
+\]
+and since $A \mid 2^{\Delta m}-1$, both factors divide it:
+\[
+u \mid 2^{\Delta m}-1, \qquad \Psi \mid 2^{\Delta m}-1 .
+\]
+The first involves only $q$ and $\Delta m$, with no reference to $\Delta n$. Overlaps are controlled: $\gcd\!\left(q^{n_1},u\right) = \gcd\!\left(q^{n_1},\Psi\right) = 1$, and since $\Psi \equiv \Delta n \pmod{q-1}$, every common prime of $u$ and $\Psi$ divides $\Delta n$. Combining with the coprime split of \S5.5,
+\[
+q^{n_1}\cdot u \cdot \Psi \ = \ \left(2^{k}-1\right)\left(2^{k}+1\right), \qquad \Delta m = 2k,
+\]
+with the two right-hand factors coprime and $q^{n_1}$ lying wholly inside one of them.
+
+\subsubsection*{\S8.2 The order condition on $\Delta m$}
+
+Let $e = \operatorname{ord}_q(2)$, so $e \mid \Delta m$. Every odd prime $\ell \mid u$ divides $2^{\Delta m}-1$ by \S8.1, so $\operatorname{ord}_\ell(2) \mid \Delta m$. Hence
+\[
+\boxed{\ \operatorname{lcm}\Big(\operatorname{ord}_q(2),\ \big\{\operatorname{ord}_\ell(2) : \ell \text{ prime},\ \ell \mid u\big\}\Big)\ \Big|\ \Delta m\ }
+\]
+strictly stronger than $\operatorname{ord}_q(2) \mid \Delta m$. For $q = 31$: $\operatorname{ord}_{31}(2) = 5$ and $u = 15$ with $\operatorname{ord}_3(2)=2$, $\operatorname{ord}_5(2)=4$, so $20 \mid \Delta m$ where the weaker condition gives only $10 \mid \Delta m$.
+
+\subsubsection*{\S8.3 An exact valuation identity}
+
+Let $\ell$ be an odd prime with $\ell \mid q-1$, and $d = \operatorname{ord}_\ell(2)$. Then $d \mid \Delta m$ by \S8.2, and $\ell \nmid d$ since $d \mid \ell-1$. Lifting the exponent on each side of $A q^{n_1} = 2^{\Delta m}-1$, where $\ell \neq q$:
+\[
+v_\ell\!\left(2^{\Delta m}-1\right) = v_\ell\!\left(2^{d}-1\right) + v_\ell(\Delta m), \qquad
+v_\ell(A) = v_\ell(q-1) + v_\ell(\Delta n),
+\]
+the second because $v_\ell(u) = v_\ell(q-1)$ and $v_\ell(\Psi) = v_\ell\!\left(q^{\Delta n}-1\right)-v_\ell(q-1) = v_\ell(\Delta n)$. Equating,
+\[
+\boxed{\,v_\ell\!\left(2^{\operatorname{ord}_\ell(2)}-1\right) + v_\ell(\Delta m) \ = \ v_\ell(q-1) + v_\ell(\Delta n)\,}
+\]
+for every odd prime $\ell \mid q-1$. At $\ell = 3$, using $\operatorname{ord}_3(2) = 2$, $v_3(3) = 1$, and $q \equiv 1 \pmod 3$ from \S1:
+\[
+1 + v_3(\Delta m) = v_3(q-1) + v_3(\Delta n),
+\]
+so $3 \nmid \Delta n$ pins $v_3(q-1) = 1 + v_3(\Delta m)$ exactly, while $\Delta n = 3$ gives $v_3(q-1) = v_3(\Delta m)$.
+
+The identity is sharp when $q-1$ carries high odd prime powers. For $q = 163$, where $q - 1 = 2\cdot 3^{4}$ and $q \equiv 3 \pmod 8$, $q \equiv 1 \pmod 3$:
+\[
+1 + v_3(\Delta m) = 4 + v_3(\Delta n) \quad\Longrightarrow\quad v_3(\Delta m) \geq 3 \quad\Longrightarrow\quad 27 \mid \Delta m,
+\]
+and $\Delta m$ even gives $54 \mid \Delta m$, on top of $\operatorname{ord}_{163}(2) \mid \Delta m$.
+
+\subsubsection*{\S8.4 Primitive divisors of $\Psi$}
+
+Every prime $\ell \mid \Psi$ satisfies $\operatorname{ord}_\ell(q) \mid \Delta n$ and, by \S8.1, $\operatorname{ord}_\ell(2) \mid \Delta m$. If $\operatorname{ord}_\ell(q) = 1$ then $\ell \mid q-1$, and $\Psi \equiv \Delta n \pmod \ell$ forces $\ell \mid \Delta n$. Otherwise $\operatorname{ord}_\ell(q) = e' > 1$ with $e' \mid \Delta n$ and $e' \mid \ell - 1$; as both $\ell$ and $e'$ are odd, $2e' \mid \ell-1$, so $\ell \equiv 1 \pmod{2e'}$.
+
+Since $\Delta n \geq 3$ is odd (\S9.4) and $q \geq 3$, Zsigmondy applies without exception, so $q^{\Delta n}-1$ carries a primitive prime $\ell_0$ with $\operatorname{ord}_{\ell_0}(q) = \Delta n$, which does not divide $q-1$ and therefore divides $\Psi$:
+\[
+\ell_0 \equiv 1 \pmod{2\Delta n}, \qquad \ell_0 \mid 2^{\Delta m}-1, \qquad \operatorname{ord}_{\ell_0}(2) \mid \Delta m .
+\]
+So $\Delta n$ is the order of $q$ modulo a specific prime factor of $2^{\Delta m}-1$, and that prime is $\equiv 1 \pmod{2\Delta n}$.
+
+\subsubsection*{\S8.5 Filtering by $u \mid 2^{\Delta m}-1$}
+
+Applied to the candidates $q \mid 2^{\Delta m}-1$ of \S5.3:
+\begin{center}
+\begin{tabular}{rlll}
+\hline
+$\Delta m$ & $2^{\Delta m}-1$ & candidates & survive $u \mid 2^{\Delta m}-1$ \\
+\hline
+$4$ & $3\cdot 5$ & $3,\,5$ & both \\
+$6$ & $3^2\cdot 7$ & $3,\,7$ & both \\
+$8$ & $3\cdot 5\cdot 17$ & $3,\,5,\,17$ & all \\
+$10$ & $3\cdot 11\cdot 31$ & $3,\,11,\,31$ & $3$ \\
+$12$ & $3^2\cdot 5\cdot 7\cdot 13$ & $3,\,5,\,7,\,13$ & all \\
+$14$ & $3\cdot 43\cdot 127$ & $3,\,43,\,127$ & $3$ \\
+$16$ & $3\cdot 5\cdot 17\cdot 257$ & four & all \\
+$18$ & $3^3\cdot 7\cdot 19\cdot 73$ & four & all \\
+$20$ & $3\cdot 5^2\cdot 11\cdot 31\cdot 41$ & five & all \\
+$22$ & $3\cdot 23\cdot 89\cdot 683$ & $3,\,23,\,89,\,683$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Bases with $u = 1$ pass on that alone, so the surviving $q$ concentrate where $q-1$ is close to a power of two --- $3, 5, 17, 257$ all pass unconditionally. A base dies when $q-1$ carries an odd prime whose order at $2$ misses $\Delta m$: at $\Delta m = 10$ and $22$ the filter cuts to a single candidate.
+
+\subsection*{\S9. The exponent coupling}
+
+\subsubsection*{\S9.1 Both maximal exponents are attained}
+
+By \S5.5, $q^{n_1} \leq 2^{k}+1$, while $2^{m_1} = 2^{m_2+\Delta m} \geq 2\cdot 2^{2k}$, so $q^{n_1} < 2^{m_1}$ and hence $2^{m_1} \leq p < 2^{m_1+1}$. On the other side $q^{n_2} = p - 2^{m_2} < p$, while $q^{n_2+1} = q\left(p-2^{m_2}\right) > p$ because $2^{m_2} \leq q-1$ and $p > q$. Therefore
+\[
+\boxed{\,m_1 = \lfloor \log_2 p \rfloor, \qquad n_2 = \lfloor \log_q p \rfloor\,}
+\]
+The pair occupies the top of both ladders, so $\Delta m = \lfloor \log_2 p\rfloor - v_2(q-1)$, and $\Delta m$ even gives the congruence
+\[
+\lfloor \log_2 p \rfloor \equiv v_2(q-1) \pmod 2 .
+\]
+
+\subsubsection*{\S9.2 The size envelope}
+
+\begin{align}
+q \ \leq \ q^{n_1} \ &\leq \ 2^{k}+1 \tag{E1}\\
+A \ = \ \frac{2^{2k}-1}{q^{n_1}} \ &\geq \ \frac{2^{2k}-1}{2^{k}+1} \ = \ 2^{k}-1 \tag{E2}\\
+m_2 = v_2(q-1) \ &\leq \ k \tag{E3}\\
+q^{\Delta n} \ = \ A\,2^{m_2}+1 \ &> \ 2^{m_2}\left(2^{k}-1\right) \tag{E4}
+\end{align}
+(E3) follows from $2^{m_2} \leq q-1 \leq 2^{k}$ by (E1); it forces $\Delta m \geq 6$ on the $q \equiv 1 \pmod 8$ branch, where $m_2 \geq 3$.
+
+\subsubsection*{\S9.3 The coupling}
+
+Since $n_1 \geq 1$ gives $q^{n_1} \geq q$, and $2^{m_2} \mid q-1$ gives $2^{m_2} \leq q-1$,
+\[
+q\left(q^{\Delta n}-1\right) = \frac{q\,2^{m_2}\left(2^{\Delta m}-1\right)}{q^{n_1}} \leq 2^{m_2}\left(2^{\Delta m}-1\right) \leq (q-1)\left(2^{\Delta m}-1\right) < q\,2^{\Delta m},
+\]
+so $q^{\Delta n}-1 < 2^{\Delta m}$. Both sides are integers, $q^{\Delta n}$ odd and $2^{\Delta m}$ even, hence
+\[
+\boxed{\,q^{\Delta n} < 2^{\Delta m}, \qquad\text{equivalently}\qquad \Delta n \cdot \log_2 q < \Delta m\,}
+\]
+This is the exponent ceiling of \S9.1 made exact: $\Delta m$ buys room for $\Delta n$ linearly, at an exchange rate of $\log_2 q$, so growing $q$ lowers the ceiling on $\Delta n$ directly.
+
+\subsubsection*{\S9.4 $\Delta n \geq 3$ and $\Delta m \geq 6$}
+
+\noindent\textbf{$\Delta n = 1$ is impossible.} Then $\Psi = 1$ and $A = u < q$, so
+\[
+q^{n_1} = \frac{2^{2k}-1}{A} > \frac{2^{2k}-1}{q} .
+\]
+Against (E1), $\left(2^{k}-1\right)\left(2^{k}+1\right) < q\left(2^{k}+1\right)$, so $q > 2^{k}-1$; as $q$ is odd and $2^{k}$ even, $q \geq 2^{k}+1$. Then $q^{n_1} \geq q \geq 2^{k}+1$ while (E1) caps $q^{n_1} \leq 2^{k}+1$, forcing $n_1 = 1$ and $q = 2^{k}+1$. But then $q-1 = 2^{k}$ has odd part $u = 1$, so $A = u\Psi = 1$, outside this case.
+
+Hence $\Delta n \geq 3$, and by \S9.3,
+\[
+q^{3} \leq q^{\Delta n} < 2^{\Delta m} \qquad\Longrightarrow\qquad \boxed{\,q < 2^{\Delta m/3}\,}
+\]
+strictly sharper than (E1). At $\Delta m = 4$ this reads $q^{3} < 16$, so $q < 2.52$, admitting no odd prime. Therefore $\Delta m \geq 6$.
+
+\subsubsection*{\S9.5 The two-sided window on $\Delta n$}
+
+From (E2) and $A = \left(q^{\Delta n}-1\right)/2^{m_2} < q^{\Delta n}/2$ we get $2^{k}-1 < q^{\Delta n}/2$, so $q^{\Delta n} > 2^{k}$. With \S9.3,
+\[
+\boxed{\,2^{\Delta m/2} \ < \ q^{\Delta n} \ < \ 2^{\Delta m}\,}
+\]
+the lower bound sharpening to $2^{m_2}\!\left(2^{\Delta m/2}-1\right)$ by (E4). Two readings:
+\begin{itemize}
+\item $\Delta n$ lies in an interval of length $\Delta m/\!\left(2\log_2 q\right)$ and must be an odd integer inside it, so roughly $\Delta m/\!\left(4\log_2 q\right)$ candidates remain. The interval narrows as $q$ grows, and a pair $(q,\Delta m)$ whose interval contains no odd integer dies at once.
+\item Since $q < 2^{e}$ with $e = \operatorname{ord}_q(2)$, the lower bound gives $\Delta m/2 < \Delta n \log_2 q < \Delta n\,e$, so
+\[
+\frac{\Delta m}{\operatorname{ord}_q(2)} \ < \ 2\,\Delta n ,
+\]
+leaving $\Delta m \in \{e, 2e, 3e, 4e, 5e\}$ when $\Delta n = 3$, intersected with evenness and \S8.2.
+\end{itemize}
+
+\subsubsection*{\S9.6 Fixing $(q,\Delta n)$ leaves finitely many $\Delta m$}
+
+$A = \left(q^{\Delta n}-1\right)/2^{v_2(q-1)}$ depends only on $q$ and $\Delta n$, so $2^{\Delta m}-1 = A\,q^{n_1}$ has prime support inside the fixed set of primes dividing $q\left(q^{\Delta n}-1\right)$. By Zsigmondy, $2^{\Delta m}-1$ carries a primitive prime $P$ with $\operatorname{ord}_P(2) = \Delta m$ for every $\Delta m \notin \{1,6\}$, and that $P$ lies in the fixed set. Hence
+\[
+\boxed{\ \Delta m \ \in\ \big\{\operatorname{ord}_P(2)\ :\ P \text{ prime},\ P \mid q\left(q^{\Delta n}-1\right)\big\}\ \cup\ \{6\}\ }
+\]
+a finite list per pair, each entry settled by one factorization. This inverts the search of \S5.3: fix $(q,\Delta n)$ and read off the candidate $\Delta m$, rather than looping on $\Delta m$.
+
+\medskip
+\noindent\textbf{Worked instance: $(q,\Delta n) = (3,3)$ is eliminated.} Here $m_2 = v_2(2) = 1$ and $A = \left(3^{3}-1\right)/2 = 13$, so the prime support of $2^{\Delta m}-1$ lies in $\{3,13\}$. With $\operatorname{ord}_3(2) = 2$ and $\operatorname{ord}_{13}(2) = 12$, the list is $\Delta m \in \{2,12,6\}$, and $\Delta m \geq 6$ even leaves $\{6,12\}$:
+\[
+2^{6}-1 = 63 = 3^{2}\cdot 7, \qquad 2^{12}-1 = 4095 = 3^{2}\cdot 5\cdot 7\cdot 13,
+\]
+both carrying primes outside $\{3,13\}$. No $\Delta m$ survives.
+
+\subsubsection*{\S9.7 Filtering by $q < 2^{\Delta m/3}$}
+
+\begin{center}
+\begin{tabular}{rlll}
+\hline
+$\Delta m$ & $2^{\Delta m}-1$ & $q < 2^{\Delta m/3}$ & survivors \\
+\hline
+$4$ & $3\cdot 5$ & $q \leq 2$ & none --- $\Delta m = 4$ dead \\
+$6$ & $3^{2}\cdot 7$ & $q \leq 3$ & $3$ \\
+$8$ & $3\cdot 5\cdot 17$ & $q \leq 6$ & $3,\ 5$ \\
+$10$ & $3\cdot 11\cdot 31$ & $q \leq 10$ & $3$ \\
+$12$ & $3^{2}\cdot 5\cdot 7\cdot 13$ & $q \leq 15$ & $3,\ 5,\ 7,\ 13$ \\
+$14$ & $3\cdot 43\cdot 127$ & $q \leq 25$ & $3$ \\
+$16$ & $3\cdot 5\cdot 17\cdot 257$ & $q \leq 40$ & $3,\ 5,\ 17$ \\
+$18$ & $3^{3}\cdot 7\cdot 19\cdot 73$ & $q \leq 64$ & $3,\ 7,\ 19$ \\
+$22$ & $3\cdot 23\cdot 89\cdot 683$ & $q \leq 161$ & $3,\ 23,\ 89$ \\
+\hline
+\end{tabular}
+\end{center}
+Independent of \S8.5, and the two compose: at $\Delta m = 22$ the condition $u \mid 2^{\Delta m}-1$ removes $23$ and $89$ as well, since $u = 11$ for both while $11 \nmid 2^{22}-1$, leaving $q = 3$ alone.
+
+\subsection*{\S10. A lower bound on $\Delta n$, and the resulting criterion}
+
+\subsubsection*{\S10.1 Where each prime of $2^{\Delta m}-1$ sits}
+
+By \S8.1, $2^{\Delta m}-1 = q^{n_1}\cdot u \cdot \Psi$. Every prime $\ell$ of the left side therefore falls into exactly one of three places, and its order at $q$ is determined by which:
+\[
+\ell = q; \qquad \ell \mid u \ (\text{so } \ell \mid q-1), \ \text{giving } \operatorname{ord}_\ell(q) = 1; \qquad \ell \mid \Psi, \ \text{giving } \operatorname{ord}_\ell(q) \mid \Delta n .
+\]
+The third case is the useful one, since $\Psi \mid q^{\Delta n}-1$.
+
+\subsubsection*{\S10.2 The lower bound}
+
+For a pair $(q,\Delta m)$ with $q \mid 2^{\Delta m}-1$, set
+\[
+S = S(q,\Delta m) = \big\{\ \ell \text{ prime} \ :\ \ell \mid 2^{\Delta m}-1,\ \ell \neq q,\ \ell \nmid q-1\ \big\} .
+\]
+Each $\ell \in S$ divides neither $q^{n_1}$ nor $u$, hence divides $\Psi$, hence $\operatorname{ord}_\ell(q) \mid \Delta n$. Therefore
+\[
+\boxed{\ L(q,\Delta m) := \operatorname{lcm}\big\{\operatorname{ord}_\ell(q) \ :\ \ell \in S\big\} \quad\text{divides}\quad \Delta n\ }
+\]
+Since $\Delta n$ is odd, every such order must be odd --- which is \S5.4 --- but the divisibility says more than the parity, and it is the divisibility that constrains.
+
+\subsubsection*{\S10.3 The squeeze}
+
+Against the window of \S9.5,
+\[
+L(q,\Delta m) \mid \Delta n, \qquad 2^{\Delta m/2} < q^{\Delta n} < 2^{\Delta m} ,
+\]
+so $\Delta n$ must be an odd multiple of $L$ inside an interval of length $\Delta m/\!\left(2\log_2 q\right)$. Both sides are computed from the factorization of $2^{\Delta m}-1$ together with a few multiplicative orders; the cofactor $A$ is never built.
+
+\subsubsection*{\S10.4 Worked instances}
+
+\noindent\textbf{The Mersenne bases.} These are exactly the pairs that survive the odd-order test of \S5.4, and each dies on the window:
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+$\Delta m$ & $q$ & $2^{\Delta m}-1$ & $S$ & $L$ & window on $\Delta n$ \\
+\hline
+$6$ & $7$ & $3^2\cdot 7$ & $\emptyset$ & $1$ & $(1.07,\ 2.14)$ --- no odd integer \\
+$10$ & $31$ & $3\cdot 11\cdot 31$ & $\{11\}$ & $5$ & $(1.009,\ 2.018)$ --- no multiple of $5$ \\
+$14$ & $127$ & $3\cdot 43\cdot 127$ & $\{43\}$ & $7$ & $(1.001,\ 2.000)$ --- no multiple of $7$ \\
+\hline
+\end{tabular}
+\end{center}
+The pattern is structural. For $q = 2^{k}-1$ with $\Delta m = 2k$, the window reads $2^{k} < \left(2^{k}-1\right)^{\Delta n} < 2^{2k}$, which brackets $\Delta n$ strictly between $1$ and $2$. This recovers the closed-form elimination of \S5.5 as an instance of the general criterion.
+
+\medskip
+\noindent\textbf{The even-order half.} Whole rows fall to the parity of a single order:
+\begin{center}
+\begin{tabular}{rllll}
+\hline
+$\Delta m$ & $q$ & $S$ & witness & $\operatorname{ord}$ \\
+\hline
+$8$ & $3$ & $\{5,17\}$ & $\ell = 5$ & $\operatorname{ord}_5(3) = 4$ \\
+& $5$ & $\{3,17\}$ & $\ell = 3$ & $\operatorname{ord}_3(5) = 2$ \\
+& $17$ & $\{3,5\}$ & $\ell = 3$ & $\operatorname{ord}_3(17) = 2$ \\
+$12$ & $3$ & $\{5,7,13\}$ & $\ell = 5$ & $\operatorname{ord}_5(3) = 4$ \\
+& $5$ & $\{3,7,13\}$ & $\ell = 3$ & $\operatorname{ord}_3(5) = 2$ \\
+& $7$ & $\{5,13\}$ & $\ell = 5$ & $\operatorname{ord}_5(7) = 4$ \\
+& $13$ & $\{5,7\}$ & $\ell = 5$ & $\operatorname{ord}_5(13) = 4$ \\
+$14$ & $3$ & $\{43,127\}$ & $\ell = 43$ & $\operatorname{ord}_{43}(3) = 42$ \\
+& $43$ & $\{127\}$ & $\ell = 127$ & $\operatorname{ord}_{127}(43) = 126$ \\
+$18$ & $3$ & $\{7,19,73\}$ & $\ell = 7$ & $\operatorname{ord}_7(3) = 6$ \\
+& $7$ & $\{19,73\}$ & $\ell = 73$ & $\operatorname{ord}_{73}(7) = 24$ \\
+& $19$ & $\{7,73\}$ & $\ell = 7$ & $\operatorname{ord}_7(19) = 6$ \\
+& $73$ & $\{7,19\}$ & $\ell = 7$ & $\operatorname{ord}_7(73) = 6$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{\S10.5 The criterion}
+
+For each even $\Delta m \geq 6$ and each prime $q \mid 2^{\Delta m}-1$ surviving $q < 2^{\Delta m/3}$ (\S9.4) and $u \mid 2^{\Delta m}-1$ (\S8.1):
+\begin{enumerate}
+\item Build $S(q,\Delta m)$. If any $\ell \in S$ has $\operatorname{ord}_\ell(q)$ even, the pair is eliminated.
+\item Otherwise form $L = \operatorname{lcm}\{\operatorname{ord}_\ell(q)\}$ and list the odd multiples $\Delta n$ of $L$ with $2^{\Delta m/2} < q^{\Delta n} < 2^{\Delta m}$. If there are none, the pair is eliminated.
+\item Each surviving $\Delta n$ must additionally satisfy
+\[
+v_\ell(\Delta n) = v_\ell\!\left(2^{\operatorname{ord}_\ell(2)}-1\right) + v_\ell(\Delta m) - v_\ell(q-1) \quad \text{for every odd prime } \ell \mid q-1
+\]
+by \S8.3, and $2\Delta n \mid \ell_0 - 1$ for some prime $\ell_0 \mid 2^{\Delta m}-1$ by \S8.4.
+\item Only what remains reaches the exact test $q^{\Delta n} = A\,2^{m_2}+1$ of \S5.3.
+\end{enumerate}
+Steps 1 through 3 use only the factorization of $2^{\Delta m}-1$ and multiplicative orders, so $\Delta n$ is over-determined before $A$ is computed.
+
+\end{document}
