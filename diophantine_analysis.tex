@@ -1,10 +1,62 @@
 \documentclass{article}
 \usepackage{amsmath, amssymb}
+
+\title{Finding Primes with Two Prime Power Partitions with Identical Bases I: Cases 1 - 3}
+
 \begin{document}
 
-Followed by even odd case.
+\section*{Abstract}
 
-What I hope is that this particular case gives me something to actually prove. Whether it's been proven before is another question.:
+Let $p \gt 5$ be a prime. We ask how many solutions exist where $p = 2^m + q^n$ for $m, n \gt 1$ and $q$ a fixed prime.
+We know of a single example where $p$ has two solutions, $p =  11$. Do others exist? First we proceed by
+considering basic arithmetic obstructions that prevent certain solutions. This breaks down to two main cases,
+based on whether a common factor of putative solutions, $A$, is either greater than or equal to 1.
+
+Working comment: What currently follows does contain a good amount of slop and portions are dropped from
+a conversation with Gemini. A separate tex file exists with the more challenging part without
+much progress. However, to sum up in direct language without being too precise or academic we go as follows
+
+
+  -We can can more or less pick up where the text
+  starts immediately below then it's just a matter of cleaning up. Cutting dangling and irrelevant bits
+  then moving onto the second tex document, then merging them. Don't bother with section naming.
+  Numbering is provisional, don't refer to section numbers. The Lemmas we number we can refer to by
+  an alias or by Lemma #. Same for any conjectures, theorems, etc.
+  Point is we're gonna put the two halves together and things are fluid. This is more of a working
+  document than an attempt at a preprint.
+- We make the observations about the difference of squares (TODO 1: Write as a lemma)
+- TODO 2: Write the "common divisor" lemma.
+- NB: Don't call either an obstruction. Let's avoid technical terminology unless it's warranted
+  Like, primitive Mersenne factor is fine because it's something we can cite directly from Pomerance.
+  It's a prime factor of a Mersenne number's first appearance as a factor in the sequence of Mersenne
+  numbers. We aren't referring to Mersenne primes, of course.  But the point here is that we can use
+  that terminology. But calling those two parts "obstructions" is silly.
+  They don't really need names as lemmas. The names are corny. Let's not be corny. Let's not name
+  things really. I don't want something that tries to read like an article. I want an outline
+  that carries all the relevant facts, and organizes them so I can write them. I also want to know
+  if something still needs proof.
+
+Let $p$ be prime with two prime power solutions sharing the same base $q$. So, we have
+\[
+p = 2^{m_1} + q^{n_1} = 2^{m_2} + q^{n_2}, \qquad m_1 > m_2, \quad n_2 > n_1.
+\]
+So then writing $\Delta m = m_1 - m_2, \Delta n = n_2 - n_1$, then just following our noses we
+wind up with a coprime quantity to our bases, which is our central obstacle. That is, with
+
+\[
+2^{m_2}\left(2^{\Delta m} - 1\right) = q^{n_1}\left(q^{\Delta n} - 1\right).
+\]
+and  $\gcd(2,q) = 1$, we have $2^{m_2} \mid q^{\Delta n} - 1$ and $q^{n_1} \mid 2^{\Delta m} - 1$.
+
+And so we define
+\[
+A = \frac{2^{\Delta m} - 1}{q^{n_1}} = \frac{q^{\Delta n} - 1}{2^{m_2}},
+\]
+Now we consider
+\[
+A\,q^{n_1} = 2^{\Delta m} - 1, \qquad A\,2^{m_2} = q^{\Delta n} - 1, \qquad A < 2^{\Delta m}, \quad A < q^{\Delta n}.
+\]
+\section{}
 
 By multiplying the equation $p = A 2^{m_2} q^{n_1} + 2^{m_2} + q^{n_1}$ by $A$ and adding $1$, the Diophantine expression factors algebraically:
 

@@ -1,0 +1,51 @@
+\contentsline {section}{\numberline {1}Two representations and the common factor}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The quadratic form and gap parity}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}The case $A=1$}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Valuations, size bounds, and orders}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Exact valuations and the factorization of $A$}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Size bounds and the exclusion of $N=1$}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Orders and multiplicities of the other prime factors}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Eliminating $q=3$ and restricting $q>3$}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}The base $q=3$}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Parities for $q>3$}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Restrictions from Mersenne factors}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The order and multiplicity of $q$}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Orders modulo A and coprime gaps}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Common factors of the two gaps}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Forbidden periods and forced residues}{8}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}The full common divisor}{9}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}The proposed descent}{9}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}The family $M=2s$, with $s$ prime}{11}{subsection.4.7}%
+\contentsline {section}{\numberline {5}The logarithmic bound}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Closeness of the two large powers}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}An effective bound for fixed $q$}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Minimum returns against the height bound}{12}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}An effective reduction when $q\mid M$}{13}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Excluding the branch with a finite check}{14}{subsection.5.5}%
+\contentsline {section}{\numberline {6}The smaller-term ratio and common divisors}{15}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Congruences on p}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}The ratio before taking d-th powers}{16}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Height using the least even multiple of r}{16}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}The factor forced by a common prime}{17}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Consequences for the full common divisor}{18}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Using congruences modulo eight and five}{18}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Sharpening the height and checking residue families}{19}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}Forcing a common factor}{20}{subsection.6.8}%
+\contentsline {subsection}{\numberline {6.9}A finite target when q is bounded in terms of d}{21}{subsection.6.9}%
+\contentsline {section}{\numberline {7}Factorization results and their use here}{22}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Gcd identities and primitive-factor counts}{22}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Transferring factors into C}{23}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Primitive factors on the two sides}{23}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Reading and limits of the cited results}{24}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Reading for the index restriction and a uniform bound}{24}{subsection.7.5}%
+\contentsline {section}{\numberline {8}Exercises and remaining questions}{25}{section.8}%
+\contentsline {section}{\numberline {A}Congruence and case reference}{27}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Residues of q and its square}{27}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Valuations}{27}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Powers of two modulo q and its square}{28}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}The prime p and the gap conditions}{28}{subsection.A.4}%
+\contentsline {section}{\numberline {B}Auxiliary calculations and comparison with MSS}{29}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Scope of the MSS results}{29}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}A polynomial identity}{29}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}Congruences modulo $p$}{30}{subsection.B.3}%
+\contentsline {section}{References}{30}{section*.4}%

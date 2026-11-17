@@ -1,0 +1,2158 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array,longtable}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setcounter{tocdepth}{1}
+\newtheorem{lemma}{Lemma}
+\title{Notes on two prime power partitions with the same bases}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+% Source map: the abstract and opening setup retain diophantine_analysis.tex.
+% The quadratic-form proofs and elementary reductions consolidate that source.
+% Valuations, size bounds, orders, and the common-gap construction consolidate
+% even_odd_case.tex. Later additions are marked at their source locations below.
+\section*{Abstract}
+
+Let $p > 5$ be a prime. We ask how many solutions exist where $p = 2^m + q^n$ for $m, n \geq 1$ and $q$ a fixed prime.
+We know of a single example where $p$ has two solutions, $p =  11$. Do others exist? First we proceed by
+considering basic arithmetic obstructions that prevent certain solutions. This breaks down to two main cases,
+based on whether a common factor of putative solutions, $A$, is either greater than or equal to 1.
+
+
+{\small\tableofcontents}
+\clearpage
+\section{Two representations and the common factor}
+\label{sec:setup}
+
+Let $p$ be prime with two prime power solutions sharing the same base $q$. So, we have
+\[
+p = 2^{m_1} + q^{n_1} = 2^{m_2} + q^{n_2}, \qquad m_1 > m_2, \quad n_2 > n_1.
+\]
+So then writing $\Delta m = m_1 - m_2, \Delta n = n_2 - n_1$, then just following our noses we
+wind up with a coprime quantity to our bases, which is our central obstacle. That is, with
+
+\[
+2^{m_2}\left(2^{\Delta m} - 1\right) = q^{n_1}\left(q^{\Delta n} - 1\right).
+\]
+and  $\gcd(2,q) = 1$, we have $2^{m_2} \mid q^{\Delta n} - 1$ and $q^{n_1} \mid 2^{\Delta m} - 1$.
+
+And so we define
+\[
+A = \frac{2^{\Delta m} - 1}{q^{n_1}} = \frac{q^{\Delta n} - 1}{2^{m_2}},
+\]
+Now we consider
+\[
+A\,q^{n_1} = 2^{\Delta m} - 1, \qquad A\,2^{m_2} = q^{\Delta n} - 1, \qquad A < 2^{\Delta m}, \quad A < q^{\Delta n}.
+\]
+
+The coprimality of $A$ with the bases follows directly:
+$Aq^{n_1}=2^{\Delta m}-1$ makes $A$ odd, and
+$A2^{m_2}=q^{\Delta n}-1$ gives $q\nmid A$. Thus
+\[
+\gcd(A,2q)=1.
+\]
+In particular $A$ is a positive integer, so the two cases are $A=1$ and
+$A>1$.
+
+\subsection{The quadratic form and gap parity}
+
+Using $2^{\Delta m}=Aq^{n_1}+1$, we can write
+\[
+p=A2^{m_2}q^{n_1}+2^{m_2}+q^{n_1}.
+\]
+Consequently
+\begin{align*}
+Ap+1
+ &= (A2^{m_2}+1)(Aq^{n_1}+1)\\
+ &= q^{\Delta n}2^{\Delta m},
+\end{align*}
+so
+\[
+\boxed{Ap=2^{\Delta m}q^{\Delta n}-1.}
+\]
+Write
+\[
+\Delta m=2k+e_2,\qquad \Delta n=2j+e_q,
+\qquad e_2,e_q\in\{0,1\},\quad k,j\geq0,
+\]
+and set
+\[
+D=2^{e_2}q^{e_q},\qquad X=2^kq^j.
+\]
+Then $D$ is squarefree and
+\[
+\boxed{Ap=DX^2-1.}
+\]
+Since $p>2,q$, reduction modulo $p$ gives
+\[
+DX^2\equiv1\pmod p,\qquad
+\left(\frac{D}{p}\right)=1.
+\]
+The two defining equations for $A$ also give
+\begin{equation}\label{eq:A-size}
+A^2
+ =\frac{(2^{\Delta m}-1)(q^{\Delta n}-1)}{2^{m_2}q^{n_1}}
+ <\frac{2^{\Delta m}q^{\Delta n}}{2^{m_2}q^{n_1}}
+ \leq\frac{DX^2}{6}.
+\end{equation}
+Here $2^{m_2}q^{n_1}\geq6$.
+
+\begin{lemma}\label{lem:squares}
+The gaps $\Delta m$ and $\Delta n$ cannot both be even.
+\end{lemma}
+\begin{proof}
+If both are even, $D=1$ and $X=2^kq^j\geq6$. Thus
+\[
+Ap=(X-1)(X+1),\qquad A<X/\sqrt6<X-1.
+\]
+Since $p$ is prime, it divides at least one of $X-1,X+1$.
+The other factor then divides $A$, which is impossible because both
+factors exceed $A$.
+\end{proof}
+
+\begin{lemma}\label{lem:parity}
+The gap $\Delta m$ is even. Consequently $\Delta n$ is odd.
+\end{lemma}
+\begin{proof}
+Since $p>5$, it is nonzero modulo $3$. Exactly one parity of $m$
+satisfies $2^m\equiv p\pmod3$.
+If $q=3$, both $m_1,m_2$ have that parity.
+If $q\neq3$, neither has that parity, since $p-2^{m_i}$ is a power
+of $q$ and is therefore nonzero modulo $3$.
+In either case $m_1,m_2$ have the same parity, so $\Delta m$ is even.
+Lemma~\ref{lem:squares} now makes $\Delta n$ odd.
+\end{proof}
+
+Thus the squarefree part is $D=q$, and $\left(\frac{q}{p}\right)=1$.
+
+\subsection{\texorpdfstring{The case $A=1$}{The case A=1}}
+
+\begin{lemma}\label{lem:Aone}
+If $A=1$, the two representations are
+\[
+11=2^3+3=2+3^2.
+\]
+\end{lemma}
+\begin{proof}
+Write $\Delta m=2k$ with $k\geq1$. Then
+\[
+q^{n_1}=2^{2k}-1=(2^k-1)(2^k+1).
+\]
+The two factors are odd and differ by $2$, so they are coprime.
+As their product is a power of a single prime, the smaller factor
+must be $1$. Hence $k=1$, $q=3$, and $n_1=1$.
+The other defining equation is now
+\[
+2^{m_2}=3^{\Delta n}-1.
+\]
+Since $\Delta n$ is odd, $3^{\Delta n}-1\equiv2\pmod8$.
+Thus $m_2=1$, which gives $\Delta n=1$.
+Therefore $m_1=3$, $n_2=2$, and $p=11$.
+\end{proof}
+
+\section{Valuations, size bounds, and orders}
+\label{sec:bounds}
+
+Assume $A>1$ from now on, and write
+\[
+M=\Delta m=2k,\qquad N=\Delta n\quad\text{(odd)}.
+\]
+All logarithms without a subscript are natural logarithms.
+% Source: even_odd_case.tex, arithmetic of A and exponent bounds.
+
+\subsection{\texorpdfstring{Exact valuations and the factorization of $A$}{Exact valuations and the factorization of A}}
+
+\begin{lemma}\label{lem:valuations}
+We have
+\[
+n_1=v_q(2^M-1),\qquad m_2=v_2(q-1).
+\]
+Writing
+\[
+q-1=2^{m_2}u,\qquad
+\Psi=\frac{q^N-1}{q-1}=1+q+\cdots+q^{N-1},
+\]
+we have
+\[
+\boxed{A=u\Psi,\qquad 2^M-1=q^{n_1}u\Psi.}
+\]
+Here $u$ and $\Psi$ are odd, and $q$ divides neither of them.
+\end{lemma}
+\begin{proof}
+The first valuation follows from $q\nmid A$.
+Since $N$ is odd, $\Psi$ is a sum of an odd number of odd terms,
+so $v_2(q^N-1)=v_2(q-1)$.
+Apply this to $A2^{m_2}=q^N-1$, using that $A$ is odd.
+The factorizations follow by substitution.
+\end{proof}
+
+Both $u$ and $\Psi$ divide $2^M-1$. They need not be coprime:
+since $\Psi\equiv N\pmod{q-1}$,
+\[
+\gcd(u,\Psi)=\gcd(u,N).
+\]
+\subsection{\texorpdfstring{Size bounds and the exclusion of $N=1$}{Size bounds and the exclusion of N=1}}
+
+\begin{lemma}\label{lem:bounds}
+Write $M=2k$. Then
+\[
+q^{n_1}\leq2^k+1,\qquad A\geq2^k-1,\qquad m_2\leq k,
+\]
+and
+\[
+\boxed{2^{M/2}<q^N<2^M.}
+\]
+Moreover $N\geq3$, $q<2^{M/3}$, and $M\geq6$.
+\end{lemma}
+\begin{proof}
+The factors in
+\[
+2^M-1=(2^k-1)(2^k+1)
+\]
+are coprime. Thus $q^{n_1}$ divides one factor, and the other divides
+$A$. This proves the first two bounds. Also
+$2^{m_2}\leq q-1\leq2^k$, proving the third.
+
+For the upper bound, put $c=2^{m_2}$. Then
+\[
+q^N-1=\frac{c}{q^{n_1}}(2^M-1)
+ \leq\frac{q-1}{q}(2^M-1)<2^M-1.
+\]
+For the lower bound,
+\[
+q^N=cA+1\geq2(2^k-1)+1>2^k.
+\]
+
+If $N=1$, then $A=u<q$. Hence
+\[
+2^{2k}-1=Aq^{n_1}<q(2^k+1),
+\]
+so $q>2^k-1$. Since $q$ is odd, $q\geq2^k+1$.
+Together with $q\leq q^{n_1}\leq2^k+1$, this forces
+$q=2^k+1$ and $n_1=1$. Then $q-1=2^k$ has odd part $u=1$,
+so $A=1$, a contradiction.
+Thus $N\geq3$, and $q^3\leq q^N<2^M$.
+Since $q\geq3$ and $M$ is even, $M\geq6$.
+\end{proof}
+
+Equivalently,
+\begin{equation}\label{eq:window}
+\frac{M\log2}{2\log q}<N<\frac{M\log2}{\log q}.
+\end{equation}
+The interval has length proportional to $M/\log q$; these bounds alone
+do not make it empty for large $M$.
+
+The larger exponents satisfy
+\[
+m_1=\lfloor\log_2p\rfloor,\qquad
+n_2=\lfloor\log_qp\rfloor.
+\]
+Indeed, $q^{n_1}\leq2^k+1<2^{m_1}$ gives
+$2^{m_1}<p<2^{m_1+1}$. Also $q^{n_2}<p$, and, since
+$c=2^{m_2}\leq q-1$ and $p>q$,
+\[
+q^{n_2+1}=q(p-c)>p.
+\]
+
+\subsection{Orders and multiplicities of the other prime factors}
+
+\begin{lemma}\label{lem:orders}
+For every prime $\ell\mid2^M-1$ with $\ell\neq q$,
+\[
+\operatorname{ord}_\ell(q)\mid N.
+\]
+Consequently the integer
+\[
+L=\operatorname{lcm}_{\substack{\ell\mid2^M-1\\
+\ell\text{ prime},\ \ell\neq q}}
+\operatorname{ord}_\ell(q)
+\]
+is odd and divides $N$. The lcm of an empty set is taken to be $1$.
+\end{lemma}
+\begin{proof}
+Every such $\ell$ divides $A$, and $A\mid q^N-1$.
+\end{proof}
+
+Primes $\ell\mid q-1$ have order $1$ and can be omitted from the lcm.
+Since $3\mid2^M-1$, it follows that
+\[
+q=3\quad\text{or}\quad q\equiv1\pmod3.
+\]
+Thus
+\[
+L\mid N,\qquad N\text{ odd},\qquad
+2^{M/2}<q^N<2^M.
+\]
+For each odd prime $\ell\mid q-1$, put
+$d_\ell=\operatorname{ord}_\ell(2)$. Since $\ell\mid u\mid2^M-1$,
+$d_\ell\mid M$. Lifting the exponent on the two sides of
+$2^M-1=Aq^{n_1}$ gives
+\begin{equation}\label{eq:valuation-coupling}
+\boxed{
+v_\ell(2^{d_\ell}-1)+v_\ell(M)
+ =v_\ell(q-1)+v_\ell(N).}
+\end{equation}
+Here $\ell\nmid d_\ell$ because $d_\ell\mid\ell-1$, and $\ell\neq q$.
+For example, if $q\neq3$, then $3\mid q-1$ and
+\[
+1+v_3(M)=v_3(q-1)+v_3(N).
+\]
+Thus the order conditions and the multiplicity conditions constrain
+the same two gaps.
+
+\section{\texorpdfstring{Eliminating $q=3$ and restricting $q>3$}{Eliminating q=3 and restricting q>3}}
+\label{sec:parities}
+% Added in discussion: q=3 proof, strengthened parity reduction, and its
+% consequences. These replace the provisional table in even_odd_case.tex.
+
+\subsection{\texorpdfstring{The base $q=3$}{The base q=3}}
+
+\begin{lemma}\label{lem:qthree}
+For $q=3$, the only prime with two representations is $p=11$.
+\end{lemma}
+\begin{proof}
+The case $A=1$ is settled, so suppose $A>1$.
+We have $m_2=1$, $N$ odd, and
+\[
+n_1=v_3(2^M-1)=1+v_3(M).
+\]
+If $n_1>1$, then $3\mid M$. Since $\operatorname{ord}_7(2)=3$,
+we get $7\mid2^M-1$, hence $7\mid A$, hence $7\mid3^N-1$.
+But $\operatorname{ord}_7(3)=6$, contradicting $N$ odd.
+Thus $n_1=1$, and the original representations give
+\[
+3^{n_2}-1=2^{m_1},\qquad n_2=1+N\text{ even}.
+\]
+The factors $3^{n_2/2}-1$ and $3^{n_2/2}+1$ are powers of $2$
+differing by $2$, so they are $2$ and $4$. Thus $n_2=2$, $m_1=3$,
+and $p=11$, which has $A=1$.
+\end{proof}
+
+\subsection{\texorpdfstring{Parities for $q>3$}{Parities for q>3}}
+
+\begin{lemma}\label{lem:new-parities}
+In the remaining case $A>1$, we have $q>3$ and
+\[
+m_1,m_2,n_1\text{ even},\qquad n_2\text{ odd}.
+\]
+Consequently $n_1\geq2$, $n_2\geq5$, and $q^2\mid2^M-1$.
+\end{lemma}
+\begin{proof}
+For $q>3$ we know $q\equiv1\pmod3$. Then
+$p=2^{m_i}+q^{n_i}\not\equiv0\pmod3$ forces both $m_i$ even.
+Suppose $n_2$ is even. Since $m_1$ is even, the left-hand side of
+\[
+\bigl(q^{n_2/2}\bigr)^2-\bigl(2^{m_1/2}\bigr)^2
+=q^{n_1}-2^{m_2}>0
+\]
+is a difference of distinct integer squares, and hence at least
+$2\cdot2^{m_1/2}+1$. By Lemma~\ref{lem:bounds},
+$q^{n_1}\leq2^k+1=2^{M/2}+1$. Hence the right-hand side is at most
+$2^{M/2}+1-2^{m_2}$, which is smaller. Therefore $n_2$ is odd,
+and $N$ odd makes $n_1$ even. Finally $n_2=n_1+N\geq2+3$.
+\end{proof}
+
+Both $q\equiv3$ and $q\equiv7\pmod8$ would give $m_2=1$, so both
+are excluded. The remaining possibilities are
+\[
+\begin{array}{c|c}
+q\bmod8&m_2=v_2(q-1)\\ \hline
+5&2\\
+1&\text{even and at least }4
+\end{array}
+\]
+with $n_1$ even and $n_2$ odd in both rows.
+Lemma~\ref{lem:q-one-mod-eight} below excludes the $5\pmod8$ row.
+Also $q<p^{1/5}$ since $n_2\geq5$.
+The size estimate also sharpens to
+\begin{equation}\label{eq:sharp-A}
+A<\frac{\sqrt{2^M q^N}}{2^{m_2/2}q^{n_1/2}}
+\leq\frac{\sqrt{2^M q^N}}{2q},\qquad
+A<\frac{p}{2^{m_2}q^{n_1}}\leq\frac{p}{4q^2}.
+\end{equation}
+The latter follows from $p=A2^{m_2}q^{n_1}+2^{m_2}+q^{n_1}$.
+
+
+\section{Restrictions from Mersenne factors}
+\label{sec:mersenne}
+
+\subsection{\texorpdfstring{The order and multiplicity of $q$}{The order and multiplicity of q}}
+% Source: original valuation discussion; the even multiplicity consequence
+% and the development target use the added parity and q=3 reductions.
+Put
+\[
+r=\operatorname{ord}_q(2),\qquad \rho=v_q(2^r-1).
+\]
+Then $q$ is a primitive Mersenne factor at exponent $r$: it divides
+$2^r-1$ and no $2^a-1$ with $1\leq a<r$.
+This describes its order, not its multiplicity. Since $r\mid M$ and
+$q\nmid r$, lifting the exponent gives
+\begin{equation}\label{eq:exact-q-valuation}
+\boxed{n_1=\rho+v_q(M).}
+\end{equation}
+Thus if $q\nmid M$, then $\rho=n_1$ is even and at least $2$.
+If $\rho=1$, then $v_q(M)$ is odd and positive, so $q\mid M$.
+In either case $2^M\equiv1\pmod{q^2}$; if $q\nmid M$, also
+$2^r\equiv2^{q-1}\equiv1\pmod{q^2}$.
+
+The $q=3$ proof suggests a development target. A larger multiplicity of
+$3$ forces $3\mid M$, which forces the Mersenne factor $7$; its order at
+base $3$ then contradicts $N$ odd. For general $q$, seek a forced factor
+$\ell\neq q$ of $2^M-1$ for which $\operatorname{ord}_\ell(q)$ cannot
+divide $N$. More generally, several forced orders may have an lcm that
+cannot fit the size interval \eqref{eq:window}. A uniform way to force
+these incompatible orders is still missing.
+
+\subsection{Orders modulo A and coprime gaps}
+\label{sec:exact-orders}
+% Added in discussion; no coprimality assumption in the first lemma.
+\begin{lemma}
+For $A>1$, $q>3$,
+\[
+\operatorname{ord}_A(2)=M,\qquad \operatorname{ord}_A(q)=N.
+\]
+\end{lemma}
+\begin{proof}
+Lemma~\ref{lem:bounds} gives $A\geq2^{M/2}-1$.
+Equality would give $q^{n_1}=2^{M/2}+1$. Since $n_1$ is even,
+$(q^{n_1/2}-1)(q^{n_1/2}+1)=2^{M/2}$ forces $q=3$.
+Thus $A>2^{M/2}-1$. A proper divisor of $M$ is at most $M/2$,
+so cannot be the order of $2$ modulo $A$.
+Also
+\[
+A=\frac{q^N-1}{2^{m_2}}\geq\frac{q^N-1}{q-1}>q^{N-1},
+\]
+which proves the second assertion.
+\end{proof}
+
+Suppose $\gcd(M,N)=1$. The subgroups generated by $2$ and $q$
+modulo $A$ have trivial intersection. Consequently
+\[
+\operatorname{ord}_A(2q)=MN,\qquad MN\mid\varphi(A).
+\]
+For each prime $\ell\mid A$, put
+$r_\ell=\operatorname{ord}_\ell(2)$, $t_\ell=\operatorname{ord}_\ell(q)$.
+Then $\gcd(r_\ell,t_\ell)=1$ and $r_\ell t_\ell\mid\ell-1$.
+In particular, a primitive Mersenne factor $\ell\neq q$ at exponent $M$
+has the form $\ell=hM+1$ and satisfies
+\[
+\boxed{\operatorname{ord}_\ell(q)\mid\gcd(h,N).}
+\]
+If $\gcd(h,N)=1$, then $\ell\mid q-1$. This excludes $\ell>q$,
+in particular when $h$ is a power of $2$.
+When $q\mid M$, every primitive factor at $M$ exceeds $q$;
+its multiplier $h$ must therefore share an odd prime factor with $N$.
+
+For positive integers $a,b$, the same subgroup argument prime power
+by prime power gives
+\[
+\gcd(A,2^a q^b-1)=\gcd(A,2^a-1,q^b-1)
+\quad\text{if }\gcd(M,N)=1.
+\]
+
+\subsection{Common factors of the two gaps}
+% Source: diophantine_analysis.tex (divisor lemma) and even_odd_case.tex
+% (common-gap construction). The q>3 specialization uses the added parities.
+
+\begin{lemma}\label{lem:divisor}
+If $d>1$ divides both gaps, write
+\[
+M=ad,\qquad N=bd,\qquad Y=2^aq^b.
+\]
+Then
+\[
+Ap=(Y-1)(1+Y+\cdots+Y^{d-1}),\qquad Y-1\mid A.
+\]
+\end{lemma}
+\begin{proof}
+The factorization follows from $Ap=Y^d-1$. If $p\mid Y-1$, then
+\[
+A=\frac{Y-1}{p}(1+Y+\cdots+Y^{d-1})
+ \geq 1+Y+\cdots+Y^{d-1}>Y^{d-1}.
+\]
+But \eqref{eq:A-size} gives $A<Y^{d/2}/\sqrt6$, a contradiction
+for $d\geq2$. Hence $p\nmid Y-1$, and $Y-1\mid Ap$ implies
+$Y-1\mid A$.
+\end{proof}
+
+Whether $\gcd(M,N)=1$ remains open. This is a separate question from
+whether $q\mid M$.
+Let an odd prime $s$ divide both gaps, and write
+\[
+U=2^{M/s},\quad V=q^{N/s},\quad Y=UV,\quad B=Y-1.
+\]
+Then
+\[
+Ap=(Y-1)\Phi_s(Y),\qquad
+\Phi_s(Y)=1+Y+\cdots+Y^{s-1}.
+\]
+Lemma~\ref{lem:divisor} gives $p\nmid B$ and $B\mid A$, so
+\[
+B\mid2^M-1,\quad B\mid q^N-1,\quad
+p\mid\Phi_s(Y),\quad \operatorname{ord}_p(Y)=s,\quad p\equiv1\pmod s.
+\]
+Thus a common factor of the gaps forces a particular divisor $B$ into
+$A$, not merely an unspecified factor of a Mersenne number.
+
+The case $s=3$ is impossible. Indeed $B\mid U^3-1,V^3-1$.
+With $W=\min(U,V)$ and $Z=\max(U,V)$, this gives
+$W^2\equiv Z\pmod{WZ-1}$. Both are positive and smaller than $WZ-1$,
+so $W^2=Z$, impossible for powers of distinct primes. Hence every prime
+factor of $\gcd(M,N)>1$ is at least $5$.
+
+For $s\geq5$, reduce $V^s-1$ modulo $B=UV-1$ to obtain
+$B\mid V^{s-1}-U$. Also $V>\sqrt U$ by $q^N>2^{M/2}$,
+so $V^{s-1}>U$. Thus there is an integer $\tau\geq1$ with
+\[
+V^{s-1}-U=\tau(UV-1),\qquad
+U(\tau V+1)=V^{s-1}+\tau.
+\]
+Here $U$ is a square, and $\tau$ is odd by parity. Since the remaining
+$q$ satisfy $q\equiv1\pmod4$ and $N/s$ is odd, put
+$w=(V+1)/2$, which is odd. Reduction modulo $V+1$ gives
+\[
+U\frac{\tau-1}{2}\equiv-\frac{\tau+1}{2}\pmod w.
+\]
+The two consecutive integers $(\tau-1)/2$ and $(\tau+1)/2$ are coprime;
+the congruence makes the first coprime to $w$. Consequently
+\[
+U\equiv-\frac{\tau+1}{\tau-1}\pmod w,
+\qquad
+\left(\frac{1-\tau^2}{\ell}\right)=1
+\quad\text{for every prime }\ell\mid w.
+\]
+The last assertion uses that $U$ is a unit square modulo $w$.
+In particular it holds for every prime dividing $(q+1)/2$.
+These necessary conditions have not yet supplied a contradiction.
+
+\subsection{Forbidden periods and forced residues}
+\label{sec:forbidden-periods}
+% Added in discussion: use minimum return periods and the exclusion of 3
+% from N, without assuming that the gaps are coprime.
+The exclusion of $3\mid\gcd(M,N)$ and the valuation identity at $3$
+give
+\[
+3\nmid N,\qquad v_3(M)=v_3(q-1)-1.
+\]
+Indeed, if $3\mid N$, then $3\nmid M$, whereas
+$1=v_3(q-1)+v_3(N)\ge2$.
+Since $r=\operatorname{ord}_q(2)$ divides both $M$ and $q-1$,
+\begin{equation}\label{eq:cubic-return}
+\boxed{r\mid(q-1)/3,\qquad 2^{(q-1)/3}\equiv1\pmod q.}
+\end{equation}
+This is a necessary condition on $q$ alone.
+
+If $\ell\mid A$ and $\ell-1=2^i3^j$, then
+$\operatorname{ord}_\ell(q)\mid\gcd(N,\ell-1)=1$. Hence
+\[
+q\equiv1\pmod\ell.
+\]
+In particular $3\mid M$ forces $q\equiv1\pmod7$;
+$12\mid M$, $q\ne13$, forces $q\equiv1\pmod{13}$;
+and $18\mid M$ forces $q\equiv1\pmod{19}$.
+The bases $7,19$ themselves are already excluded by $q\equiv1\pmod4$.
+For example, $q=109$ passes \eqref{eq:cubic-return}, but
+$\operatorname{ord}_{109}(2)=36$ forces $3\mid M$, while
+$109\equiv4\pmod7$. Thus it is excluded for all $p$.
+
+More generally, let $L\mid M$ be forced, and let $\mathcal S$ be
+any set of primes $\ell\ne q$ such that
+\[
+\operatorname{ord}_\ell(2)\mid L,\qquad \ell-1=2^i3^j.
+\]
+Then, writing $P=\prod_{\ell\in\mathcal S}\ell$ and $c=m_2$,
+\begin{equation}\label{eq:forced-residue-product}
+\boxed{P\mid q-1,\qquad 2^cP\le q-1.}
+\end{equation}
+A single failed residue excludes $q$; the product can exclude a whole
+specified family without computing the individual residues.
+
+When $c=2$, $q\equiv5\pmod8$ implies that $2$ is a quadratic
+nonresidue modulo $q$, so $4\mid r\mid M$. Thus $q\equiv1\pmod5$,
+and the earlier classes modulo $48$ sharpen to
+\[
+q\equiv61\text{ or }181\pmod{240}\qquad(c=2).
+\]
+
+\subsection{The full common divisor}
+\label{sec:full-gcd}
+% Restored from even_odd_case.tex, Section 6.3; totient restriction added here.
+Let $d=\gcd(M,N)>1$, $U=2^{M/d}$, $V=q^{N/d}$, and $Y=UV$.
+Then $Ap=Y^d-1$. The sharper size bound gives
+\[
+p>2q(1-Y^{-d})Y^{d/2}>Y^{d/2}.
+\]
+For any proper divisor $e$ of $d$, $\Phi_e(Y)\mid Y^e-1<Y^{d/2}$.
+Hence $p$ divides only the factor $\Phi_d(Y)$, and
+\[
+H_d:=\frac{Y^d-1}{\Phi_d(Y)}\mid A,\qquad
+\operatorname{ord}_p(Y)=d,\qquad p\equiv1\pmod d.
+\]
+The M\"obius product gives
+\[
+\left|\log\Phi_d(Y)-\varphi(d)\log Y\right|
+\leq\sum_{j\geq1}-\log(1-Y^{-j})
+\leq\frac{Y}{(Y-1)^2}<\log2.
+\]
+Thus $\Phi_d(Y)<2Y^{\varphi(d)}$. Comparing the resulting lower bound
+on $H_d$ with $A<Y^{d/2}/(2q)$ proves
+\[
+\boxed{\varphi(d)>d/2.}
+\]
+Equivalently, the prime factors of $d$ must satisfy
+$\prod_{\ell\mid d}(1-1/\ell)>1/2$; every odd prime power passes this test.
+Also $3\nmid d$ by the preceding argument.
+
+\subsection{The proposed descent}
+\label{sec:descent}
+% User's proposed direction, worked out here. The obstruction below is to
+% the reduced integrality system, not a counterexample to the original problem.
+Here let $d\geq5$ be a prime dividing both gaps, and set
+\[
+a=M/d,\quad b=N/d,\quad U=2^a,\quad V=q^b,\quad B=UV-1.
+\]
+The gap bounds give $\sqrt U<V<U$ and $B\mid A$.
+There are integers $\tau,\sigma\geq1$ such that
+\begin{equation}\label{eq:quotient-pair}
+V^{d-1}-U=\tau B,\qquad U^{d-1}-V=\sigma B.
+\end{equation}
+Both quotients are odd. Neither is $1$: for example $\tau=1$ would
+require $V+1\mid V^{d-1}+1$, hence $V+1\mid2$.
+Thus $\tau,\sigma\geq3$.
+
+For fixed $\tau$, integrality is equivalent to
+\begin{equation}\label{eq:quotient-divisor}
+U=\frac{V^{d-1}+\tau}{\tau V+1}\in\mathbb Z
+\quad\Longleftrightarrow\quad
+E_d:=\frac{\tau^d+1}{\tau V+1}\in\mathbb Z.
+\end{equation}
+Indeed $\gcd(\tau,\tau V+1)=1$, and multiplying the first numerator
+by $\tau^{d-1}$ gives residue $1+\tau^d$ modulo $\tau V+1$.
+Equivalently choose a divisor $D\mid\tau^d+1$ with
+$D>\tau+1$ and $D\equiv1\pmod\tau$, and put $V=(D-1)/\tau$.
+Since $d$ is odd,
+\[
+\tau^d+1=(\tau+1)\Phi_{2d}(\tau),\qquad
+\gcd(\tau+1,\Phi_{2d}(\tau))\mid d.
+\]
+This parametrizes integer quotients for fixed $\tau$; $\tau$ is unbounded.
+The integer $E_d$ is not in general the cofactor $C=A/B$.
+
+For the base-$V$ expansion, write
+$U=\sum_j u_jV^j$, $\tau=\sum_j t_jV^j$ with digits in $[0,V-1]$.
+The equation $U+\tau VU=V^{d-1}+\tau$ gives the carry relations
+\[
+u_j+\tau u_{j-1}+c_j=t_j+\mathbf1_{j=d-1}+Vc_{j+1},
+\qquad u_{-1}=c_0=0,
+\]
+with zero terminal carry. In particular $U\equiv\tau\pmod V$.
+These relations still require a restriction on the carries to yield an exclusion.
+
+Put $c=v_2(V-1)=m_2$. The power-of-two condition on $U$ requires
+\[
+v_2(V^{d-1}+\tau)-v_2(\tau V+1)=a,
+\]
+and equality of the odd parts of the two expressions.
+If $a>c+v_2(d-1)$, reduction modulo $2^a$ and lifting give
+\[
+v_2(\tau+1)=c+v_2(d-1),\quad
+v_2(\tau V+1)=c,\quad v_2(E_d)=v_2(d-1).
+\]
+Thus the $2$-adic valuation of $E_d$ is controlled, but its odd part need
+not be $1$. The congruence modulo $V+1$ proved above remains necessary;
+it does not require the odd factors of $V+1$ to divide $U$.
+The symmetric reduction modulo $U+1$ gives
+\[
+\gcd\left(\frac{\sigma-1}{2},U+1\right)=1,\qquad
+V\equiv-\frac{\sigma+1}{\sigma-1}\pmod{U+1}.
+\]
+The gcd assertion follows from the coprimality of
+$(\sigma-1)/2$ and $(\sigma+1)/2$.
+
+The reduced conditions admit prime-power pairs. For example
+\[
+d=5,\quad U=4096=2^{12},\quad V=461\text{ prime},\quad
+B=1888255,
+\]
+\[
+\tau=23919,\qquad\sigma=149066189,\qquad
+E_5=710020863679660.
+\]
+They satisfy \eqref{eq:quotient-pair}, $\sqrt U<V<U$, and
+$v_2(E_5)=2$. Here $\tau>U$, so replacing $U$ by $\tau$ does not descend.
+This pair fails the original problem: $461\equiv2\pmod3$ and
+$2^{60}\equiv196\pmod{461}$.
+
+A descent proving coprimality must therefore preserve more than
+\eqref{eq:quotient-pair}. In particular it must retain
+\[
+q\mid U^d-1,\qquad n_1=v_q(U^d-1)\text{ even},\qquad
+\frac{U^d-1}{q^{n_1}}=\frac{V^d-1}{2^{v_2(q-1)}},
+\]
+as well as the prime quotient $p=(U^dV^d-1)/A$.
+No decreasing map preserving these conditions has yet been established.
+
+\subsection{\texorpdfstring{The family $M=2s$, with $s$ prime}{The family M=2s, with s prime}}
+% Added in discussion: this family has coprime gaps and q does not divide M.
+
+Suppose $M=2s$ with $s$ an odd prime. Then $r\mid2s$;
+since $q>3$, $r\neq1,2$, so $r=s$ or $2s$.
+Thus $q\geq2s+1$ and
+\[
+N<\frac{2s\log2}{\log q}<s.
+\]
+Therefore $\gcd(M,N)=1$ and $q\nmid M$ in this family.
+It belongs to the repeated primitive-factor case $\rho=n_1\geq2$ even;
+the common-divisor construction above does not apply to it.
+
+\section{The logarithmic bound}
+\label{sec:logarithms}
+% Added in discussion: the upper bound for Lambda, application of Laurent,
+% and finite reduction for q dividing M. Laurent's estimate is external.
+
+\subsection{Closeness of the two large powers}
+
+Define
+\[
+\Lambda=n_2\log q-m_1\log2.
+\]
+The subtracted equation yields
+\[
+2^{m_1}(1-2^{-M})=q^{n_2}(1-q^{-N}),
+\]
+hence
+\[
+\Lambda=\log(1-2^{-M})-\log(1-q^{-N}).
+\]
+Since $q^N<2^M$ and $q^N\geq27$,
+\begin{equation}\label{eq:lambda-upper}
+\boxed{0<\Lambda<\frac{27}{26}q^{-N}.}
+\end{equation}
+Indeed, $-\log(1-x)\leq x/(1-x)$ for $0<x<1$.
+In particular the linear form is nonzero.
+
+Since $3\mid q-1$, its odd part $u$ is at least $3$. The gap equation
+and $n_1\geq2$ give
+\begin{equation}\label{eq:gap-ratio}
+q^N=\frac{2^{m_2}}{q^{n_1}}(2^M-1)+1
+ <\frac{2^M-1}{3q}+1,
+\qquad \frac{2^{m_2}}{q^{n_1}}\leq\frac{q-1}{3q^2}.
+\end{equation}
+Along any hypothetical sequence with $q\to\infty$, this gives
+$q^N/2^M\to0$. Meanwhile
+\[
+0<\frac{p}{2^{m_1}}-1
+ \leq\frac{2^{M/2}+1}{2^{M+m_2}}\longrightarrow0
+\]
+as $M\to\infty$. The large terms $2^{m_1}$ and $q^{n_2}$ approach
+each other; the gap powers need not.
+
+\subsection{\texorpdfstring{An effective bound for fixed $q$}{An effective bound for fixed q}}
+
+Laurent's estimate, quoted in Miyazaki--Scott--Styer
+\cite{MSS} (\texttt{prop-comp} in the local source), gives
+\[
+\log|b_2\log\alpha_2-b_1\log\alpha_1|
+>-25.2H_1H_2\bigl(\max\{\log b'+0.38,10\}\bigr)^2,
+\qquad b'=b_1/H_2+b_2/H_1,
+\]
+under its height and independence hypotheses.
+Use $(\alpha_1,\alpha_2)=(2,q)$, $(b_1,b_2)=(m_1,n_2)$.
+The bases are multiplicatively independent because they are distinct primes.
+For a conservative application choose $H_1=H_2=\log q>1$;
+these dominate both rational heights, both logarithms, and $1$.
+This choice also avoids any issue with the mismatched index in the height
+condition printed in the local copy. Sharper admissible heights could
+improve the constants, but are not needed for the deduction below.
+
+Put $\lambda=\log q$ and
+\[
+\mathcal H=\max\left\{\log\frac{m_1+n_2}{\lambda}+0.38,10\right\}.
+\]
+Combining the quoted lower bound with \eqref{eq:lambda-upper} gives
+\begin{equation}\label{eq:baker-gap}
+N\lambda<25.2\lambda^2\mathcal H^2+\log(27/26).
+\end{equation}
+
+The dependence on $m_1,n_2$ can be removed in favor of $M,q$.
+Since $m_2\leq M/2$, $m_1\leq3M/2$. Also
+$q^{n_2}<p<2^{m_1+1}$, so
+\[
+n_2<\frac{(3M/2+1)\log2}{\lambda}.
+\]
+Since $\lambda\geq\log3$, $\log2/\log3<2/3$, and $M\geq6$,
+these inequalities give $m_1+n_2<3M$.
+Together with $N\lambda>M\log2/2$, this proves
+\begin{equation}\label{eq:baker-M}
+\boxed{
+\frac{M\log2}{2}
+<25.2(\log q)^2
+\left(\max\left\{\log\frac{3M}{\log q}+0.38,10\right\}\right)^2
++\log(27/26).}
+\end{equation}
+
+For each fixed $q$, the right side grows like $(\log M)^2$ whereas the
+left side grows like $M$. It therefore gives an effective upper bound
+on $M$ for that fixed $q$, and then bounds all four exponents by the
+identities and bounds in Section~\ref{sec:bounds}. By itself this does not bound $q$
+absolutely; the next step supplies such a bound in one branch.
+
+\subsection{Minimum returns against the height bound}
+\label{sec:minimum-returns}
+% Added from the user's minimum-size/periodicity direction. These are
+% necessary conditions, not a density assumption about prime powers.
+Fix $q$ and a prime $d\ge5$ required to divide both gaps. Put
+\[
+c=v_2(q-1),\quad r=\operatorname{ord}_q(2),\quad
+\rho=v_q(2^r-1),\quad s=v_3(q-1)-1.
+\]
+First require $c$ even and $r\mid(q-1)/3$.
+Set $D=\operatorname{lcm}(2,d,r,3^s)$, and let $h$ be the least
+integer with
+\[
+h\ge v_q(D),\qquad \rho+h\text{ even}.
+\]
+Define $L=Dq^{h-v_q(D)}$ and $e_0=\rho+h$. Then
+\begin{equation}\label{eq:minimum-return}
+\boxed{L\mid M,\qquad n_1\ge e_0\ge2,\qquad d\mid N.}
+\end{equation}
+This follows from $n_1=\rho+v_q(M)$ and
+$v_3(M)=s$. More precisely $M=Lj$ requires
+$3\nmid j$ and $v_q(j)$ even.
+For $\rho=1$, $L=\operatorname{lcm}(2,d,qr,3^s)$.
+Thus even the minimum permitted $n_1$ requires a factor $q$ in $M$.
+If $d=q$ and $\rho$ is even, the minimum is instead $v_q(M)=2$.
+
+The minimum sizes give
+\begin{equation}\label{eq:return-size}
+2^M\ge1+\frac{q^{e_0}(q^d-1)}{2^c}.
+\end{equation}
+If $T$ is the base-$2$ logarithm of the right side, then
+$M\ge L\lceil T/L\rceil$. This lower bound must fit below the
+effective upper bound from \eqref{eq:baker-M}.
+The inequalities alone do not exclude all $q$ when $\rho$ is even.
+
+\subsubsection*{Propagating the required periods}
+Start with forced divisors $L\mid M$, $K\mid N$, initially the $L$
+above and $K=d$. For each selected prime power $\ell^f\mid2^L-1$,
+$\ell\ne q$, the full gap equations force $\ell^f\mid A$. Therefore
+replace $K$ by
+\[
+\operatorname{lcm}\bigl(K,\operatorname{ord}_{\ell^f}(q)\bigr).
+\]
+If $\gcd(K,6)>1$, there is a contradiction.
+Conversely, for each odd prime $\ell\mid q-1$, put
+$r_\ell=\operatorname{ord}_\ell(2)$ and
+$\eta_\ell=v_\ell(2^{r_\ell}-1)$. The valuation identity forces
+\[
+r_\ell\mid M,\qquad
+v_\ell(M)\ge v_\ell(q-1)+v_\ell(K)-\eta_\ell.
+\]
+Enlarge $L$ by these forced factors, retaining the exact $3$-valuation
+and the parity condition on $v_q(M)$. Newly forced Mersenne factors
+can then enlarge $K$ again. All these implications hold for every
+multiple of the current $L,K$.
+Use the resulting lower bound on $n_1$ and replace $d$ by $K$ in
+\eqref{eq:return-size}. A contradiction follows if this forces $M$
+beyond \eqref{eq:baker-M}, or if \eqref{eq:forced-residue-product} fails.
+The open step is to force such a contradiction uniformly, rather
+than merely obtain compatible divisibility conditions.
+
+The doubling-map formulation in \cite[Theorem A and \S4]{AGJ26}
+identifies the period of $1/Q$ under doubling with
+$\operatorname{ord}_Q(2)$, for odd $Q$. At prime-power denominators,
+lifting gives
+\[
+\operatorname{ord}_{q^e}(2)=r q^{\max(0,e-\rho)}.
+\]
+This expresses the minimum-return obstruction dynamically. The paper's
+compressed returns compute these periods; an additional restriction on
+the simultaneous periods at bases $2$ and $q$ is still required here.
+
+\subsection{\texorpdfstring{An effective reduction when $q\mid M$}{An effective reduction when q divides  M}}
+
+If $q\mid M$, then $qr\mid M$ because $r\mid M$ and $q\nmid r$.
+Since $q<2^r$, this gives
+\[
+M\geq qr>\frac{q\log q}{\log2}.
+\]
+Together with \eqref{eq:baker-M}, this bounds $q$ absolutely in this branch.
+A coarse cutoff is $q<10^6$.
+
+Put $\lambda=\log q$, $t=M/\lambda$, and
+$H(t)=\max\{\log(3t)+0.38,10\}$. Dividing \eqref{eq:baker-M} gives
+\[
+\frac{t}{H(t)^2}
+ <\frac{50.4}{\log2}\lambda
+   +\frac{2\log(27/26)}{\lambda\log2\,H(t)^2}
+ <73\lambda.
+\]
+If $q\geq10^6$, then $t>q/\log2$, $H(t)=\log(3t)+0.38>2$,
+and $t/H(t)^2$ is increasing. Hence
+\[
+q<73\log2\,\lambda(\lambda+C)^2,
+\qquad C=\log(3/\log2)+0.38<1.845126.
+\]
+At $q=10^6$ the right side is less than $172000$.
+Moreover $q/[\log q(\log q+C)^2]$ is increasing thereafter:
+its logarithmic derivative with respect to $\lambda$ is
+$1-1/\lambda-2/(\lambda+C)>0$.
+Thus $q<10^6$ in this branch. For each such $q$,
+\eqref{eq:baker-M} bounds $M$ effectively. The uniform bound and
+finite exclusion below complete this branch.
+
+\begin{lemma}
+If $q\mid M$, then $36\nmid M$ and $48\nmid M$.
+\end{lemma}
+\begin{proof}
+If $36\mid M$, the primes $3,5,7,13,19,37$ divide $2^M-1$;
+their orders at base $2$ are $2,4,3,12,18,36$ respectively.
+Each has $\ell-1$ supported on $2,3$, so
+Section~\ref{sec:forbidden-periods} forces $q\equiv1\pmod\ell$
+unless $q=\ell$. The bases $3,5,7,19$ are already excluded.
+Since $4\mid M$, $q\equiv1\pmod5$, excluding $q=13,37$ as well.
+Consequently
+\[
+959595=3\cdot5\cdot7\cdot13\cdot19\cdot37\mid q-1.
+\]
+As $4\mid q-1$, this gives $q\ge3838381$, contrary to $q<10^6$.
+
+If $48\mid M$, use $3,5,7,13,17,97$, whose orders are
+$2,4,3,12,8,48$. The base $17$ is excluded modulo $3$;
+$13,97$ are excluded by $q\equiv1\pmod5$.
+Thus $2250885\mid q-1$, giving $q\ge9003541$.
+\end{proof}
+In particular, in the $q\mid M$ branch,
+\[
+\operatorname{lcm}(2,r,3^{v_3(q-1)-1})
+\quad\text{cannot be divisible by }36\text{ or }48.
+\]
+These exclusions apply to all $p$; they use no bound on $p$ and no
+enumeration. Additional prime factors in the residue product can
+strengthen the thresholds.
+
+\subsection{Excluding the branch with a finite check}
+\label{sec:q-divides-exclusion}
+% New computer-assisted deduction from the minimum-return argument.
+% This subsumes the earlier special-family check_power_two_orders.lua.
+\begin{lemma}
+If $q\mid M$, then $M<4\cdot10^6$.
+\end{lemma}
+\begin{proof}
+Write $H_\lambda(x)=\max\{\log(3x/\lambda)+0.38,10\}$.
+The preceding estimates give $M<73\lambda^2H_\lambda(M)^2$.
+Since $\lambda=\log q<14$ and $\lambda H_\lambda(M)$ is increasing
+in $\lambda$,
+\[
+\frac{M}{H_{14}(M)^2}<73\cdot14^2=14308.
+\]
+The function $x/H_{14}(x)^2$ is increasing: on the logarithmic
+branch its derivative has the sign of $H_{14}(x)-2>0$.
+But $H_{14}(4\cdot10^6)<15$, and
+$4\cdot10^6/15^2>14308$. Hence $M<4\cdot10^6$.
+\end{proof}
+
+\begin{lemma}\label{lem:q-not-M}
+For $A>1$ and $q>3$, $q\nmid M$.
+\end{lemma}
+\begin{proof}[Proof with finite computation]
+Suppose $q\mid M$. It suffices to check primes $3<q<10^6$ satisfying
+\[
+q\equiv1\pmod3,\quad v_2(q-1)\text{ even},\quad
+2^{(q-1)/3}\equiv1\pmod q.
+\]
+For each such prime, put $r=\operatorname{ord}_q(2)$,
+$s=v_3(q-1)-1$, and
+\[
+L=\operatorname{lcm}\left(
+q\operatorname{lcm}(2,r,3^s),\
+\{\operatorname{ord}_\ell(2):\ell\mid q-1,\ \ell\text{ odd prime}\}
+\right).
+\]
+Every entry in this lcm divides $M$: the odd part of $q-1$ divides
+$A$. Thus reject $q$ if $L\ge4\cdot10^6$ or $v_3(L)>s$.
+For the remaining primes, the following implications are necessary:
+\[
+4\mid L\Rightarrow q\equiv1\pmod5,\qquad
+3\mid L\Rightarrow q\equiv1\pmod7,\qquad
+5\mid L\Rightarrow q^5\equiv1\pmod{31}.
+\]
+They follow from $\gcd(N,6)=1$ and the respective orders
+$\operatorname{ord}_5(2)=4$, $\operatorname{ord}_7(2)=3$,
+$\operatorname{ord}_{31}(2)=5$. The bases $5,7,31$ fail the
+initial restrictions; the script also explicitly omits a witness equal to $q$.
+
+The exact sieve in \path{check_q_divides_gap.lua} gives:
+\[
+\begin{array}{l|r}
+\text{primes passing the initial restrictions}&4347\\\hline
+\text{excluded by }L\ge4\cdot10^6&4332\\
+\text{excluded by }v_3(L)>s&5\\
+\text{excluded modulo }5&7\\
+\text{excluded modulo }7&2\\
+\text{excluded modulo }31&1\\\hline
+\text{remaining}&0
+\end{array}
+\]
+These are successive, disjoint rejection counts. The script enumerates
+only $q$ and uses integer arithmetic; it does not enumerate $p,M,N$.
+Its arithmetic stays below $2^{53}$, including on LuaJIT.
+\end{proof}
+
+Consequently every remaining solution requires
+\[
+\boxed{q\nmid M,\qquad n_1=\rho\ge2\text{ even},\qquad
+q^{n_1}\mid2^r-1,\qquad r\mid(q-1)/3.}
+\]
+In particular $2^{(q-1)/3}\equiv1\pmod{q^2}$.
+A prime $d\mid\gcd(M,N)$ must be different from $q$.
+This leaves the repeated primitive-factor branch; coprimality of
+the two gaps remains open.
+
+\section{The smaller-term ratio and common divisors}
+\label{sec:additional-returns}
+% New deductions following the user's minimum-return and common-gap split.
+Throughout this section $q\nmid M$, by Lemma~\ref{lem:q-not-M}.
+Put $e=n_1=\rho$, $c=m_2$, $Q=q^e$, and
+\[
+E=\operatorname{lcm}(2,r),\qquad M=hE.
+\]
+Then $Q\mid2^r-1$, and lifting gives
+\[
+A=\frac{2^r-1}{Q}\,\frac{2^M-1}{2^r-1},\qquad
+\gcd\left(q,\frac{2^M-1}{2^r-1}\right)=1.
+\]
+In the cyclotomic factorization of $2^M-1$, only $\Phi_r(2)$ contains
+$q$. Every other factor $\Phi_j(2)$, $j\mid M$, enters $A$ intact.
+
+\subsection{Congruences on p}
+\label{sec:p-common-gap}
+Let $g=\gcd(M,N)>1$. Section~\ref{sec:full-gcd} gives
+$p\equiv1\pmod g$. If a prime $d\mid g$ also divided $q-1$,
+then $p=2^{m_2}+q^{n_2}$ would give
+$1\equiv2^{m_2}+1\pmod d$, impossible. Thus
+\[
+\gcd(g,q-1)=1.
+\]
+Also $p=2^{m_1}+q^{n_1}$ is a sum of two nonzero squares modulo $5$.
+Since $p>5$ and $q\ne5$, $p\equiv2$ or $3\pmod5$.
+Consequently $5\nmid g$. Together with the previous exclusions,
+\begin{equation}\label{eq:common-gap-coprimality}
+\boxed{\gcd(g,30q(q-1))=1,\qquad \gcd(g,E)=1,\qquad gE\mid M.}
+\end{equation}
+Every prime factor of $g$ is at least $7$.
+The case in which a common prime has its full multiplicity already
+in $r$ is therefore excluded: such a prime would divide $q-1$.
+
+More generally, let $\ell$ be an odd prime dividing $q-1$, and put
+$\eta_\ell=v_\ell(2^{\operatorname{ord}_\ell(2)}-1)$.
+If $\eta_\ell=1$, the valuation identity and
+$\gcd(g,q-1)=1$ imply
+\begin{equation}\label{eq:ordinary-q-minus-one}
+\boxed{\ell\nmid N,\qquad v_\ell(M)=v_\ell(q-1)-1.}
+\end{equation}
+Indeed, $\ell\mid N$ would make
+$v_\ell(M)=v_\ell(q-1)+v_\ell(N)-1\ge1$, contradicting
+$\gcd(g,q-1)=1$. The same conclusion holds when $g=1$.
+Since $r\mid M$, we obtain the stronger condition on $q$
+\[
+r\mid(q-1)/\ell,\qquad
+2^{(q-1)/\ell}\equiv1\pmod{q^2}.
+\]
+This applies to $\ell=3,5,7,11,13$ whenever $\ell\mid q-1$.
+
+\subsection{The ratio before taking d-th powers}
+For any common divisor $d>1$, write $M=ad$, $N=bd$ and
+$U=2^a$, $V=q^b$. Keep the smaller terms in the equality:
+\[
+p=2^{m_2}U^d+q^{n_1}=2^{m_2}+q^{n_1}V^d,
+\qquad
+R:=\frac{q^{n_1}}{2^{m_2}}=\frac{U^d-1}{V^d-1}.
+\]
+Thus $1<U/V<R^{1/d}$. More precisely, with
+$\delta=a\log2-b\log q>0$,
+\begin{equation}\label{eq:smaller-ratio}
+\boxed{d\delta=\log R-\Lambda,\qquad
+0<\Lambda<\frac{27}{26}q^{-bd}.}
+\end{equation}
+For fixed $q$, both $n_1$ and $m_2$ are fixed, so $R$ is fixed.
+Increasing $d$ requires a closer ratio $2^a/q^b$ and the
+exponentially accurate equality \eqref{eq:smaller-ratio}.
+
+The congruences on $q$ also constrain $R$. With
+$u=(q-1)/2^{m_2}$,
+\[
+R=\frac{u q^{n_1}}{q-1},\qquad
+\log R=(n_1-1)\log q+\log u+\log\frac q{q-1},
+\]
+where $3\mid u$ and $0<\log(q/(q-1))<1/(q-1)$.
+Consequently
+\[
+\frac{(n_1-1)\log q+\log u-(27/26)q^{-N}}d
+<\delta<
+\frac{(n_1-1)\log q+\log u+1/(q-1)}d.
+\]
+Every odd product forced to divide $q-1$ also divides $u$, giving
+a corresponding lower bound on this ratio. For a common prime $d$,
+the congruence on $p$ gives, in addition,
+\[
+2^{m_2+a}+q^{n_1}\equiv1\pmod d,\qquad
+2^{m_2}+q^{n_1+b}\equiv1\pmod d.
+\]
+These follow by reducing the $d$-th powers modulo $d$.
+
+\subsection{Height using the least even multiple of r}
+The coprime factors $2^{E/2}-1$ and $2^{E/2}+1$ give
+\[
+Q\le2^{E/2}+1,\qquad c\le E/2,\qquad
+E\ge2\log_2(q^2-1).
+\]
+Writing $x=2^{E/2}$, $y=2^{M-E/2}$, the gap equation gives
+\[
+q^N\ge\frac{2(2^M-1)}{2^{E/2}+1}+1
+=\frac{2xy+x-1}{x+1}>y.
+\]
+Consequently
+\begin{equation}\label{eq:additional-height}
+\boxed{N\log q>\left(1-\frac1{2h}\right)M\log2.}
+\end{equation}
+Also $m_1\le M+E/2$ and
+$n_2<(m_1+1)\log2/\log q$. Since $q\ge13$ and $M\ge6$,
+these imply $m_1+n_2<2M$; if $h\ge5$, they give
+$m_1+n_2<3M/2$.
+Combining with \eqref{eq:baker-gap}, for $h\ge5$ we obtain
+\begin{equation}\label{eq:baker-additional}
+\left(1-\frac1{2h}\right)M\log2
+<25.2(\log q)^2
+\left(\max\left\{\log\frac{3M}{2\log q}+0.38,10\right\}\right)^2
++\log(27/26).
+\end{equation}
+For $h<5$, replace $3M/2$ inside the logarithm by $2M$.
+These improve the upper bound for fixed $q$; they do not yet give
+an absolute bound on $q$.
+
+The multiplier $h=M/E$ also has an elementary upper bound in terms of
+$N$. Since $2^{m_1}<q^{n_2}$ and
+$E\log2\ge2\log(Q-1)>2(e-1/4)\log q$,
+\begin{equation}\label{eq:number-of-returns}
+\boxed{h<\frac{N+e}{2e-1/2}\le\frac{2(N+2)}7.}
+\end{equation}
+The last fraction is obtained at the minimum $e=2$; the middle
+expression decreases with $e$. In particular $N=5$ forces $h=1$,
+so $M=E$. For $N=7$ we have $h\le2$, and for $N=11$, $h\le3$.
+
+\subsection{The factor forced by a common prime}
+Let $d\ge7$ be prime with $d\mid\gcd(M,N)$, and write
+\[
+M=ad,\quad N=bd,\quad U=2^a,\quad V=q^b,\quad
+B=UV-1,\quad C=A/B.
+\]
+By \eqref{eq:common-gap-coprimality}, $E\mid a$.
+Then $Q\mid U-1$, and $d\ne q$ gives
+\begin{equation}\label{eq:intact-cyclotomic}
+A=\frac{U-1}{Q}\Phi_d(U),\qquad
+\gcd(q,\Phi_d(U))=1,\qquad \Phi_d(U)\mid A.
+\end{equation}
+Thus $h\ge d$, and the minimum sizes and height bound imply
+\[
+M\ge2d\log_2(q^2-1),\qquad
+N\log q>\left(1-\frac1{2d}\right)M\log2.
+\]
+There is also a restriction on the other gap:
+\begin{equation}\label{eq:five-d}
+\boxed{N\ge5d.}
+\end{equation}
+Indeed $U>Q=q^e$, whereas
+$U^d=1+Q(V^d-1)/2^c<QV^d$.
+Hence $b>(1-1/d)e\ge8/5$.
+Since $b$ is odd and $3\nmid b$, it follows that $b\ge5$.
+Using that $U$ is a square gives the stronger inequality
+\[
+b>\left(2-\frac1d\right)e-\frac12:
+\]
+$Q\le\sqrt U+1$ and $q^e-1>q^{e-1/4}$ imply
+$U>q^{2e-1/2}$, which can be substituted into $U^d<QV^d$.
+In particular, $N=5d$ forces $n_1=e=2$.
+Since $d\mid h$ and \eqref{eq:number-of-returns} gives
+$h<(10d+4)/7<2d$, it also forces $h=d$. Thus
+\[
+N=5d\quad\Longrightarrow\quad n_1=2,\qquad M=dE.
+\]
+
+The complete factor in \eqref{eq:intact-cyclotomic} supplies
+\[
+\frac{\Phi_d(U)}{\gcd(\Phi_d(U),UV-1)}\mid C,
+\qquad
+C<\frac{(UV)^{d/2}}{2^{c/2}q^{e/2}(UV-1)}.
+\]
+For every prime power $\ell^f\mid\Phi_d(U)$,
+$\operatorname{ord}_{\ell^f}(q)\mid N$.
+This is the full factor to which the period and residue restrictions
+can be applied; the mixed-base gcd still needs control.
+
+\subsection{Consequences for the full common divisor}
+The arguments giving $N\ge5d$ and $N=5d\Rightarrow n_1=2$, $M=dE$
+use only $dE\mid M$, $d\mid N$, $d\ne q$, and the gap equations.
+They therefore apply with $d=g=\gcd(M,N)$ as well, even when $g$
+is composite. Thus
+\[
+g>1\quad\Longrightarrow\quad N\ge5g\ge35.
+\]
+In particular the gaps are coprime when $N$ is prime, or when $N$
+is a power of $5$.
+
+The first possible value $N=35$ is also excluded from the noncoprime
+case. It would require $g=7$, $n_1=2$ and $n_2=37$.
+Since $p\equiv1\pmod7$, its representation as a sum of two nonzero
+squares gives
+\[
+2^{m_1}\equiv q^2\equiv4\pmod7.
+\]
+Hence $q\equiv2$ or $5\pmod7$. The other representation gives
+$2^{m_2}\equiv1-q^{37}\equiv1-q\pmod7$, namely $6$ or $3$.
+Neither is a power of $2$ modulo $7$. Consequently
+\[
+\boxed{N<49\quad\Longrightarrow\quad\gcd(M,N)=1.}
+\]
+Indeed, for $35<N<49$, a prime factor of a nontrivial $g$ would have
+to be $7$, since $N\ge5g$; no multiple of $7$ in this interval is
+odd and coprime to $3$.
+
+\subsection{Using congruences modulo eight and five}
+\label{sec:mod-eight-families}
+If $7\mid g$, reducing the two representations modulo $7$ gives
+\[
+\begin{array}{c|c|c|c|c}
+q\bmod7&m_2\bmod6&m_1\bmod6&n_1\bmod6&N\bmod6\\\hline
+3&4&2&4&5\\
+5&4&2&2&1
+\end{array}
+\]
+Indeed $p\equiv1\pmod7$ requires
+$2^{m_1}\equiv q^{n_1}\equiv4\pmod7$. Substituting the possible
+residues into $2^{m_2}+q^{n_1+N}\equiv1$, with $\gcd(N,6)=1$,
+leaves the two rows. In particular $M\equiv4\pmod6$ and
+$n_2\equiv3\pmod6$.
+
+\begin{lemma}\label{lem:q-one-mod-eight}
+In the remaining case, $q\equiv1\pmod{48}$ and $m_2$ is even and
+at least $4$.
+\end{lemma}
+\begin{proof}
+Suppose $q\equiv5\pmod8$. Then $m_2=2$ and
+$v_2(\operatorname{ord}_q(2))=2$, so $4\mid M$.
+Thus $5\mid A$ and $q^N\equiv1\pmod5$. Since $N$ is odd,
+$q\equiv1\pmod5$. But $m_1=M+2\equiv2\pmod4$, giving
+$p=2^{m_1}+q^{n_1}\equiv4+1\equiv0\pmod5$, impossible.
+The remaining class $q\equiv1\pmod8$, together with even
+$m_2=v_2(q-1)$, gives $q\equiv1\pmod{16}$.
+Combine this with $q\equiv1\pmod3$.
+\end{proof}
+
+\begin{lemma}\label{lem:mod-five-split}
+The congruences modulo $5$ split as follows:
+\[
+\begin{array}{c|c|c}
+ &q\bmod5&\text{further conditions}\\\hline
+4\mid M&1&m_2\equiv0\pmod4,\quad5\nmid N,\quad p\equiv2\pmod5\\
+M\equiv2\pmod4&2,3&q^N\equiv3\pmod5,\quad m_2+n_1\equiv2\pmod4
+\end{array}
+\]
+Consequently
+\[
+q\equiv1,97,193\pmod{240},\qquad
+q^2\equiv1,49\pmod{240}.
+\]
+\end{lemma}
+\begin{proof}
+When $4\mid M$, we have $q\equiv1\pmod5$, as above.
+Then $p\equiv2^{m_2}+1\pmod5$ excludes $m_2\equiv2\pmod4$.
+The assertion $5\nmid N$ follows from \eqref{eq:ordinary-q-minus-one}.
+When $M\equiv2\pmod4$, put $P=2^{m_2}$ and $Q=q^{n_1}$.
+Both are $\pm1$ modulo $5$, and $p\equiv Q-P$ cannot vanish.
+Hence $Q\equiv-P\pmod5$. Since $AQ\equiv2^M-1\equiv3$,
+\[
+q^N=AP+1\equiv-3+1\equiv3\pmod5.
+\]
+Thus $q\equiv2$ or $3\pmod5$. The relation $Q\equiv-P$ gives
+$m_2+n_1\equiv2\pmod4$. Combining the three possible residues
+of $q$ modulo $5$ with $q\equiv1\pmod{48}$ gives the last assertions.
+\end{proof}
+In the second row, $q\equiv2\pmod5$ requires $N\equiv3\pmod4$,
+and $q\equiv3\pmod5$ requires $N\equiv1\pmod4$.
+Also
+\[
+p\equiv65\pmod{96},\qquad p\equiv257\text{ or }353\pmod{480}.
+\]
+Indeed $q^{n_1}\equiv1\pmod{96}$ and
+$2^{m_1}\equiv64\pmod{96}$, while $p\equiv2,3\pmod5$.
+
+% New deductions from the common-divisor residue calculations.
+\begin{lemma}\label{lem:exclude-seventeen}
+$17\nmid\gcd(M,N)$. Consequently gaps are coprime whenever
+$N=5^a17^b$, with $a,b\ge0$.
+\end{lemma}
+\begin{proof}
+Suppose $17\mid g$. The nonzero squares modulo $17$ are
+$1,2,4,8,9,13,15,16$, and
+$\langle4\rangle=\{1,4,16,13\}$.
+In $2^{m_1}+q^{n_1}\equiv1$, only
+$2^{m_1}\equiv16$, $q^{n_1}\equiv2$ are possible.
+Thus $m_1\equiv4\pmod8$. Since $\operatorname{ord}_{17}(2)=8$
+and $n_1$ is even, $q$ has order $16$ and $n_1\equiv2\pmod4$.
+The odd power $q^{n_2}$ also has order $16$.
+In $q^{n_2}\equiv1-2^{m_2}$, the choices
+$2^{m_2}=1,16$ give $0,2$, so only $4,13$ remain.
+Hence $m_2\equiv2\pmod4$ and $M\equiv2\pmod4$.
+But Lemma~\ref{lem:mod-five-split} then requires
+$m_2+n_1\equiv2\pmod4$, a contradiction.
+\end{proof}
+
+\subsection{Sharpening the height and checking residue families}
+\begin{lemma}\label{lem:sharp-h}
+In the remaining case,
+\[
+h<q^2,\qquad (2h-1)n_1<N,\qquad
+h<\frac{N+2}{4}.
+\]
+In particular $(2g-1)n_1<N$ when $g>1$.
+\end{lemma}
+\begin{proof}
+The classes modulo $240$ give $q\ge97$. Put $\lambda=\log q$ and
+$\beta=\log(27/26)$. Suppose $h\ge q^2$.
+Since $M=hE$ and $E\log2\ge2\log(q^2-1)>3\lambda$,
+$M>3h\lambda/\log2$.
+In \eqref{eq:baker-additional} replace $1-1/(2h)$ by $0.99$.
+The function
+\[
+\frac{0.99x\log2-\beta}
+ {\max\{\log(3x/(2\lambda))+0.38,10\}^2}
+\]
+is increasing for $x\ge3h\lambda/\log2$. Substitution gives
+\[
+2.97h\lambda-\beta
+ <25.2\lambda^2(\log h+3)^2.
+\]
+The ratio $(2.97h\lambda-\beta)/(\log h+3)^2$ also increases
+for $h\ge q^2$. Hence
+\[
+q^2<9\lambda(2\lambda+3)^2.
+\]
+At $q=97$ the right side is less than $6078<9409$;
+$q^2/[\log q(2\log q+3)^2]$ increases for $q\ge97$.
+This proves $h<q^2$.
+
+Write $e=n_1$, $c=m_2$, $Q=q^e$. Since $c\ge4$, $e\ge2$,
+\[
+2h\log\frac{Q}{Q-1}
+ <\frac{2q^2}{q^2-1}<4\log2\le c\log2.
+\]
+Using $2^E\ge(Q-1)^2$ and $2^{m_1}<q^{n_2}$, we obtain
+\[
+q^{N+e}>2^{c+hE}\ge2^c(Q-1)^{2h}>Q^{2h}.
+\]
+Thus $(2h-1)e<N$. Now use $e\ge2$ and $g\mid h$.
+\end{proof}
+
+For $N=49$, a nontrivial common divisor would have to be $g=7$.
+The modulo-$7$ table and the size bounds give
+\[
+n_1=2,\qquad M=7E,\qquad
+q\equiv5\pmod7,\qquad m_2\equiv4\pmod{12},\qquad M\equiv4\pmod6.
+\]
+Here $(2g-1)n_1<49$ forces $n_1=2$, and $7\mid h<51/4$
+forces $h=7$. The congruence on $m_2$ follows by combining
+$m_2\equiv4\pmod6$ with Lemma~\ref{lem:mod-five-split}.
+These restrictions have not yet excluded the family $N=49$, $g=7$.
+
+For a fixed prime $d\mid g$, retain the even values $e=n_1$ and
+multiples $h$ of $d$ satisfying $(2h-1)e<N$.
+For each, reduce
+\[
+2^{m_1}=1-q^e,\qquad 2^{m_2}=1-q^{N+e}\pmod d
+\]
+with $m_1,m_2,E$ even, $m_1-m_2=hE$, and the modulo-$5$ split.
+This is a finite residue calculation; no upper bound on $q$ is used.
+The script \texttt{check\_common\_gap\_residues.lua} gives:
+\[
+\begin{array}{c|c|c|c|l}
+N&d&n_1&h&q\bmod d\\\hline
+49&7&2&7&5\\
+55&11&2&11&3,5,6\\
+65&13&2&13&2\\
+77&7&4&7&3\\
+77&11&2&11&5,8\\
+85&17&\multicolumn{3}{c}{\text{excluded}}\\
+91&7&2&7,14&5\\
+91&13&2&13&2,6\\
+121&11&2&11,22&6
+\end{array}
+\]
+These are the survivors of this residue test, not asserted solutions.
+For $N=5d$, the same test proves coprimality for
+\[
+d\in\{7,17,29,41,43,73,89,109,113\}.
+\]
+Here $g>1$ would force $g=d$, $e=2$, $h=d$.
+Since $5\mid N$, the modulo-$5$ split gives
+$m_2\equiv0$, $m_1\equiv2\pmod4$.
+
+An algebraic version of this last test uses $t=\operatorname{ord}_d(16)$.
+Compute over $\mathbb F_d$ the gcd of
+\[
+X^{d-1}-1,\qquad (1-X^2)^t-4^t,\qquad (1-X^7)^t-1.
+\]
+If it is $1$, the family $N=5d$ is excluded. The exponent $7$ comes
+from $N+2=5d+2\equiv7\pmod{d-1}$.
+More generally use the two cosets $\langle16\rangle$ and
+$4\langle16\rangle$, retaining the permitted classes of $m_1,m_2$
+modulo $4$. A general extension would need to show that all the
+residue sets surviving the height bound are empty, possibly after
+combining further moduli. No such uniform assertion is proved here.
+
+\subsection{Forcing a common factor}
+\label{sec:forcing-common-factor}
+Let $\ell=jM+1>q$ be a primitive Mersenne factor at exponent $M$.
+If $\gcd(j,N)=1$, then
+\[
+1<\operatorname{ord}_\ell(q)\mid\gcd(M,N).
+\]
+Indeed, $\ell\mid A$ gives $\operatorname{ord}_\ell(q)\mid N$,
+while the order also divides $\ell-1=jM$. Coprimality with $j$
+forces it to divide $M$, and $1<q<\ell$ excludes order $1$.
+Thus such a factor contradicts $N<49$. A multiplier $j$ supported
+on $2,3$ automatically passes the coprimality test; if $4\mid M$,
+then $5\nmid N$, so factors of $5$ in $j$ are allowed as well.
+The missing general step is to force a primitive factor with this
+multiplier condition and $\ell>q$. Zsigmondy's theorem alone does
+not supply either condition.
+
+The condition $\ell>q$ may be weakened to $\ell\nmid q-1$.
+There is also a product version. Put $u=(q-1)/2^{m_2}$ and
+\[
+D=\prod_{\substack{\ell\mid A,\ \operatorname{ord}_\ell(2)=M\\
+                    \gcd((\ell-1)/M,N)=1}}
+       \ell^{v_\ell(A)}.
+\]
+If $g=1$, every prime in this product divides $q-1$.
+Moreover $\ell>M>N$, so lifting gives
+$v_\ell(A)=v_\ell(q-1)$, and therefore
+\[
+\boxed{g=1\ \Longrightarrow\ D\mid u.}
+\]
+Thus $D\nmid u$, in particular $D>u$, forces $g>1$.
+This allows several smaller primitive factors to replace one factor
+larger than $q$. The prime $q$ is excluded from the product even when
+$\operatorname{ord}_q(2)=M$.
+
+The same test also applies inside the common-divisor branch.
+Since $\gcd(E,N)=1$, form $D_E$ from the full prime-power factors
+of $(2^E-1)/q^{n_1}$ satisfying
+\[
+\gcd\left(\frac{\ell-1}{\operatorname{ord}_\ell(2)},N\right)=1.
+\]
+Each such $\ell$ divides $q-1$, and lifting gives
+\[
+\boxed{D_E\mid uN.}
+\]
+Thus a lower bound $D_E>uN$ would exclude that family without
+first proving the gaps coprime. In the surviving $N=49$ case,
+$3\nmid E$, so $7\nmid2^E-1$. Here $D_E$ is exactly the part
+supported on primes $\ell\not\equiv1\pmod7$, after removing $q^2$,
+and the stronger conclusion is $D_E\mid u$.
+
+For $j=2$, necessarily $4\mid M$: otherwise $\ell=2M+1\equiv5\pmod8$
+and $2^M\equiv-1\pmod\ell$.
+Even with $4\mid M$, primality of $2M+1$ and order exactly $M$
+still require proof.
+
+The multiplier $j=(\ell-1)/\operatorname{ord}_\ell(2)$ is the
+\emph{residual index} of $2$ modulo $\ell$.
+For a prime $s\mid N$, the condition $s\mid j$ is equivalent to
+$\ell$ splitting completely in $\mathbb Q(\zeta_s,2^{1/s})$.
+Here $\ell>M>N$, so no ramified primes intervene.
+This identifies the desired index restriction with avoidance of a
+finite collection of splitting conditions. A useful general result
+would bound the part of the primitive factorization supported on
+those splitting primes, strongly enough to force $D>u$.
+
+\subsection{A finite target when q is bounded in terms of d}
+% Added from the question about whether large common divisors are prohibitive.
+\begin{lemma}
+If a prime $d\mid\gcd(M,N)$ satisfies $q\le d^2$, then $d<10^5$.
+\end{lemma}
+\begin{proof}
+Suppose $d\ge10^5$, and put $t=\log d$, $\lambda=\log q\le2t$.
+Write $H_\lambda(x)=\max\{\log(3x/\lambda)+0.38,10\}$.
+The function
+\[
+\frac{x\log2/2-\log(27/26)}{H_\lambda(x)^2}
+\]
+is increasing for the positive $x$ used below. Also
+$\lambda H_\lambda(x)$ is increasing in $\lambda$.
+These allow the lower bounds on $M$ to be substituted into
+\eqref{eq:baker-M}.
+
+We have $dE\mid M$, so
+$M\ge2d\log_2(q^2-1)>3d\lambda/\log2$.
+At $x=3d\lambda/\log2$, $H_\lambda(x)<t+3$.
+Consequently \eqref{eq:baker-M} implies
+\[
+d<34t(t+3)^2.
+\]
+At $d=10^5$ the right side is less than $83000$; moreover
+$d/[\log d(\log d+3)^2]$ increases thereafter, a contradiction.
+\end{proof}
+Thus $d\ge10^5$ requires $q>d^2$. More generally, imposing
+$q\le d^K$ for any fixed $K>0$ gives an effective finite bound
+on $d$ by the same argument: the necessary bound has the form
+$d=O_K((\log d)^3)$.
+This is a finite target for a specified family, not an absolute bound
+on common divisors when $q$ is unrestricted.
+
+\section{Factorization results and their use here}
+\label{sec:factor-results}
+% Original notes Sections 8.2, 8.4, 9.5--9.6 restored; new consequences marked.
+For $u=(q-1)/2^{m_2}$, the original factorization $A=u\Psi$ gives
+\[
+\operatorname{lcm}\left(\operatorname{ord}_q(2),
+ \{\operatorname{ord}_\ell(2):\ell\mid u\text{ prime}\}\right)\mid M.
+\]
+Also $M/r<2N$ for $r=\operatorname{ord}_q(2)$, since
+$2^{M/2}<q^N<2^{rN}$.
+Zsigmondy's theorem applied to $q^N-1$, with odd $N\geq3$, has no
+exception. It supplies a prime $\ell_0\mid\Psi$ such that
+\[
+\operatorname{ord}_{\ell_0}(q)=N,\qquad
+\ell_0\equiv1\pmod{2N},\qquad\operatorname{ord}_{\ell_0}(2)\mid M.
+\]
+Conversely, a primitive Mersenne factor at $M\neq6$ has order $M$
+and lies among the primes dividing $q(q^N-1)$. Thus fixing $(q,N)$
+restricts $M$ to the orders at base $2$ of those primes, with $6$
+as the primitive-divisor exception.
+
+\subsection{Gcd identities and primitive-factor counts}
+Cambraia et al.\ \cite[\S2, Proposition 9]{Cambraia} collect the
+same-base gcd and valuation facts used here. In particular,
+\[
+\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1,
+\]
+\[
+\gcd\left(2^a-1,\frac{2^{ab}-1}{2^a-1}\right)=\gcd(2^a-1,b).
+\]
+The second follows by reducing the geometric sum modulo $2^a-1$.
+Their Proposition 2 uses coprime exponents and a primitive factor at
+the product exponent to force an additional prime.
+
+Write $\omega(n)$ for the number of distinct prime factors and
+$\tau(n)$ for the number of positive divisors. The primitive-factor
+argument in Kova\v{c}--Luca \cite[\S3]{KL} gives, more precisely,
+\[
+\omega(2^M-1)\geq\tau(M)-1-\mathbf1_{6\mid M},\qquad
+\omega(A)\geq\tau(M)-2-\mathbf1_{6\mid M}.
+\]
+Choose a primitive prime at every divisor of $M$ except $1,6$;
+different orders give different primes. Removing $q$ loses one prime.
+
+\begin{lemma}
+For the remaining case $A>1$, $q>3$,
+\[
+\omega(2^M-1)\geq4,\qquad\omega(A)\geq3.
+\]
+\end{lemma}
+\begin{proof}
+Suppose $\omega(2^M-1)\leq3$. The preceding count, with $M$ even,
+leaves $M=2,4,6,8$ or $M=2s$ for an odd prime $s$.
+The size bound excludes $2,4$; $2^6-1=3^2\cdot7$ and
+$2^8-1=3\cdot5\cdot17$ exclude $6,8$ since $q>3$ and $n_1\geq2$.
+For $s\geq5$, the three primes are $3$, a primitive factor at $s$,
+and a primitive factor at $2s$. Hence
+\[
+2^s-1=P^f,\qquad2^s+1=3Q^e
+\]
+for distinct primes $P,Q$, using $v_3(2^s+1)=1$.
+A Mersenne number $2^s-1$ is not a nontrivial perfect power:
+an even exponent is excluded modulo $4$, and an odd exponent greater
+than $1$ makes $P^f+1$ have an odd factor greater than $1$.
+Thus $f=1$, so $q=Q$ and $e=n_1$ is even.
+But $2^s+1=3Q^e$ is then impossible modulo $8$.
+\end{proof}
+% This consequence is derived here; the low-factor classification also
+% appears in Cambraia et al., Theorems 14--15.
+
+\subsection{Transferring factors into C}
+For a prime $s\mid\gcd(M,N)$, put $a=M/s$, $b=N/s$,
+$Y=2^a q^b$ and $C=A/(Y-1)$. Then
+\[
+Cp=\Phi_s(Y),\qquad C<\frac{Y^{s/2}}{2q(Y-1)},\qquad
+\gcd(C,Y-1)\mid s.
+\]
+For any divisor $D\mid A$,
+\[
+\frac{D}{\gcd(D,Y-1)}\mid C.
+\]
+Taking $D=(2^a-1)/q^{v_q(2^a-1)}$ gives
+\[
+\boxed{\frac{D}{\gcd(D,q^b-1)}\mid C,}
+\]
+since $Y-1\equiv q^b-1\pmod D$.
+Thus a useful lower bound on $C$ requires control of a mixed-base gcd.
+For $\ell\mid C$, $\ell\neq s$, we have $\operatorname{ord}_\ell(Y)=s$;
+therefore, with $r_\ell=\operatorname{ord}_\ell(2)$ and
+$t_\ell=\operatorname{ord}_\ell(q)$,
+\[
+v_s(r_\ell)=v_s(M)\quad\text{or}\quad v_s(t_\ell)=v_s(N).
+\]
+If both valuations were smaller, both factors of $Y$ would be $1$
+modulo $\ell$. The converse need not hold because of cancellation.
+
+\subsection{Primitive factors on the two sides}
+% Added from the discussion of Zsigmondy's theorem and the full odd-part equality.
+Let $d\ge5$ be a prime dividing both gaps, $U=2^{M/d}$,
+$V=q^{N/d}$, $B=UV-1$, and $C=A/B$. The full equality is
+\[
+2^M-1=q^{n_1}\operatorname{odd}(q^N-1),\qquad
+\operatorname{odd}(q^N-1)=A.
+\]
+Thus every prime power in $2^M-1$ outside the base $q$ occurs
+with exactly the same valuation in $q^N-1$.
+
+Zsigmondy's theorem \cite[Theorem 13]{GyorySmyth} supplies a prime
+of order $M$ at base $2$ and a prime of order $N$ at base $q$.
+Here $M\ge10$ and $N\ge5$ is odd, so there are no exceptions.
+The former prime belongs to $A$ unless it is $q$ itself; the latter
+always belongs to $A$. Such primes satisfy respectively
+$\ell\equiv1\pmod M$ and $\ell\equiv1\pmod{2N}$.
+If the same prime has both full orders, then
+$\ell\equiv1\pmod{\operatorname{lcm}(M,N)}$.
+
+For $\ell\mid A$, $\ell\ne d$, put
+$\alpha=\operatorname{ord}_\ell(U)$ and
+$\beta=\operatorname{ord}_\ell(V)$. Both lie in $\{1,d\}$.
+The factor allocation is
+\[
+\begin{array}{c|c|c}
+\alpha&\beta&\text{location of the full }\ell\text{-part of }A\\\hline
+1&1&B\\
+1&d&C\\
+d&1&C\\
+d&d&B\text{ if }UV\equiv1\pmod\ell;\ C\text{ otherwise}.
+\end{array}
+\]
+Indeed $Cp=\Phi_d(UV)$ and $\gcd(B,C)\mid d$.
+In the last row, $U,V$ lie in the same subgroup of order $d$;
+their product can be $1$. Primitivity at two different bases does
+not exclude this cancellation.
+
+\begin{lemma}
+Put $G=\gcd(U-1,V-1)$. Then $B=GH$ with
+\[
+\gcd(G,H)=1,\qquad H>U,
+\]
+and every prime $\ell\mid H$ satisfies
+$\operatorname{ord}_\ell(U)=\operatorname{ord}_\ell(V)=d$.
+\end{lemma}
+\begin{proof}
+For $\ell\mid B$, the residues $U,V$ are inverse, so their orders
+are equal. If this order is $1$ and $\ell\ne d$, lifting and the
+full gap equations give
+\[
+v_\ell(B)=v_\ell(A)=v_\ell(U-1)=v_\ell(V-1).
+\]
+If $d\mid B$, then $U\equiv V\equiv1\pmod d$ and
+$v_d(\Phi_d(UV))=1$. Since $p>d$, $v_d(C)=1$.
+Lifting again gives
+$v_d(B)=v_d(U-1)=v_d(V-1)$.
+Thus the entire part of $B$ whose primes have order $1$ is exactly
+$G$, with no such primes left in $H$. Finally $G\le V-1$ gives
+$H\ge(UV-1)/(V-1)>U$.
+\end{proof}
+
+For a primitive Mersenne factor $\ell\ne q$ at exponent $M$,
+$\alpha=d$. Writing $t=\operatorname{ord}_\ell(q)$, if
+$v_d(t)<v_d(N)$ then $\beta=1$, so the full $\ell$-part of $A$
+is forced into $C$. Symmetrically, a primitive factor at exponent
+$N$ for base $q$ is forced into $C$ if
+$v_d(\operatorname{ord}_\ell(2))<v_d(M)$.
+Products of distinct forced prime powers must fit below
+\[
+C<\frac{(UV)^{d/2}}{2^{m_2/2}q^{n_1/2}(UV-1)}.
+\]
+The remaining target is to force enough such factors into $C$, or
+to bound the simultaneous primitive part $H$ below its required
+size. Zsigmondy's existence assertion alone does neither.
+
+\subsection{Reading and limits of the cited results}
+Pomerance \cite[\S2]{PomCycl} supplies the primitive/intrinsic
+cyclotomic decomposition, bounds for $\Phi_d(2)$, and the Aurifeuilian
+splitting for $d\equiv4\pmod8$. These concern individual factors.
+Cambraia et al.\ \cite[\S\S2--4]{Cambraia} give the gcd identities,
+valuation formula, and classification when $\omega(2^M-1)\leq3$;
+the preceding lemma specializes that classification to our equations.
+Their final section studies a different sum of Mersenne numbers.
+
+Kova\v{c}--Luca \cite{KL} study sums of divisor counts over exponents;
+their pointwise primitive-factor bound is what we use above.
+Erd\H{o}s--Kiss--Pomerance \cite{EKP} study reciprocal sums of prime
+divisors, including averages and consecutive exponents. Neither result
+currently controls the particular mixed-base gcd needed for $C$.
+Pomerance's earlier paper \cite{PomPrim} treats reciprocal sums over
+divisors of prescribed order.
+
+For the proposed descent, compare Bilu \cite[\S2, Proposition 2.1 and
+Corollary 2.2]{Bilu}: coprimality and a perfect-power product force powers
+of ideals. The identity $\Phi_s(Y)=Cp$ does not provide that
+perfect-power hypothesis. A transfer of the argument would need to
+supply it.
+
+\subsection{Reading for the index restriction and a uniform bound}
+% Further reading and open targets from the current discussion.
+For the residual index $j$, start with Moree \cite[\S\S1,5,6]{MoreeNear}.
+The condition $\operatorname{ord}_\ell(2)=(\ell-1)/j$ is precisely
+his near-primitive-root problem. Lenstra--Moree--Stevenhagen
+\cite[\S\S2,5,6]{LMS} express the compatibility of the splitting
+conditions using Galois groups and character sums. Their density
+results assume GRH and vary $\ell$; they do not force a suitable
+prime divisor of a specified $\Phi_M(2)$. Here the additional target
+is the bound $D>(q-1)/2^{m_2}$ from
+Section~\ref{sec:forcing-common-factor}.
+
+For a different route to a bound on $N$, Corvaja's short survey
+\cite[\S1]{CorvajaSurvey} explains the Subspace Theorem bounds for
+gcds of powers and the extension to a fixed finitely generated
+multiplicative group. In our case
+\[
+A=\gcd(2^M-1,q^N-1)>3q^{N-1}.
+\]
+The strict inequality follows from $2^{m_2}\le(q-1)/3$.
+An effective bound, valid for our family and uniform in $q$, of the form
+\[
+\log\gcd(2^M-1,q^N-1)
+ \le\theta N\log q+K\log q,\qquad \theta<1,
+\]
+with fixed $\theta,K$, would give $N<(K+1)/(1-\theta)$.
+This is a target, not a quoted theorem. Fixed-group results do not
+supply uniformity as $q$ varies, and their ineffectivity also matters
+for a finite computation. The survey connects this approach with
+complex analysis and the support problem.
+
+For computational algebraic number theory, Alvarado et al.
+\cite[\S\S3--6]{SUnitAlgorithms} give explicit archimedean and
+$\ell$-adic bounds, lattice reduction, and sieves for $S$-unit equations
+over number fields. A use here would first require a reduction to
+controlled fields and prime supports. The original equality gives a
+four-term unit relation over $S=\{2,q\}$, not directly their
+two-variable equation $x+y=1$. In a cyclotomic-field approach the
+uncontrolled primes in $A$ remain the obstacle to fixing that support.
+
+\section{Exercises and remaining questions}
+\label{sec:exercises}
+% Consolidated development plan. Closed calculations and open targets are
+% identified within each item; no blanket coprimality claim is assumed.
+\begin{enumerate}
+\item \textbf{Cyclotomic multiplicities.}
+With $r=\operatorname{ord}_q(2)$ and $\rho=v_q(2^r-1)$, prove
+\[
+v_q(\Phi_d(2))=\begin{cases}
+\rho&d=r,\\1&d=rq^j,\ j\geq1,\\0&\text{otherwise}.
+\end{cases}
+\]
+Remove these powers to obtain $A$ as a product of cyclotomic factors.
+Then remove each intrinsic factor to recover the pairwise coprime
+primitive parts in \cite[\S2]{PomCycl}. Determine which Aurifeuilian
+factor must enter $A$ when $q$ divides the other.
+
+\item \textbf{Orders including multiplicity.}
+For $t=\operatorname{ord}_\ell(q)$, prove
+\[
+\operatorname{ord}_{\ell^e}(q)
+=t\ell^{\max\{0,e-v_\ell(q^t-1)\}}.
+\]
+Using Section~\ref{sec:exact-orders}, recover $M$ and $N$ as the lcms
+of the orders modulo the prime-power factors of $A$.
+Work out the restrictions supplied by primitive Mersenne factors at
+$2,3,4,8,12$, including the exception when the factor is $q$.
+Use $\gcd(N,6)=1$ to sharpen the residue classes. Starting with
+Section~\ref{sec:minimum-returns}, propagate selected prime-power
+orders in both directions. Seek families where the forced residue
+product exceeds $(q-1)/2^{m_2}$, or the minimum return exceeds the
+height bound. Distinguish a fixed point of these restrictions from
+an actual solution of the gap equations.
+
+\item \textbf{Coprime gaps: multipliers.}
+Assume $\gcd(M,N)=1$. For primitive factors $\ell=jM+1\neq q$,
+use $\operatorname{ord}_\ell(q)\mid\gcd(j,N)$ to exclude specified
+families of multipliers. Determine which odd prime factors of $N$
+are forced by several such $j$ when $\ell\nmid q-1$.
+Form $D$ from Section~\ref{sec:forcing-common-factor}; compare its
+prime powers with the odd part of $q-1$. Read the index condition
+as avoidance of splitting in $\mathbb Q(\zeta_s,2^{1/s})$, $s\mid N$.
+Open target: force $D\nmid(q-1)/2^{m_2}$ for a specified family of $M,N$.
+
+\item \textbf{Common gaps: full cyclotomic factorization.}
+Compute the least initial product of primes $7,11,13,\ldots$ for which
+$\varphi(d)\leq d/2$. Compare the exact bound from $H_d\mid A$ with
+Section~\ref{sec:full-gcd}, retaining $2^{m_2/2}q^{n_1/2}$ in the
+denominator. Identify the prime-power common divisors untouched by
+this size argument.
+Use Section~\ref{sec:additional-returns}, where $dE\mid M$ is now
+necessary. Use $(2h-1)n_1<N$ and extend the residue table beyond
+$N=121$. For $N=5d$, compute the finite-field polynomial gcd and
+look for a condition on $d$ making it $1$. For the surviving
+$N=49$ family, combine further moduli while retaining the common
+exponent classes. Use \eqref{eq:ordinary-q-minus-one} to impose
+the additional restrictions from odd prime factors of $q-1$.
+
+\item \textbf{Descent and carries.}
+For fixed odd prime $d$, classify the divisors of $\tau^d+1$ which
+produce integer $U,V$ in \eqref{eq:quotient-divisor}. Verify the example
+in Section~\ref{sec:descent} and its failure of the full gap equations.
+Complete the $2$-adic cases omitted by $a>m_2+v_2(d-1)$, including
+possible cancellation at equal valuations. Open target: a decreasing
+transformation preserving the prime-power bases and full gap equations,
+or a direct exclusion from the digit and odd-part conditions.
+
+\item \textbf{Factors remaining in C.}
+For a forced $\ell^e\mid A$, determine
+$\ell^{\max\{0,e-v_\ell(Y-1)\}}\mid C$.
+Use the mixed-base gcd formula to combine coprime contributions.
+Open target: a lower bound exceeding $Y^{s/2}/[2q(Y-1)]$ for a
+specified family. Test $M=2s^a$ and $M=4s^a$ with fixed $a\geq2$,
+imposing $s\mid N$ when using $C$.
+
+\item \textbf{The remaining valuation branch.}
+Check the analytic bounds and the integer certificate in
+Section~\ref{sec:q-divides-exclusion}. For the remaining case,
+$q\nmid M$ and $\rho=n_1$ is even. Use the other cyclotomic factors
+to restrict multiples of $r$, retaining
+$2^{(q-1)/3}\equiv1\pmod{q^2}$. An absolute bound on $q$ remains open.
+\end{enumerate}
+
+\appendix
+\clearpage
+\section{Congruence and case reference}
+\label{sec:reference-tables}
+Assume $A>1$, $q>3$ and the two representations of the prime $p$.
+The proved reductions give $q\nmid M$. Write
+\[
+r=\operatorname{ord}_q(2),\quad k=M/2,\quad
+c=m_2=v_2(q-1),\quad g=\gcd(M,N),\quad E=\operatorname{lcm}(2,r).
+\]
+
+\subsection{Residues of q and its square}
+{\small\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}p{0.49\textwidth}p{0.22\textwidth}p{0.23\textwidth}@{}}
+\textbf{Modulus and condition}&\textbf{$q$}&\textbf{$q^2$}\\\hline
+\endhead
+Modulo $3$&$1$&$1$\\
+Modulo $8$&$1$&$1$\\
+Modulo $16$&$1$&$1$\\
+Modulo $48$&$1$&$1$\\
+Modulo $240$&$1,97,193$&$1,49$\\
+Modulo $6r$&$1$&$1$\\\hline
+$3\nmid M$: modulo $9$&$4,7$&$4,7$\\
+$3\mid M$: modulo $9$&$1$&$1$\\
+$3\mid M$: modulo $7$&$1$&$1$\\
+$4\mid M$: modulo $5$&$1$&$1$\\
+$M\equiv2\pmod4$: modulo $5$&$2,3$&$4$\\
+$8\mid M$: modulo $17$&$1$&$1$\\
+$12\mid M$: modulo $13$&$1$&$1$\\
+$16\mid M$: modulo $257$&$1$&$1$\\
+$18\mid M$: modulo $19$&$1$&$1$\\\hline
+$4\mid M$: modulo $240$&$1$&$1$\\
+$M\equiv2\pmod4$: modulo $240$&$97,193$&$49$\\
+\hline
+\end{longtable}}
+The old $q\equiv5\pmod8$ class is excluded by
+Lemma~\ref{lem:q-one-mod-eight}. The rows modulo $7$ and $13$ use
+$3\nmid N$ and are stronger than the earlier quadratic-residue lists.
+Also $q^2\equiv1\pmod{96}$.
+
+\subsection{Valuations}
+{\small\renewcommand{\arraystretch}{1.2}\noindent
+\begin{tabular}{@{}p{0.43\textwidth}p{0.25\textwidth}p{0.26\textwidth}@{}}
+\textbf{Prime}&\textbf{Valuation of $q-1$}&\textbf{Valuation of $q^2-1$}\\\hline
+$2$&$c\text{ even},\ c\ge4$&$c+1$\\
+$3$&$1+v_3(M)$&$1+v_3(M)$\\
+Odd $\ell\mid q-1$, $\eta_\ell=1$&$1+v_\ell(M)$&$1+v_\ell(M)$\\\hline
+\end{tabular}\par}
+\medskip\noindent
+Here $\eta_\ell=v_\ell(2^{\operatorname{ord}_\ell(2)}-1)$.
+The last row also forces $\ell\nmid N$; it applies to
+$\ell=3,5,7,11,13$ whenever they divide $q-1$.
+The exact valuation at the base $q$ is
+\[
+v_q(2^M-1)=v_q(2^r-1)=n_1\text{ even},\qquad n_1\ge2.
+\]
+
+\clearpage
+\subsection{Powers of two modulo q and its square}
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}p{0.49\textwidth}p{0.22\textwidth}p{0.23\textwidth}@{}}
+\textbf{Expression}&\textbf{Modulo $q$}&\textbf{Modulo $q^2$}\\\hline
+\endhead
+$2^r$&$1$&$1$\\
+$2^M$&$1$&$1$\\
+$2^{q-1}$&$1$&$1$\\
+$2^{(q-1)/2}$&$1$&$1$\\
+$2^{(q-1)/3}$&$1$&$1$\\
+$2^{(q-1)/6}$&$1$&$1$\\
+$2^{(q-1)/\ell}$, $\ell\mid q-1$ odd and $\eta_\ell=1$&$1$&$1$\\
+$2^k$, if $r\mid k$&$1$&$1$\\
+$2^k$, if $r\nmid k$&$-1$&$-1$\\\hline
+\end{longtable}}
+Since $q\equiv1\pmod8$, $r\mid(q-1)/2$. Together with
+$r\mid(q-1)/3$, this gives $r\mid(q-1)/6$.
+The order remains $r$ modulo $q^2$, so the signs in the last two
+rows agree. Also $v_2(r)\le c-1$.
+
+For each prime power $\ell^f\mid A$,
+\[
+q^N\equiv(q^2)^N\equiv1\pmod{\ell^f},\qquad
+\operatorname{ord}_{\ell^f}(q)
+=\operatorname{ord}_{\ell^f}(q^2)\mid N.
+\]
+The equality of orders uses that $N$ is odd. For the full modulus,
+\[
+\operatorname{ord}_A(2)=M,\qquad
+\operatorname{ord}_A(q)=\operatorname{ord}_A(q^2)=N.
+\]
+
+\subsection{The prime p and the gap conditions}
+{\small\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}p{0.35\textwidth}p{0.60\textwidth}@{}}
+\textbf{Condition}&\textbf{Restriction}\\\hline
+\endhead
+$p$ modulo $96$&$65$\\
+$p$ modulo $5$&$2,3$; if $4\mid M$, the residue is $2$\\
+$p$ modulo $480$&$257,353$\\
+$p$ modulo $g$&$1$\\\hline
+Exponents&$m_1,m_2,n_1$ even; $n_2$ odd; $n_1\ge2$\\
+Gaps&$M\ge6$ even; $N\ge5$ and $\gcd(N,6)=1$\\
+$4\mid M$&$m_2\equiv0\pmod4$, $5\nmid N$\\
+$M\equiv2\pmod4$&$m_2+n_1\equiv2\pmod4$, $q^N\equiv3\pmod5$\\
+Common divisor&$\gcd(g,510q(q-1))=1$, $\gcd(g,E)=1$, $gE\mid M$\\
+$h=M/E$&$(2h-1)n_1<N$, $h<(N+2)/4$\\
+$g>1$&$N\ge5g$, every prime factor of $g$ is at least $7$,
+$\varphi(g)>g/2$\\
+$N=5g$, $g>1$&$n_1=2$, $M=gE$\\
+Guaranteed $g=1$&$N<49$; any prime $N$; $N=5^a17^b$\\
+$N=5d$, $d$ prime&$g=1$ for $d=7,17,29,41,43,73,89,109,113$\\\hline
+\end{longtable}}
+Section~\ref{sec:forcing-common-factor} gives a way to force $g>1$
+using primitive Mersenne factors and their residual indices.
+
+\clearpage
+\section{Auxiliary calculations and comparison with MSS}
+\label{sec:auxiliary}
+% Added in discussion: comparison with MSS and the two adaptations below.
+
+\subsection{Scope of the MSS results}
+
+The system is a special case of $a^x+b^y=c^z$ with
+$(a,b,c)=(2,q,p)$ and $z=Z=1$. MSS's complete results for
+$c=7,13,97$ exclude those values of $p$ here. Their more general effective
+results fix $c$ in specified families, so a bound depending on $c=p$
+does not supply a global bound for our problem. Their Pillai theorem
+concerns a difference of powers and is not directly a theorem about
+our sum. See the theorem statements and outline in \cite{MSS}.
+
+Their polynomial-exponential equation matches our equality exactly:
+\[
+X^a-X^b=q^{y_1}-q^{y_2},\qquad
+(X,a,b,y_1,y_2)=(2,m_1,m_2,n_2,n_1).
+\]
+But the proposition labeled \texttt{prop-EuAl} in the local MSS source
+assumes $(a-b)/E$ odd, where $E$ is the least positive exponent for which
+$X^E\equiv\pm1\pmod q$. This is a signed order, unlike our ordinary orders.
+For $X=2$ put $r=\operatorname{ord}_q(2)$. If $r$ is odd, $E=r$,
+and $M/E$ is even. If $r$ is even, $E=r/2$, and $M/E=2(M/r)$ is even.
+Thus the proposition as stated never applies to this specialization.
+The polynomial argument below is a separate adaptation, not an invocation
+of that proposition.
+
+\subsection{A polynomial identity}
+\label{sec:polynomial}
+
+Use the ordinary order and write
+\[
+r=\operatorname{ord}_q(2),\qquad M=rh,\qquad
+\eta=v_q(h),\qquad \rho=v_q(2^r-1).
+\]
+Here $r\geq2$, $q\nmid r$, $\rho\geq1$, and
+$n_1=\rho+\eta$ by lifting the exponent.
+Define
+\[
+F_r(t)=\frac{t^r-1}{t-1},\qquad
+J_h(t)=1+t^r+\cdots+t^{r(h-1)},\qquad
+G(t)=t^{m_2}(t-1)J_h(t).
+\]
+We have
+\[
+F_r(2)=2^r-1,\qquad
+F_r(2)G(2)=q^{n_1}(q^N-1).
+\]
+The polynomial identity below does not require $h$ odd.
+
+Put
+\[
+H_r(t)=\frac{F_r(t)-r}{t-1}\in\mathbb Z[t],
+\qquad c\in\{0,\ldots,r-1\},\quad c\equiv-m_2\pmod r,
+\]
+and let $R(t)$ be the remainder of $-t^cH_r(t)$ on division by the
+monic polynomial $F_r(t)$. Then there is $P(t)\in\mathbb Z[t]$ such that
+\begin{equation}\label{eq:adapted-bezout}
+\boxed{F_r(t)P(t)+G(t)R(t)=rh=M.}
+\end{equation}
+To check this, work modulo $F_r(t)$. We have $t^r\equiv1$,
+$J_h(t)\equiv h$, and $(t-1)H_r(t)\equiv-r$. Therefore
+\[
+G(t)R(t)\equiv
+-h t^{m_2+c}(t-1)H_r(t)\equiv rh.
+\]
+Since $F_r$ is monic, the quotient defining $P$ has integer coefficients.
+
+Evaluate \eqref{eq:adapted-bezout} at $2$ and multiply by $F_r(2)$.
+Using the original equation gives the exact identity
+\[
+q^{n_1}R(2)+M(2^r-1)
+=(2^r-1)^2P(2)+q^{n_2}R(2).
+\]
+Consequently
+\begin{equation}\label{eq:adapted-congruence}
+\boxed{
+q^{n_1}R(2)+M(2^r-1)
+\equiv0\pmod{q^{\min\{2\rho,n_2\}}}.}
+\end{equation}
+This is an even-quotient analogue of the congruence used by MSS.
+
+Write $h=q^\eta h_0$ and $2^r-1=q^\rho K$ with $q\nmid h_0K$.
+If $\rho>\eta$, division by $q^{n_1}$ gives
+\begin{equation}\label{eq:adapted-divided}
+\boxed{R(2)+r h_0K\equiv0\pmod{q^{\min\{\rho-\eta,N\}}}.}
+\end{equation}
+If $\eta\geq\rho$, the modulus in
+\eqref{eq:adapted-congruence} is at most $q^{n_1}$, and both left-hand
+terms are already divisible by that modulus. It then adds no restriction.
+In particular, when $\rho=1$ the calculation gives new restrictions
+only if $\eta=0$, and then only modulo $q$.
+It is not established whether this improves on direct expansions of the
+original equation.
+
+For orientation, $r=2$ gives $q=3$ and $R(t)=1$, since $m_2=1$.
+If $\eta=0$, \eqref{eq:adapted-divided} says $1+2h\equiv0\pmod3$,
+so $h\equiv1\pmod3$. This illustrates the formula; the $q=3$ branch is already settled by
+Lemma~\ref{lem:qthree} without this construction.
+
+To obtain a global estimate, we would need control of the size and sign of $R(2)+r h_0K$, or a
+stronger modulus, sufficient to combine with \eqref{eq:baker-M}.
+The degree of $R$ can grow with $r$, so a large modulus alone does not
+supply that comparison. This is the same kind of size issue emphasized
+in MSS's closing discussion.
+
+\subsection{\texorpdfstring{Congruences modulo $p$}{Congruences modulo p}}
+
+Applying the determinant idea in MSS, set
+\[
+T=m_1n_2-m_2n_1=m_2N+Mn_1+MN>0.
+\]
+From $2^{m_i}\equiv-q^{n_i}\pmod p$, raising the two congruences
+to $n_2,n_1$ respectively and dividing gives
+\[
+2^T\equiv(-1)^{n_2-n_1}=-1\pmod p.
+\]
+Similarly, using exponents $m_1,m_2$ gives
+\[
+q^T\equiv(-1)^{m_1-m_2}=1\pmod p.
+\]
+Thus
+\[
+\operatorname{ord}_p(q)\mid T,\qquad
+\operatorname{ord}_p(2)\mid2T,\qquad
+\operatorname{ord}_p(2)\nmid T.
+\]
+These are necessary conditions involving the prime $p$ itself.
+They have not yet been combined into a new bound.
+The normalization of orders used elsewhere in MSS should not be assumed
+to preserve our fixed base $2$ without checking the change of variables.
+
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{CKLMR}
+\bibitem[AGJ26]{AGJ26}
+L. Alsed\`a, A. Garijo, and X. Jarque,
+\emph{Mersenne numbers and the doubling map}, preprint, 2026.
+\url{https://arxiv.org/abs/2605.29130}.
+
+\bibitem[GS10]{GyorySmyth}
+K. Gy\H{o}ry and C. Smyth,
+\emph{The divisibility of $a^n-b^n$ by powers of $n$},
+Integers 10 (2010), 319--334, Theorem 13.
+
+\bibitem[MSS]{MSS}
+T.~Miyazaki, R.~Scott, and R.~Styer,
+\textit{Handling some Diophantine equation via Euclidean algorithm and its
+application to purely exponential equations}, 2026.
+Local source: \texttt{effMP3\_15Jul2026.tex};
+\url{https://arxiv.org/abs/2604.18991}.
+The logarithmic estimate used here is Laurent's result quoted in the
+section on linear forms in logarithms. The polynomial construction and
+its limitations appear in the final two sections.
+
+\bibitem[PC25]{PomCycl}
+C.~Pomerance, \textit{Cyclotomic primes},
+Journal of Number Theory \textbf{276} (2025), 198--208.
+\url{https://math.dartmouth.edu/~carlp/cyclotomicprimesfinal+.pdf}.
+
+\bibitem[PM86]{PomPrim}
+C.~Pomerance, \textit{On primitive divisors of Mersenne numbers},
+Acta Arithmetica \textbf{46} (1986), 355--367.
+\url{https://math.dartmouth.edu/~carlp/PDF/paper56.pdf}.
+
+\bibitem[B04]{Bilu}
+Y.~F.~Bilu, \textit{Catalan's conjecture (after Mih\u{a}ilescu)},
+Ast\'erisque \textbf{294} (2004), 1--26, S\'eminaire Bourbaki, no.~909.
+\url{https://www.numdam.org/item/SB_2002-2003__45__1_0.pdf}.
+
+\bibitem[CKLMR]{Cambraia}
+A.~Cambraia Jr., M.~P.~Knapp, A.~Lemos, B.~K.~Moriya,
+and P.~H.~A.~Rodrigues,
+\textit{On prime factors of Mersenne numbers}, 2021.
+\url{https://arxiv.org/abs/1606.08690}.
+
+\bibitem[KL25]{KL}
+V.~Kova\v{c} and F.~Luca,
+\textit{On the number of divisors of Mersenne numbers}, 2025.
+\url{https://arxiv.org/abs/2506.04883}.
+
+\bibitem[EKP91]{EKP}
+P.~Erd\H{o}s, P.~Kiss, and C.~Pomerance,
+\textit{On prime divisors of Mersenne numbers},
+Acta Arithmetica \textbf{57} (1991), 267--281.
+
+\bibitem[M13]{MoreeNear}
+P.~Moree, \emph{Near-primitive roots}.
+\url{https://arxiv.org/abs/1112.5090}.
+
+\bibitem[LMS14]{LMS}
+H.~W.~Lenstra, Jr., P.~Moree, and P.~Stevenhagen,
+\emph{Character sums for primitive root densities}.
+\url{https://arxiv.org/abs/1112.4816}.
+
+\bibitem[C10]{CorvajaSurvey}
+P.~Corvaja, \emph{Upper bound for the $\gcd(u-1,v-1)$,
+$u,v$ $S$-units, generalisations and applications},
+RIMS K\^oky\^uroku \textbf{1710} (2010), 1--6.
+\url{https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/1710-01.pdf}.
+
+\bibitem[AKMRVW]{SUnitAlgorithms}
+A.~Alvarado, A.~Koutsianas, B.~Malmskog, C.~Rasmussen,
+C.~Vincent, and M.~West,
+\emph{A robust implementation for solving the $S$-unit equation
+and several applications}.
+\url{https://arxiv.org/abs/1903.00977}.
+\end{thebibliography}
+\end{document}
