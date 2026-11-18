@@ -2,6 +2,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{array,longtable}
 \usepackage[margin=1in]{geometry}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \setcounter{tocdepth}{1}
 \newtheorem{lemma}{Lemma}
@@ -21,10 +22,48 @@ We know of a single example where $p$ has two solutions, $p =  11$. Do others ex
 considering basic arithmetic obstructions that prevent certain solutions. This breaks down to two main cases,
 based on whether a common factor of putative solutions, $A$, is either greater than or equal to 1.
 
+\section*{Proof sketch}
+\addcontentsline{toc}{section}{Proof sketch}
 
+Write $M=m_1-m_2$ and $N=n_2-n_1$. Subtracting the partitions
+gives $Aq^{n_1}=2^M-1$ and $A2^{m_2}=q^N-1$, with $\gcd(A,2q)=1$.
+The quadratic form gives $M$ even and $N$ odd. Factoring $2^M-1$
+then gives $p=11$ when $A=1$. For $q=3$, any $n_1>1$ forces $7\mid A$,
+but $\operatorname{ord}_7(3)=6$. The case $n_1=1$ again gives $p=11$
+(Lemmas~\ref{lem:Aone} and~\ref{lem:qthree}).
+
+For $A>1$ and $q>3$, the parity and congruence arguments give
+$q\equiv1\pmod3$, $m_2=v_2(q-1)$ even, $n_1$ even, and
+$N\ge5$ with $\gcd(N,6)=1$. Put $r=\operatorname{ord}_q(2)$ and
+$\rho=v_q(2^r-1)$. Lifting gives $n_1=\rho+v_q(M)$.
+
+The two large powers yield
+$0<n_2\log q-m_1\log 2<(27/26)q^{-N}$.
+Laurent's lower bound gives an effective bound on $M$ for fixed $q$.
+If $q\mid M$, then $qr\mid M$, giving absolute bounds $q<10^6$
+and $M<4\cdot10^6$. The finite check in
+Section~\ref{sec:q-divides-exclusion} excludes this branch.
+
+It remains to consider $q\nmid M$ and $n_1=\rho\ge2$ even.
+The modulo-$5$ argument gives $q\equiv1\pmod{48}$
+(Lemma~\ref{lem:q-one-mod-eight}). The size and residue arguments
+in Section~\ref{sec:additional-returns} give $\gcd(M,N)=1$ for $N<49$.
+With $E=\operatorname{lcm}(2,r)$, we have
+\[
+E\mid M,\qquad \gcd(E,N)=1,\qquad
+a=\frac{2^E-1}{q^\rho}\mid A,\qquad q^N\equiv1\pmod a.
+\]
+Thus one prime-power factor of $a$ at which $q$ has order sharing
+a prime divisor with $E$ would exclude every $N$ for that $q$.
+Section~\ref{sec:reciprocity} computes products of power-residue
+symbols that can certify such a factor without factoring $a$.
+The open step on this route is to force an order obstruction for every
+remaining $q$.
+
+\clearpage
 {\small\tableofcontents}
 \clearpage
-\section{Two representations and the common factor}
+\section{Two partitions and the common factor}
 \label{sec:setup}
 
 Let $p$ be prime with two prime power solutions sharing the same base $q$. So, we have
@@ -131,7 +170,7 @@ Thus the squarefree part is $D=q$, and $\left(\frac{q}{p}\right)=1$.
 \subsection{\texorpdfstring{The case $A=1$}{The case A=1}}
 
 \begin{lemma}\label{lem:Aone}
-If $A=1$, the two representations are
+If $A=1$, the two partitions are
 \[
 11=2^3+3=2+3^2.
 \]
@@ -311,7 +350,7 @@ the same two gaps.
 \subsection{\texorpdfstring{The base $q=3$}{The base q=3}}
 
 \begin{lemma}\label{lem:qthree}
-For $q=3$, the only prime with two representations is $p=11$.
+For $q=3$, the only prime with two partitions is $p=11$.
 \end{lemma}
 \begin{proof}
 The case $A=1$ is settled, so suppose $A>1$.
@@ -322,7 +361,7 @@ n_1=v_3(2^M-1)=1+v_3(M).
 If $n_1>1$, then $3\mid M$. Since $\operatorname{ord}_7(2)=3$,
 we get $7\mid2^M-1$, hence $7\mid A$, hence $7\mid3^N-1$.
 But $\operatorname{ord}_7(3)=6$, contradicting $N$ odd.
-Thus $n_1=1$, and the original representations give
+Thus $n_1=1$, and the original partitions give
 \[
 3^{n_2}-1=2^{m_1},\qquad n_2=1+N\text{ even}.
 \]
@@ -752,7 +791,7 @@ each other; the gap powers need not.
 
 \subsection{\texorpdfstring{An effective bound for fixed $q$}{An effective bound for fixed q}}
 
-Laurent's estimate, quoted in Miyazaki--Scott--Styer
+Laurent's estimate \cite[Corollary 2]{Laurent}, quoted in Miyazaki--Scott--Styer
 \cite{MSS} (\texttt{prop-comp} in the local source), gives
 \[
 \log|b_2\log\alpha_2-b_1\log\alpha_1|
@@ -1206,12 +1245,12 @@ is a power of $5$.
 
 The first possible value $N=35$ is also excluded from the noncoprime
 case. It would require $g=7$, $n_1=2$ and $n_2=37$.
-Since $p\equiv1\pmod7$, its representation as a sum of two nonzero
+Since $p\equiv1\pmod7$, its partition as a sum of two nonzero
 squares gives
 \[
 2^{m_1}\equiv q^2\equiv4\pmod7.
 \]
-Hence $q\equiv2$ or $5\pmod7$. The other representation gives
+Hence $q\equiv2$ or $5\pmod7$. The other partition gives
 $2^{m_2}\equiv1-q^{37}\equiv1-q\pmod7$, namely $6$ or $3$.
 Neither is a power of $2$ modulo $7$. Consequently
 \[
@@ -1223,7 +1262,7 @@ odd and coprime to $3$.
 
 \subsection{Using congruences modulo eight and five}
 \label{sec:mod-eight-families}
-If $7\mid g$, reducing the two representations modulo $7$ gives
+If $7\mid g$, reducing the two partitions modulo $7$ gives
 \[
 \begin{array}{c|c|c|c|c}
 q\bmod7&m_2\bmod6&m_1\bmod6&n_1\bmod6&N\bmod6\\\hline
@@ -1367,6 +1406,47 @@ Here $(2g-1)n_1<49$ forces $n_1=2$, and $7\mid h<51/4$
 forces $h=7$. The congruence on $m_2$ follows by combining
 $m_2\equiv4\pmod6$ with Lemma~\ref{lem:mod-five-split}.
 These restrictions have not yet excluded the family $N=49$, $g=7$.
+
+\begin{lemma}\label{lem:aurifeuillean-height}
+Suppose $r\equiv4\pmod8$. If
+\[
+\frac{8h}{q^{n_1/2}-1}\le m_2\log2,
+\]
+then $(4h-1)n_1<N$. The hypothesis holds whenever $h\le32$.
+Consequently the noncoprime $N=49$ family requires
+$r\not\equiv4\pmod8$.
+\end{lemma}
+\begin{proof}
+Write $r=8a+4$. Since $q^{n_1}\mid2^r-1$ and
+$\operatorname{ord}_q(2)=r$, the full power $q^{n_1}$ divides
+\[
+2^{r/2}+1
+=(2^{2a+1}-2^{a+1}+1)(2^{2a+1}+2^{a+1}+1).
+\]
+The two factors are odd and their difference is a power of $2$,
+so they are coprime. Hence
+\[
+q^{n_1}\le2^{r/4}+2^{(r+4)/8}+1
+ <(2^{r/8}+1)^2,
+\qquad 2^r>(q^{n_1/2}-1)^8.
+\]
+Here $E=r$. Put $e=n_1$, $c=m_2$. The hypothesis and
+$\log(1+x)<x$ give
+\[
+8h\log\frac{q^{e/2}}{q^{e/2}-1}<c\log2.
+\]
+Therefore
+\[
+q^{N+e}>2^{c+hr}
+ >2^c(q^{e/2}-1)^{8h}>q^{4he}.
+\]
+For $h\le32$, use $q\ge97$, $e\ge2$, $c\ge4$:
+$8h/(q^{e/2}-1)\le8/3<4\log2$.
+For $N=49$ we have $h=7$, $e=2$, which would require $54<49$.
+\end{proof}
+This uses the Aurifeuillean identity before factoring its integer
+values. Its relation to grouping roots of unity is developed in
+Brent \cite[\S\S2--3]{Brent}.
 
 For a fixed prime $d\mid g$, retain the even values $e=n_1$ and
 multiples $h$ of $d$ satisfying $(2h-1)e<N$.
@@ -1708,9 +1788,46 @@ of ideals. The identity $\Phi_s(Y)=Cp$ does not provide that
 perfect-power hypothesis. A transfer of the argument would need to
 supply it.
 
-\subsection{Reading for the index restriction and a uniform bound}
+\subsection{Cyclotomic structure and further reading}
 % Further reading and open targets from the current discussion.
-For the residual index $j$, start with Moree \cite[\S\S1,5,6]{MoreeNear}.
+For a primitive $M$-th root of unity $\zeta_M$,
+\[
+\Phi_M(2)=\operatorname{Norm}_{\mathbb Q(\zeta_M)/\mathbb Q}(2-\zeta_M).
+\]
+A primitive Mersenne factor $\ell$ corresponds to a prime ideal
+where $\zeta_M$ reduces to $2$. Subgroups of the Galois group group
+the conjugates into relative norms. This can give algebraic
+factorizations and, under suitable specialization, integer factors.
+Brent \cite[\S\S2.2--2.3,3,4.4]{Brent} develops the Gauss and
+Aurifeuillean identities from these root groupings and gives algorithms
+for computing their factors. Lemma~\ref{lem:aurifeuillean-height}
+is one use here: the whole $q^{n_1}$ must fit into one coprime factor.
+For the field structure, use Washington \cite[Chapters 2--3]{Washington};
+Chapter 6 gives the Gauss-sum background, and Chapter 8 treats
+cyclotomic units. A further target is to compute relative norms in
+small subfields and determine whether they separate the part containing
+$q^{n_1}$ from factors forced into $A$.
+
+The magnitude condition $\ell>q$ remains a separate route.
+Stewart \cite[Theorem 1.1, \S5]{Stewart} proves, for all sufficiently
+large $M$, an effective bound
+\[
+P(\Phi_M(2))>
+M\exp\!\left(\frac{\log M}{104\log\log M}\right),
+\]
+where $P$ denotes the largest prime factor. Such a factor is primitive.
+The proof combines the size of the cyclotomic value with bounds on
+prime-adic multiplicities. To use it here, one must compare its bound
+with $q$ in the family under consideration and control the multiplier
+of the resulting prime. The current general bound on $q$ in terms
+of $M$ is exponential, so this does not yet establish $\ell>q$ throughout.
+
+The alternative $\ell\nmid q-1$ asks for control of shared factors
+with $q-1$. The products $D,D_E$ above make the required divisibility
+or size statement precise; logical weakness alone does not make
+that statement easier to prove.
+For the residual index $j$, Moree \cite[\S\S1,5,6]{MoreeNear}
+provides a complementary viewpoint.
 The condition $\operatorname{ord}_\ell(2)=(\ell-1)/j$ is precisely
 his near-primitive-root problem. Lenstra--Moree--Stevenhagen
 \cite[\S\S2,5,6]{LMS} express the compatibility of the splitting
@@ -1747,6 +1864,103 @@ controlled fields and prime supports. The original equality gives a
 four-term unit relation over $S=\{2,q\}$, not directly their
 two-variable equation $x+y=1$. In a cyclotomic-field approach the
 uncontrolled primes in $A$ remain the obstacle to fixing that support.
+
+\section{An order obstruction from power reciprocity}
+\label{sec:reciprocity}
+
+Keep $q\nmid M$, $n_1=\rho$ even, $E=\operatorname{lcm}(2,r)$ and
+$a=(2^E-1)/q^\rho$. Since $a\mid A$, an order
+$\operatorname{ord}_{\ell^f}(q)$ with $\ell^f\mid a$ cannot share a
+prime divisor with $E$. At a prime $\ell$, the $s^b$-th power-residue
+symbol detects such an obstruction when $s\mid E$ and $s^b\mid\ell-1$.
+It describes Frobenius in the Kummer extension obtained by adjoining
+an $s^b$-th root of $q$ to $\mathbb Q(\zeta_{s^b})$
+\cite[\S\S2,4]{StevenhagenKummer}.
+
+\subsection{A product computable at q}
+
+Take $m=s^b\mid r$ with $s$ prime and put
+\[
+B=2^{E/m},\qquad
+H_s=\Phi_m(B)=\frac{2^E-1}{2^{E/s}-1},\qquad a_s=H_s/q^\rho.
+\]
+The denominator in the quotient for $H_s$ is prime to $q$, so
+$a_s\mid a$. In $K=\mathbb Q(\zeta_m)$, set $\beta=B-\zeta_m$.
+The norm of $\beta$ is $H_s$. Let $J$ be the ideal obtained from
+$(\beta)$ by removing the factors above $q$ and $s$.
+At every prime ideal $P\mid J$ above $\ell$, $\zeta_m$ reduces
+to $B$ and has order $m$. The residue field is $\mathbb F_\ell$.
+Thus $(q/J)_m\ne1$ forces $s\mid\operatorname{ord}_{\ell}(q)$
+for some $\ell\mid a_s$.
+
+In the remaining case, for odd $s\mid r$ we have $s\mid A$ and $s\nmid N$.
+Equation~\eqref{eq:valuation-coupling} gives
+\[
+v_s(q-1)=v_s(2^{\operatorname{ord}_s(2)}-1)+v_s(M)
+  \ge 1+v_s(r).
+\]
+Hence $q$ is an $m$-th power in $\mathbb Q_s$ by the $s$-adic logarithm.
+For $s=2$, $q\equiv1\pmod8$ gives $r\mid(q-1)/2$, so
+$q\equiv1\pmod{2m}$. Write $q=u^{m/2}$ in $\mathbb Q_2$ with
+$u\in1+4\mathbb Z_2$, using the logarithm on $1+4\mathbb Z_2$.
+Adjoining an $m$-th root of $q$ to $K$ locally at $2$ amounts to
+adjoining $\sqrt u$, giving a trivial or unramified extension.
+Since $\beta$ is a unit there, the local symbol equals $1$.
+Together the congruences give $E\operatorname{rad}(r)\mid q-1$,
+where $\operatorname{rad}(r)$ is the product of the distinct primes dividing $r$.
+
+With the symbol convention of Sharifi \cite[\S3, eq.~(5)]{SharifiCycl},
+global reciprocity expresses $(q/J)_m$ as the product of
+$(\beta,q)_m$ over the primes above $q$. The local contribution above
+$s$ is trivial by the preceding calculation, and for $m=2$ the real
+contribution is trivial by positivity. This adapts the norm and
+reciprocity calculation in Sharifi \cite[\S\S4,8]{SharifiCycl}.
+
+Reduce the resulting symbol modulo the prime where $\zeta_m$ maps
+to $B$. For $1<i<m$ with $\gcd(i,m)=1$, let $u_i i\equiv1\pmod m$.
+The result is
+\[
+T_m=
+\left(
+\frac{a_s}{\Phi'_m(B)}
+\prod_{\substack{1<i<m\\ \gcd(i,m)=1}} (B-B^i)^{u_i}
+\right)^{(q-1)/m}\pmod q.
+\]
+Indeed, at the prime above $q$ where $\zeta_m$ maps to $B$, $\beta$
+has valuation $\rho$ and $\beta/q^\rho$ reduces to
+$a_s/\Phi'_m(B)$, by dividing the norm by the other conjugate factors.
+The tame symbol uses this unit with sign $(-1)^\rho=1$.
+At the other primes the unit is $B-B^i$. Raising the corresponding
+residue symbol to $u_i$ expresses it in the common reduction
+$\zeta_m\mapsto B$. Thus every remaining solution must have $T_m=1$
+for all prime powers $m\mid r$.
+
+For $m=2$ this requires $a_2$ to be a square modulo $q$.
+For $m=3$ it requires $a_3(2B+1)$ to be a cube modulo $q$.
+For example, $q=3511$ has $r=1755$ and $\rho=2$.
+Here $a_3(2B+1)\equiv-14\pmod q$ and $T_3=756$.
+This prime is already excluded by earlier congruences.
+The open question is whether the remaining hypotheses force some
+$T_m\ne1$, or an individual order obstruction when the symbols cancel.
+
+\subsection{Computational supplements}
+
+\begin{itemize}
+\item \path{mersenne-tables.md} gives orders, the factors used in $D_E$,
+and Frobenius in the cyclotomic fields for illustrative $q$.
+The GAP source is \path{mersenne_tables.g}. For the cyclotomic
+Frobenius formula see Milne \cite{MilneANT}.
+\item \path{order-obstructions.md} checks all prime choices with
+$E\le256$ using \path{check_order_obstruction.g} and
+\path{mersenne-factors-256.g}. There are 395 certificates among
+396 choices, with $q=3$, $a=1$ the exception. All have $\rho=1$.
+\item \path{cyclotomic-reciprocity.md} gives the derivation and examples.
+\path{cyclotomic-reciprocity-tables.md} compares the calculation at $q$
+with direct symbols at the prime factors and includes examples
+with $\rho=2$. The PARI/GP functions are in
+\path{cyclotomic_reciprocity.gp}. Run
+\path{check_cyclotomic_reciprocity.gp} to regenerate the tables.
+\end{itemize}
 
 \section{Exercises and remaining questions}
 \label{sec:exercises}
@@ -1835,7 +2049,7 @@ $2^{(q-1)/3}\equiv1\pmod{q^2}$. An absolute bound on $q$ remains open.
 \clearpage
 \section{Congruence and case reference}
 \label{sec:reference-tables}
-Assume $A>1$, $q>3$ and the two representations of the prime $p$.
+Assume $A>1$, $q>3$ and the two partitions of the prime $p$.
 The proved reductions give $q\nmid M$. Write
 \[
 r=\operatorname{ord}_q(2),\quad k=M/2,\quad
@@ -1936,6 +2150,7 @@ $4\mid M$&$m_2\equiv0\pmod4$, $5\nmid N$\\
 $M\equiv2\pmod4$&$m_2+n_1\equiv2\pmod4$, $q^N\equiv3\pmod5$\\
 Common divisor&$\gcd(g,510q(q-1))=1$, $\gcd(g,E)=1$, $gE\mid M$\\
 $h=M/E$&$(2h-1)n_1<N$, $h<(N+2)/4$\\
+$r\equiv4\pmod8$, $h\le32$&$(4h-1)n_1<N$\\
 $g>1$&$N\ge5g$, every prime factor of $g$ is at least $7$,
 $\varphi(g)>g/2$\\
 $N=5g$, $g>1$&$n_1=2$, $M=gE$\\
@@ -2081,78 +2296,6 @@ to preserve our fixed base $2$ without checking the change of variables.
 
 \phantomsection
 \addcontentsline{toc}{section}{References}
-\begin{thebibliography}{CKLMR}
-\bibitem[AGJ26]{AGJ26}
-L. Alsed\`a, A. Garijo, and X. Jarque,
-\emph{Mersenne numbers and the doubling map}, preprint, 2026.
-\url{https://arxiv.org/abs/2605.29130}.
-
-\bibitem[GS10]{GyorySmyth}
-K. Gy\H{o}ry and C. Smyth,
-\emph{The divisibility of $a^n-b^n$ by powers of $n$},
-Integers 10 (2010), 319--334, Theorem 13.
-
-\bibitem[MSS]{MSS}
-T.~Miyazaki, R.~Scott, and R.~Styer,
-\textit{Handling some Diophantine equation via Euclidean algorithm and its
-application to purely exponential equations}, 2026.
-Local source: \texttt{effMP3\_15Jul2026.tex};
-\url{https://arxiv.org/abs/2604.18991}.
-The logarithmic estimate used here is Laurent's result quoted in the
-section on linear forms in logarithms. The polynomial construction and
-its limitations appear in the final two sections.
-
-\bibitem[PC25]{PomCycl}
-C.~Pomerance, \textit{Cyclotomic primes},
-Journal of Number Theory \textbf{276} (2025), 198--208.
-\url{https://math.dartmouth.edu/~carlp/cyclotomicprimesfinal+.pdf}.
-
-\bibitem[PM86]{PomPrim}
-C.~Pomerance, \textit{On primitive divisors of Mersenne numbers},
-Acta Arithmetica \textbf{46} (1986), 355--367.
-\url{https://math.dartmouth.edu/~carlp/PDF/paper56.pdf}.
-
-\bibitem[B04]{Bilu}
-Y.~F.~Bilu, \textit{Catalan's conjecture (after Mih\u{a}ilescu)},
-Ast\'erisque \textbf{294} (2004), 1--26, S\'eminaire Bourbaki, no.~909.
-\url{https://www.numdam.org/item/SB_2002-2003__45__1_0.pdf}.
-
-\bibitem[CKLMR]{Cambraia}
-A.~Cambraia Jr., M.~P.~Knapp, A.~Lemos, B.~K.~Moriya,
-and P.~H.~A.~Rodrigues,
-\textit{On prime factors of Mersenne numbers}, 2021.
-\url{https://arxiv.org/abs/1606.08690}.
-
-\bibitem[KL25]{KL}
-V.~Kova\v{c} and F.~Luca,
-\textit{On the number of divisors of Mersenne numbers}, 2025.
-\url{https://arxiv.org/abs/2506.04883}.
-
-\bibitem[EKP91]{EKP}
-P.~Erd\H{o}s, P.~Kiss, and C.~Pomerance,
-\textit{On prime divisors of Mersenne numbers},
-Acta Arithmetica \textbf{57} (1991), 267--281.
-
-\bibitem[M13]{MoreeNear}
-P.~Moree, \emph{Near-primitive roots}.
-\url{https://arxiv.org/abs/1112.5090}.
-
-\bibitem[LMS14]{LMS}
-H.~W.~Lenstra, Jr., P.~Moree, and P.~Stevenhagen,
-\emph{Character sums for primitive root densities}.
-\url{https://arxiv.org/abs/1112.4816}.
-
-\bibitem[C10]{CorvajaSurvey}
-P.~Corvaja, \emph{Upper bound for the $\gcd(u-1,v-1)$,
-$u,v$ $S$-units, generalisations and applications},
-RIMS K\^oky\^uroku \textbf{1710} (2010), 1--6.
-\url{https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/1710-01.pdf}.
-
-\bibitem[AKMRVW]{SUnitAlgorithms}
-A.~Alvarado, A.~Koutsianas, B.~Malmskog, C.~Rasmussen,
-C.~Vincent, and M.~West,
-\emph{A robust implementation for solving the $S$-unit equation
-and several applications}.
-\url{https://arxiv.org/abs/1903.00977}.
-\end{thebibliography}
+\bibliographystyle{alpha}
+\bibliography{prime_power_notes}
 \end{document}

@@ -1,0 +1,121 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{CKL{\etalchar{+}}21}
+
+\bibitem[AGJ26]{AGJ26}
+L.~Alsed{\`a}, A.~Garijo, and X.~Jarque.
+\newblock Mersenne numbers and the doubling map.
+\newblock \url{https://arxiv.org/abs/2605.29130}, 2026.
+\newblock Preprint.
+
+\bibitem[AKM{\etalchar{+}}]{SUnitAlgorithms}
+A.~Alvarado, A.~Koutsianas, B.~Malmskog, C.~Rasmussen, C.~Vincent, and M.~West.
+\newblock A robust implementation for solving the {$S$}-unit equation and
+  several applications.
+\newblock \url{https://arxiv.org/abs/1903.00977}.
+
+\bibitem[Bil04]{Bilu}
+Y.~F. Bilu.
+\newblock {Catalan}'s conjecture (after mih{\u{a}}ilescu).
+\newblock {\em Ast{\'e}risque}, 294:1--26, 2004.
+\newblock S{\'e}minaire Bourbaki, no.~909.
+  \url{https://www.numdam.org/item/SB_2002-2003__45__1_0.pdf}.
+
+\bibitem[Bre93]{Brent}
+R.~P. Brent.
+\newblock On computing factors of cyclotomic polynomials.
+\newblock {\em Mathematics of Computation}, 61:131--149, 1993.
+\newblock \url{https://maths-people.anu.edu.au/brent/pd/rpb135.pdf}.
+
+\bibitem[CKL{\etalchar{+}}21]{Cambraia}
+A.~Cambraia, Jr., M.~P. Knapp, A.~Lemos, B.~K. Moriya, and P.~H.~A. Rodrigues.
+\newblock On prime factors of {Mersenne} numbers.
+\newblock \url{https://arxiv.org/abs/1606.08690}, 2021.
+
+\bibitem[Cor10]{CorvajaSurvey}
+P.~Corvaja.
+\newblock Upper bound for the {$\gcd(u-1,v-1)$}, {$u,v$} {$S$}-units,
+  generalisations and applications.
+\newblock {\em RIMS K{\^o}ky{\^o}roku}, 1710:1--6, 2010.
+\newblock
+  \url{https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/1710-01.pdf}.
+
+\bibitem[EKP91]{EKP}
+P.~Erd{\H{o}}s, P.~Kiss, and C.~Pomerance.
+\newblock On prime divisors of {Mersenne} numbers.
+\newblock {\em Acta Arithmetica}, 57:267--281, 1991.
+
+\bibitem[GS10]{GyorySmyth}
+K.~Gy{\H{o}}ry and C.~Smyth.
+\newblock The divisibility of {$a^n-b^n$} by powers of {$n$}.
+\newblock {\em Integers}, 10:319--334, 2010.
+
+\bibitem[KL25]{KL}
+V.~Kova{\v{c}} and F.~Luca.
+\newblock On the number of divisors of {Mersenne} numbers.
+\newblock \url{https://arxiv.org/abs/2506.04883}, 2025.
+
+\bibitem[Lau08]{Laurent}
+M.~Laurent.
+\newblock Linear forms in two logarithms and interpolation determinants {II}.
+\newblock {\em Acta Arithmetica}, 133:325--348, 2008.
+
+\bibitem[LMS]{LMS}
+H.~W. Lenstra, Jr., P.~Moree, and P.~Stevenhagen.
+\newblock Character sums for primitive root densities.
+\newblock \url{https://arxiv.org/abs/1112.4816}.
+
+\bibitem[Mil20]{MilneANT}
+J.~S. Milne.
+\newblock Algebraic number theory.
+\newblock Course notes, version 3.08.
+  \url{https://www.jmilne.org/math/CourseNotes/ANT.pdf}, 2020.
+
+\bibitem[Mor]{MoreeNear}
+P.~Moree.
+\newblock Near-primitive roots.
+\newblock \url{https://arxiv.org/abs/1112.5090}.
+
+\bibitem[MSS26]{MSS}
+T.~Miyazaki, R.~Scott, and R.~Styer.
+\newblock Handling some diophantine equation via euclidean algorithm and its
+  application to purely exponential equations.
+\newblock \url{https://arxiv.org/abs/2604.18991}, 2026.
+\newblock Preprint. Local source: \path{effMP3_15Jul2026.tex}.
+
+\bibitem[Pom86]{PomPrim}
+C.~Pomerance.
+\newblock On primitive divisors of {Mersenne} numbers.
+\newblock {\em Acta Arithmetica}, 46:355--367, 1986.
+\newblock \url{https://math.dartmouth.edu/~carlp/PDF/paper56.pdf}.
+
+\bibitem[Pom25]{PomCycl}
+C.~Pomerance.
+\newblock Cyclotomic primes.
+\newblock {\em Journal of Number Theory}, 276:198--208, 2025.
+\newblock \url{https://math.dartmouth.edu/~carlp/cyclotomicprimesfinal+.pdf}.
+
+\bibitem[Sha97]{SharifiCycl}
+Romyar~T. Sharifi.
+\newblock On cyclotomic polynomials, power residues, and reciprocity laws.
+\newblock {\em L'Enseignement Math{\'e}matique}, 43, 1997.
+\newblock \url{https://www.math.ucla.edu/~sharifi/publ/cycl.pdf}.
+
+\bibitem[Ste]{StevenhagenKummer}
+Peter Stevenhagen.
+\newblock Kummer theory and reciprocity laws.
+\newblock Course notes.
+  \url{https://websites.math.leidenuniv.nl/algebra/Stevenhagen-Kummer.pdf}.
+
+\bibitem[Ste13]{Stewart}
+C.~L. Stewart.
+\newblock On divisors of {Lucas} and {Lehmer} numbers.
+\newblock {\em Acta Mathematica}, 211:291--314, 2013.
+\newblock \url{https://doi.org/10.1007/s11511-013-0105-y}.
+
+\bibitem[Was97]{Washington}
+L.~C. Washington.
+\newblock {\em Introduction to Cyclotomic Fields}.
+\newblock Springer, second edition, 1997.
+\newblock \url{https://doi.org/10.1007/978-1-4612-1934-7}.
+
+\end{thebibliography}

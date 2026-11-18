@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.30)  17 NOV 2026 10:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.30)  18 NOV 2026 11:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -169,6 +169,13 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layoutvoffset=\dimen170
 \Gm@dimlist=\toks31
 )
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+))
 (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2026-06-17 v7.01r Hypertext links for LaTeX
 
@@ -247,11 +254,6 @@ Package hyperref Info: Backreferencing OFF on input line 4219.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4466.
 \c@Hy@tempcnt=\count309
-
-(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip18
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
 LaTeX Info: Redefining \url on input line 4805.
 \XeTeXLinkMargin=\dimen172
 
@@ -298,27 +300,27 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
  (/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-08-10 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count317
-) (./prime_power_notes.aux)
+) (obj/prime_power_notes.aux)
 \openout1 = `prime_power_notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -354,52 +356,55 @@ LaTeX Font Info:    ... okay on input line 11.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 11.
-(./prime_power_notes.out) (./prime_power_notes.out)
+Package hyperref Info: Link coloring OFF on input line 12.
+(obj/prime_power_notes.out) (obj/prime_power_notes.out)
 \@outlinefile=\write3
 \openout3 = `prime_power_notes.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 19.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 20.
 
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
 
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-(./prime_power_notes.toc)
+) [1
+
+{/home/erpage159/.texlive2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(obj/prime_power_notes.toc)
 \tf@toc=\write4
 \openout4 = `prime_power_notes.toc'.
 
- [1
+ [2
 
-{/home/erpage159/.texlive2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+] [3
 
-] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
-[13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27
+] [4] [5] [6] [7] [8] [9] [10] [11] [12]
+[13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27]
+[28] [29] [30
 
-]
-[28
+] [31
 
-] [29
+] [32
 
-] [30] [31] (./prime_power_notes.aux)
+] (obj/prime_power_notes.bbl [33]) [34]
+(obj/prime_power_notes.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
  ***********
 Package rerunfilecheck Info: File `prime_power_notes.out' has not changed.
-(rerunfilecheck)             Checksum: B12170CDDFACA72528AC354E8C7F8FCA;2425.
+(rerunfilecheck)             Checksum: 81B1C824547AF78AA79570F8DBA03CB8;2782.
  ) 
 Here is how much of TeX's memory you used:
- 9905 strings out of 467702
- 150424 string characters out of 5422618
- 589441 words of memory out of 5000000
- 38820 multiletter control sequences out of 15000+600000
+ 9966 strings out of 467702
+ 151598 string characters out of 5422618
+ 591096 words of memory out of 5000000
+ 38858 multiletter control sequences out of 15000+600000
  641483 words of font info for 92 fonts, out of 8000000 for 9000
  859 hyphenation exceptions out of 8191
  74i,11n,79p,554b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -425,10 +430,10 @@ ive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2026/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2026/tex
 mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on prime_power_notes.pdf (31 pages, 385938 bytes).
+Output written on obj/prime_power_notes.pdf (34 pages, 404410 bytes).
 PDF statistics:
- 535 PDF objects out of 1000 (max. 8388607)
- 454 compressed objects within 5 object streams
- 156 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 600 PDF objects out of 1000 (max. 8388607)
+ 514 compressed objects within 6 object streams
+ 171 named destinations out of 1000 (max. 500000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 
