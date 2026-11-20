@@ -40,16 +40,27 @@
 \contentsline {subsection}{\numberline {7.4}Reading and limits of the cited results}{26}{subsection.7.4}%
 \contentsline {subsection}{\numberline {7.5}Cyclotomic structure and further reading}{26}{subsection.7.5}%
 \contentsline {section}{\numberline {8}An order obstruction from power reciprocity}{27}{section.8}%
-\contentsline {subsection}{\numberline {8.1}A product computable at q}{27}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Computational supplements}{28}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Exercises and remaining questions}{28}{section.9}%
-\contentsline {section}{\numberline {A}Congruence and case reference}{30}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Residues of q and its square}{30}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Valuations}{30}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Powers of two modulo q and its square}{31}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}The prime p and the gap conditions}{31}{subsection.A.4}%
-\contentsline {section}{\numberline {B}Auxiliary calculations and comparison with MSS}{32}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}Scope of the MSS results}{32}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}A polynomial identity}{32}{subsection.B.2}%
-\contentsline {subsection}{\numberline {B.3}Congruences modulo $p$}{33}{subsection.B.3}%
-\contentsline {section}{References}{33}{section*.5}%
+\contentsline {subsection}{\numberline {8.1}The order test}{27}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Choosing the cyclotomic factor}{28}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Reciprocity and the local terms}{28}{subsection.8.3}%
+\contentsline {paragraph}{Odd $s$.}{29}{section*.5}%
+\contentsline {paragraph}{$s=2$.}{29}{section*.6}%
+\contentsline {subsection}{\numberline {8.4}Evaluating the product modulo q}{29}{subsection.8.4}%
+\contentsline {paragraph}{The residues of the unit parts.}{29}{section*.7}%
+\contentsline {paragraph}{Multiplying the symbols.}{30}{section*.8}%
+\contentsline {subsection}{\numberline {8.5}The quadratic and cubic tests}{30}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Restrictions on the multiplier h}{31}{subsection.8.6}%
+\contentsline {paragraph}{Recovering $h$ from $q$.}{31}{section*.9}%
+\contentsline {paragraph}{Recovering $N$ at the prime $2$.}{31}{section*.10}%
+\contentsline {subsection}{\numberline {8.7}Computational supplements}{32}{subsection.8.7}%
+\contentsline {section}{\numberline {9}Exercises and remaining questions}{32}{section.9}%
+\contentsline {section}{\numberline {A}Congruence and case reference}{34}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Residues of q and its square}{34}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Valuations}{34}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Powers of two modulo q and its square}{35}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}The prime p and the gap conditions}{35}{subsection.A.4}%
+\contentsline {section}{\numberline {B}Auxiliary calculations and comparison with MSS}{36}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Scope of the MSS results}{36}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}A polynomial identity}{36}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}Congruences modulo $p$}{37}{subsection.B.3}%
+\contentsline {section}{References}{37}{section*.11}%

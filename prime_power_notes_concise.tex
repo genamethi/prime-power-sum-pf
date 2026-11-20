@@ -1,0 +1,301 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+
+\title{Two partitions of a prime as \texorpdfstring{$2^m+q^n$}{2^m + q^n}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+For a fixed prime $q$, can a prime $p>5$ have two partitions
+as $2^m+q^n$ with $m,n\ge1$? For $q=3$ the only example is
+$11=2^3+3=2+3^2$. The question for $q>3$ remains open.
+
+\section{Subtracting the partitions}
+
+Since $p$ is odd, so is $q$. Write the two partitions as
+\begin{equation}\label{eq:partitions}
+p=2^{c+M}+q^e=2^c+q^{e+N},
+\qquad c,e,M,N\ge1.
+\end{equation}
+Here $c,e$ are the smaller exponents and $M,N$ are the differences.
+Subtracting gives $2^c(2^M-1)=q^e(q^N-1)$. Since $2$ and $q$ are coprime,
+there is a positive integer $A$ such that
+\begin{equation}\label{eq:gap}
+Aq^e=2^M-1,\qquad A2^c=q^N-1,\qquad \gcd(A,2q)=1.
+\end{equation}
+Multiplying these equations and using \eqref{eq:partitions} gives
+\begin{equation}\label{eq:Ap}
+Ap=2^M q^N-1,\qquad A<\frac{(2^M q^N)^{1/2}}{(2^c q^e)^{1/2}}.
+\end{equation}
+
+Modulo $3$, the parity of each exponent of $2$ is determined by $p$
+and by whether $q=3$. If $q=3$, the power of $2$ is congruent to $p$.
+If $q\ne3$, it is congruent to the other nonzero residue.
+Thus $M$ is even. If $N$ were also even, then with
+$X=(2^M q^N)^{1/2}\ge6$ we would have $Ap=(X-1)(X+1)$.
+Both factors exceed $A$ by \eqref{eq:Ap}, but one must divide $A$
+since $p$ is prime. Thus $N$ is odd.
+
+Write $M=2k$. The odd factors $2^k-1$ and $2^k+1$ are coprime.
+By \eqref{eq:gap}, one contains the full power $q^e$ and the other
+divides $A$. Also $c=v_2(q-1)$, since $N$ is odd. It follows that
+\begin{equation}\label{eq:size}
+q^e\le2^k+1,\qquad A\ge2^k-1,\qquad
+c\le k,\qquad 2^k<q^N<2^M.
+\end{equation}
+For the last two-sided bound, use $q^N=2^c A+1$ and
+$(q^N-1)/(2^M-1)=2^c/q^e\le(q-1)/q$.
+
+If $A=1$, the smaller factor $2^k-1$ must be $1$, giving $q=3$ and
+$e=1$. Then $c=1$ and $3^N=3$, so \eqref{eq:partitions} gives $11$.
+If $N=1$, then $A=(q-1)/2^c<q$ and
+$2^{2k}-1=Aq^e<q(2^k+1)$. Hence $q>2^k-1$, so \eqref{eq:size}
+forces $q=2^k+1$. Then $q-1$ is a power of $2$, so $A=1$.
+For $A>1$ it follows that $N\ge3$.
+
+If $q=3$ and $A>1$, lifting the exponent in \eqref{eq:gap} gives
+$e=1+v_3(M)$. If $e>1$, then $3\mid M$ and $7\mid A$ since
+$\ord_7(2)=3$. But $\ord_7(3)=6$ cannot divide the odd integer $N$.
+Thus $e=1$, and $c=1$ gives $3^{N+1}-1=2^{M+1}$. As $N+1$ is even,
+the factors $3^{(N+1)/2}-1$ and $3^{(N+1)/2}+1$ are powers of $2$
+differing by $2$. They must be $2$ and $4$, again giving $11$.
+
+\section{Restrictions on \texorpdfstring{$M$ and $N$}{M and N}}
+\label{sec:restrictions}
+
+Assume henceforth $A>1$ and $q>3$. For every prime power
+$\ell^f\mid 2^M-1$ with $\ell\ne q$, \eqref{eq:gap} gives
+\begin{equation}\label{eq:local}
+\ell^f\mid A,\qquad \ord_{\ell^f}(q)\mid N.
+\end{equation}
+Since $M$ is even, $2^M\equiv1\pmod3$. As $q>3$, we can take
+$\ell=3$ in \eqref{eq:local} to obtain $3\mid A$. Then
+$q^N\equiv1\pmod3$ by \eqref{eq:gap}, so $q\equiv1\pmod3$
+because $N$ is odd.
+Then \eqref{eq:partitions} modulo $3$ forces $c$ even.
+
+The exponent $e+N$ is odd. Otherwise \eqref{eq:partitions} would
+express $q^e-2^c$ as the positive difference of the squares
+$q^{e+N}$ and $2^{c+M}$. The difference would be at least
+$2\cdot2^{(c+M)/2}+1$, whereas \eqref{eq:size} gives
+$q^e-2^c\le2^{M/2}+1-2^c$. Since $N$ is odd, $e$ is even and $e\ge2$.
+
+For any $d>1$ dividing both $M$ and $N$, put $Y=2^{M/d}q^{N/d}$.
+By \eqref{eq:Ap}, $Y-1\mid Ap$. If $p$ divided $Y-1$, then
+$1+Y+\cdots+Y^{d-1}$ would divide $A$, contradicting
+$A<Y^{d/2}$ from \eqref{eq:Ap}. Thus
+\begin{equation}\label{eq:common}
+Y-1\mid A,\qquad \ord_p(Y)=d,\qquad p\equiv1\pmod d.
+\end{equation}
+For the order assertion, \eqref{eq:partitions} gives
+$p>2^{(c+M)/2}q^{(e+N)/2}>Y^{d/2}$. So $p$ cannot divide $Y^j-1$ for
+a proper divisor $j$ of $d$.
+
+In particular $3$ cannot divide both $M$ and $N$. Otherwise let
+$U=2^{M/3}$ and $V=q^{N/3}$. By \eqref{eq:size},
+$\sqrt U<V<U$, and by \eqref{eq:common} and \eqref{eq:gap},
+$UV-1\mid V^3-1$, so $V^2\equiv U\pmod{UV-1}$.
+Both $V^2$ and $U$ are positive and less than $UV-1$, and
+$V^2>U$, a contradiction.
+At $3$, lifting the exponent in \eqref{eq:gap} gives
+$1+v_3(M)=v_3(q-1)+v_3(N)$. Thus
+\begin{equation}\label{eq:three}
+\gcd(N,6)=1,\qquad N\ge5,\qquad v_3(M)=v_3(q-1)-1.
+\end{equation}
+Write $r=\ord_q(2)$ and $\rho=v_q(2^r-1)$. Since $r\mid M$ and
+$r\mid q-1$, \eqref{eq:three} gives $r\mid(q-1)/3$. Lifting at $q$
+also gives $e=\rho+v_q(M)$. Thus
+\begin{equation}\label{eq:qval}
+e=\rho+v_q(M),\qquad r\mid(q-1)/3.
+\end{equation}
+
+\section{A finite computation when \texorpdfstring{$q\mid M$}{q divides M}}
+\label{sec:finite}
+
+The two larger terms in \eqref{eq:partitions} satisfy
+\[
+\Lambda=(e+N)\log q-(c+M)\log2
+=\log(1-2^{-M})-\log(1-q^{-N}).
+\]
+Using \eqref{eq:size} and $q^N\ge27$ gives
+$0<\Lambda<(27/26)q^{-N}$. Set $\lambda=\log q$ and
+$H_\lambda(x)=\max\{\log(x/\lambda)+0.38,10\}$.
+Apply Laurent's bound \cite[Corollary~2, $(m,C_2)=(10,25.2)$]{Laurent}
+to the multiplicatively independent rational numbers $2,q$, taking
+both logarithmic height parameters equal to $\lambda$. Thus
+\begin{equation}\label{eq:log}
+N\lambda<25.2\lambda^2 H_\lambda(c+M+e+N)^2+\log(27/26).
+\end{equation}
+By \eqref{eq:size}, $c+M\le3M/2$ and $p<2^{c+M+1}$, so
+$e+N<(c+M+1)\log2/\lambda$. Hence $c+M+e+N<3M$.
+Since $N\lambda>M\log2/2$, \eqref{eq:log} implies
+\begin{equation}\label{eq:M}
+M<73\lambda^2 H_\lambda(3M)^2.
+\end{equation}
+In particular, \eqref{eq:M} bounds $M$ effectively for each fixed $q$.
+
+If $q\mid M$, then $qr\mid M$. As $q<2^r$, we have
+$t=M/\lambda>q/\log2$. Setting $H(t)=\max\{\log(3t)+0.38,10\}$,
+\eqref{eq:M} gives $t/H(t)^2<73\lambda$. The function $t/H(t)^2$
+is increasing. For $q\ge10^6$, substituting $t=q/\log2$ gives
+\[
+q<73\log2\,(\log q)(\log q+\log(3/\log2)+0.38)^2.
+\]
+This inequality fails at $10^6$, and the ratio of its left side to its
+right side increases thereafter. Thus $q<10^6$. Also
+$\lambda H_\lambda(3M)$ increases with $\lambda$, so \eqref{eq:M}
+and $\lambda<14$ imply $M/H_{14}(3M)^2<14308$. The left side is
+increasing in $M$ and exceeds $14308$ at $M=4\cdot10^6$.
+
+It suffices to enumerate primes $3<q<10^6$ with
+$q\equiv1\pmod3$, $v_2(q-1)$ even, and $2^{(q-1)/3}\equiv1\pmod q$.
+For each such $q$, set $s=v_3(q-1)-1$ and compute
+\[
+L=\lcm\bigl(2,qr,3^s,
+  \{\ord_\ell(2):\ell\mid q-1,\ \ell\text{ an odd prime}\}\bigr).
+\]
+Every entry divides $M$. For the orders indexed by $\ell$, this follows
+because the odd part of $q-1$ divides $A$ in \eqref{eq:gap}.
+Equation \eqref{eq:three} requires $v_3(L)\le s$. By \eqref{eq:local},
+if $L$ is divisible by $4$, $3$, or $5$, the order of $q$ modulo $5$,
+$7$, or $31$, respectively, must divide $1$, $1$, or $5$.
+The bases $5,7,31$ fail the initial conditions.
+
+The script \path{scripts/check_q_divides_gap.lua} checks these
+conditions with integer arithmetic. Of $4347$ primes passing the
+initial conditions, $4332$ fail $L<4\cdot10^6$, the next $5$ fail the
+valuation at $3$, and the tests modulo $5$, $7$, and $31$ remove the
+last $7$, $2$, and $1$, respectively. Therefore
+\begin{equation}\label{eq:remaining}
+q\nmid M,\qquad e=\rho\ge2\text{ even},\qquad
+2^{(q-1)/3}\equiv1\pmod{q^2}.
+\end{equation}
+
+\section{Congruences and common divisors of \texorpdfstring{$M,N$}{M,N}}
+\label{sec:gcd}
+
+If $q\equiv5\pmod8$, then $c=2$ and $2$ is a quadratic nonresidue
+modulo $q$, so $4\mid r$ and $4\mid M$. Then \eqref{eq:local} at $5$
+gives $q\equiv1\pmod5$. But $c+M\equiv2\pmod4$ would give
+$p\equiv4+1\pmod5$. Since $c$ is even, it follows that $c\ge4$ and
+$q\equiv1\pmod{48}$.
+
+Put $g=\gcd(M,N)$ and $E=\lcm(2,r)$. If a prime $d\mid g$ divided
+$q-1$, then \eqref{eq:common} and the second partition in
+\eqref{eq:partitions} would give $1\equiv2^c+1\pmod d$.
+Also $p$ is a sum of two nonzero squares modulo $5$ by the first
+partition in \eqref{eq:partitions}. Hence $p\equiv2$ or
+$3\pmod5$, so $5\nmid g$ by \eqref{eq:common}.
+Together with \eqref{eq:three} and \eqref{eq:remaining}, this gives
+\begin{equation}\label{eq:gcd}
+\gcd(g,30q(q-1))=1,\qquad gE\mid M,\qquad \gcd(E,N)=1.
+\end{equation}
+Indeed, $E\mid M$ and $E\mid q-1$.
+
+If $4\mid M$, then $q\equiv1\pmod5$ by \eqref{eq:local}.
+If $M\equiv2\pmod4$, then $2^c,q^e\in\{1,-1\}\pmod5$ and
+$p\equiv q^e-2^c\not\equiv0\pmod5$, so $q^e\equiv-2^c\pmod5$.
+Substituting in \eqref{eq:gap} gives $q^N\equiv3\pmod5$, hence
+$q\equiv2$ or $3\pmod5$. In particular
+\begin{equation}\label{eq:240}
+q\equiv1,97,193\pmod{240}.
+\end{equation}
+
+Suppose $g>1$ and put $U=2^{M/g}$ and $b=N/g$. Since $E\mid M/g$,
+\eqref{eq:remaining} gives $q^e\mid U-1$. Also $U$ is a square,
+so factoring $U-1$ as in \eqref{eq:size} gives $q^e\le\sqrt U+1$.
+It follows that $U\ge(q^e-1)^2>q^{2e-1}$. On the other hand,
+\eqref{eq:gap} gives $U^g=1+q^e(q^{bg}-1)/2^c<q^{e+bg}$.
+Therefore $b>(2-1/g)e-1$. Since $g\ge7$, $e\ge2$, and $b$ is coprime
+to $6$, we have $b\ge5$ and $N\ge5g\ge35$.
+For $N=35$ this forces $g=7$ and $b=5$, and the bound on $b$ forces $e=2$.
+By \eqref{eq:common}, $p\equiv1\pmod7$. The only way to obtain $1$
+as a sum of two nonzero squares modulo $7$ is $4+4$, so
+$q\equiv2$ or $5\pmod7$. The second partition in
+\eqref{eq:partitions} gives $2^c\equiv1-q^{37}\equiv1-q\pmod7$.
+Neither $6$ nor $3$ is a power of $2$ modulo $7$.
+For $35<N<49$, $N\ge5g$ still forces $g=7$ if $g>1$. The only
+multiple of $7$ in that interval is $42$, which violates \eqref{eq:three}. Thus
+\begin{equation}\label{eq:N49}
+N<49\quad\Longrightarrow\quad \gcd(M,N)=1.
+\end{equation}
+
+\section{Orders modulo the factors of \texorpdfstring{$2^E-1$}{2\string^E-1}}
+\label{sec:orders}
+
+By \eqref{eq:gap}, \eqref{eq:remaining}, and \eqref{eq:gcd},
+\begin{equation}\label{eq:order-test}
+a=\frac{2^E-1}{q^\rho}\mid A,\qquad
+\gcd(\ord_{\ell^f}(q),E)=1
+\quad\text{for every prime power }\ell^f\mid a.
+\end{equation}
+The order condition follows because the order divides $N$.
+Both $a$ and $E$ are determined by $q$, so one failure of
+\eqref{eq:order-test} excludes that $q$ for all $M,N$.
+
+Power reciprocity can sometimes detect a failure without factoring $a$.
+Take a prime power $m=s^b$ dividing $r$ and put
+\[
+B=2^{E/m},\qquad
+a_s=\frac{\Phi_m(B)}{q^\rho}
+=\frac{2^E-1}{q^\rho(2^{E/s}-1)}.
+\]
+The integer $a_s$ divides $a$ since $r\nmid E/s$. Write
+$K=\mathbb Q(\zeta_m)$ and $\beta=B-\zeta_m$, so
+$\operatorname{Norm}_{K/\mathbb Q}(\beta)=\Phi_m(B)$.
+Let $J$ be the part of $(\beta)$ prime to $sq$. At a prime ideal
+dividing $J$ above $\ell$, $\zeta_m$ reduces to $B$ of order $m$ in
+$\mathbb F_\ell$. By \eqref{eq:order-test}, $q$ has order coprime to
+$s$ there, so the $m$-th power residue symbol $(q/J)_m$ must equal $1$.
+
+To compute this symbol at $q$, first consider the places above $s$.
+For odd $s$, we have $s\mid q-1$, $s\mid r\mid M$, and $s\nmid N$
+by \eqref{eq:gcd}. Lifting in \eqref{eq:gap} gives
+$v_s(q-1)=v_s(2^{\ord_s(2)}-1)+v_s(M)\ge b+1$.
+Thus $q$ is an $m$-th power in $\mathbb Q_s$ by the $s$-adic logarithm.
+For $s=2$, $q\equiv1\pmod8$ gives $r\mid(q-1)/2$, hence
+$q\equiv1\pmod{2m}$. The logarithm on $1+4\mathbb Z_2$ then gives
+$q=u^{m/2}$ for some $u\in1+4\mathbb Z_2$. Adjoining an $m$-th root
+of $q$ to $K$ locally at $2$ is equivalent to adjoining $\sqrt u$,
+which is trivial or unramified. Since $\beta$ is a unit at $2$, its
+local symbol is $1$. The real symbol when $m=2$ is trivial by positivity.
+In particular the restrictions at $s$ give
+$E\prod_{s\mid r,\ s\text{ prime}}s\mid q-1$.
+
+With the convention in \cite[\S3, (5)]{SharifiCycl}, reciprocity
+expresses $(q/J)_m$ as the product of the local symbols $(\beta,q)_m$
+above $q$. These primes correspond to the reductions
+$\zeta_m\mapsto B^i$ for $i$ coprime to $m$. At $i=1$, $\beta$ has
+valuation $\rho$, and its unit part reduces to $a_s/\Phi_m'(B)$ by
+the norm identity. At the other primes it has residue $B-B^i$.
+The tame symbol raises these units to $(q-1)/m$ and the sign from
+the valuation is $(-1)^\rho=1$. To express the symbol at
+$B^i$ in the reduction $\zeta_m\mapsto B$, raise it to the inverse
+$u_i$ of $i$ modulo $m$. The resulting product gives
+\begin{equation}\label{eq:T}
+\left(
+\frac{a_s}{\Phi_m'(B)}
+\prod_{\substack{1<i<m\\(i,m)=1}}(B-B^i)^{u_i}
+\right)^{(q-1)/m}\equiv1\pmod q,
+\qquad i u_i\equiv1\pmod m.
+\end{equation}
+For example, if $2\mid r$, taking $m=2$ requires
+$(2^{E/2}+1)/q^\rho$ to be a square modulo $q$.
+
+The open step is to find a prime-power factor in \eqref{eq:order-test}
+whose order shares a prime divisor with $E$, for every $q$ surviving
+the preceding reductions. A failure of \eqref{eq:T} for any $m$ supplies
+such a factor. When the product in \eqref{eq:T} is $1$, the individual
+symbols may still be nontrivial.
+
+\bibliographystyle{alpha}
+\bibliography{prime_power_notes}
+\end{document}

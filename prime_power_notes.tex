@@ -1182,6 +1182,9 @@ $E\log2\ge2\log(Q-1)>2(e-1/4)\log q$,
 The last fraction is obtained at the minimum $e=2$; the middle
 expression decreases with $e$. In particular $N=5$ forces $h=1$,
 so $M=E$. For $N=7$ we have $h\le2$, and for $N=11$, $h\le3$.
+Since $q^{n_2}<p<2q^{n_2}$, we have
+$N+e=n_2=\lfloor\log_q p\rfloor$.
+Lemma~\ref{lem:sharp-h} improves the middle bound to $h<n_2/(2e)$.
 
 \subsection{The factor forced by a common prime}
 Let $d\ge7$ be prime with $d\mid\gcd(M,N)$, and write
@@ -1868,98 +1871,397 @@ uncontrolled primes in $A$ remain the obstacle to fixing that support.
 \section{An order obstruction from power reciprocity}
 \label{sec:reciprocity}
 
-Keep $q\nmid M$, $n_1=\rho$ even, $E=\operatorname{lcm}(2,r)$ and
-$a=(2^E-1)/q^\rho$. Since $a\mid A$, an order
-$\operatorname{ord}_{\ell^f}(q)$ with $\ell^f\mid a$ cannot share a
-prime divisor with $E$. At a prime $\ell$, the $s^b$-th power-residue
-symbol detects such an obstruction when $s\mid E$ and $s^b\mid\ell-1$.
-It describes Frobenius in the Kummer extension obtained by adjoining
-an $s^b$-th root of $q$ to $\mathbb Q(\zeta_{s^b})$
-\cite[\S\S2,4]{StevenhagenKummer}.
+\subsection{The order test}
 
-\subsection{A product computable at q}
-
-Take $m=s^b\mid r$ with $s$ prime and put
+Work in the remaining case $q>3$, $A>1$ and $q\nmid M$. Keep
+$r=\operatorname{ord}_q(2)$, $\rho=v_q(2^r-1)=n_1$ even, and
+$E=\operatorname{lcm}(2,r)$. Then
 \[
-B=2^{E/m},\qquad
-H_s=\Phi_m(B)=\frac{2^E-1}{2^{E/s}-1},\qquad a_s=H_s/q^\rho.
+a=\frac{2^E-1}{q^\rho}\mid A,\qquad \gcd(E,N)=1.
 \]
-The denominator in the quotient for $H_s$ is prime to $q$, so
-$a_s\mid a$. In $K=\mathbb Q(\zeta_m)$, set $\beta=B-\zeta_m$.
-The norm of $\beta$ is $H_s$. Let $J$ be the ideal obtained from
-$(\beta)$ by removing the factors above $q$ and $s$.
-At every prime ideal $P\mid J$ above $\ell$, $\zeta_m$ reduces
-to $B$ and has order $m$. The residue field is $\mathbb F_\ell$.
-Thus $(q/J)_m\ne1$ forces $s\mid\operatorname{ord}_{\ell}(q)$
-for some $\ell\mid a_s$.
+Indeed, $r$ divides both $M$ and $q-1$, so
+$\gcd(M,N,q-1)=1$ from Section~\ref{sec:p-common-gap} gives
+$\gcd(r,N)=1$. Also $N$ is odd.
+Since $A2^{m_2}=q^N-1$, the order of $q$ modulo any prime power
+$\ell^f\mid a$ divides $N$. To exclude $q$ for all $M,N$, it is enough
+to find one such order with a prime divisor in common with $E$.
 
-In the remaining case, for odd $s\mid r$ we have $s\mid A$ and $s\nmid N$.
-Equation~\eqref{eq:valuation-coupling} gives
+Fix a prime power $m=s^b$ dividing $r$. If $\ell\mid a$ is prime and
+$m\mid\ell-1$, then
+\[
+q^{(\ell-1)/m}\not\equiv1\pmod\ell
+\quad\Longrightarrow\quad s\mid\operatorname{ord}_{\ell}(q).
+\]
+An order prime to $s$ would divide $(\ell-1)/m$, since we only
+removed factors of $s$ from $\ell-1$.
+
+For a solution, $q$ must therefore be an $m$-th power at each such
+prime $\ell$. The power-residue symbol records this condition as an
+$m$-th root of unity, with value $1$ when $q$ is a power. We choose a
+cyclotomic divisor of $2^E-1$ and multiply the symbols at its prime
+ideal factors away from $s$ and $q$, with multiplicity. If the
+product differs from $1$, at least one of those primes gives the
+required obstruction.
+
+The reciprocity law here is the product formula for local
+norm-residue symbols. It relates the product at the unknown factors
+to local calculations at the known prime $q$, once the contribution
+at $s$ is accounted for. This gives an existence test for the prime
+$\ell$ without first finding it. The aim is to force an obstruction
+uniformly for the remaining $q$, or to prove an effective bound on
+the exceptions to this test.
+
+\subsection{Choosing the cyclotomic factor}
+
+To select primes for the test, set $B=2^{E/m}$ and take the
+cyclotomic value
+\[
+H_s=\Phi_m(B)
+  =\frac{2^E-1}{2^{E/s}-1},
+\qquad a_s=\frac{H_s}{q^\rho}.
+\]
+Since $m\mid r$, the order of $B$ modulo $q$ is
+$r/\gcd(r,E/m)=m$. The equality uses $\gcd(m,E/r)=1$,
+as $E/r=2$ only when $r$ is odd.
+In particular, $2^{E/s}=B^{m/s}\not\equiv1\pmod q$. Thus $H_s$
+contains the full $q$-part of $2^E-1$ and $a_s\mid a$.
+
+Work in $K=\mathbb Q(\zeta_m)$ with $\zeta_m$ a primitive $m$-th
+root of unity. Its ring of integers is $\mathcal O_K=\mathbb Z[\zeta_m]$
+\cite[Chapter 2]{Washington}. Set $\beta=B-\zeta_m$, whose norm to
+$\mathbb Q$ is $H_s$. Let $P$ denote a nonzero prime ideal of
+$\mathcal O_K$. For nonzero $\alpha\in\mathcal O_K$, the valuation
+$v_P(\alpha)$ is the exponent of $P$ in the factorization of
+$(\alpha)$. In particular,
+\[
+(\beta)=\beta\mathcal O_K=\prod_{P\mid(\beta)}P^{v_P(\beta)},
+\qquad
+J=\prod_{\substack{P\mid(\beta)\\ P\nmid(sq)}}P^{v_P(\beta)}.
+\]
+Thus $J$ keeps the prime ideal factors of $(\beta)$ away from $s$
+and $q$, with their multiplicities. In terms of containment,
+$(\beta)\subseteq J$, and $J\subseteq P$ for each prime ideal $P\mid J$.
+
+Fix a prime ideal $P\mid J$ and let $\ell$ be the rational prime
+below it, so $P\cap\mathbb Z=\ell\mathbb Z$. Reduction at $P$
+is the quotient map $\mathcal O_K\to\mathcal O_K/P$.
+The quotient $\mathcal O_K/P$ is the residue field at $P$.
+It is a field because $P$ is maximal.
+Here $\beta\in P$, so $\zeta_m$ maps to $B\bmod\ell$. Since
+$\mathcal O_K=\mathbb Z[\zeta_m]$, the image is generated by
+$\mathbb F_\ell$ and this residue of $\zeta_m$, which already lies
+in $\mathbb F_\ell$. Hence
+\[
+\mathcal O_K/P\simeq\mathbb F_\ell.
+\]
+Since $\ell\nmid m$, the reduction of $\zeta_m$ still has order $m$.
+Indeed, $X^m-1$ has distinct roots modulo $\ell$, so its factor
+$\Phi_m(X)$ has no common root with any $\Phi_d(X)$ for a proper
+divisor $d$ of $m$. Therefore $B\bmod\ell$ has order $m$ and
+$m\mid\ell-1$.
+
+The $m$-th power-residue symbol $(q/P)_m$ is the root of unity
+that reduces to $q^{(\ell-1)/m}$ at $P$. Equivalently, it is the
+factor by which Frobenius multiplies an $m$-th root of $q$ in the
+Kummer extension of $K$ \cite[\S\S2,4]{StevenhagenKummer}.
+Multiplying with the multiplicities in $J$ gives
+\[
+(q/J)_m:=\prod_{P\mid J}(q/P)_m^{v_P(\beta)}.
+\]
+If $(q/J)_m\ne1$, some symbol $(q/P)_m\ne1$. The order test
+then gives $s\mid\operatorname{ord}_\ell(q)$ at its rational prime
+$\ell\mid a_s$.
+
+\subsection{Reciprocity and the local terms}
+
+Reciprocity expresses $(q/J)_m$ in terms of local symbols above
+$q$ and $s$ and at the archimedean places.
+In Sharifi's convention, the local norm-residue symbols
+$(\beta,q)_{m,v}$ have product $1$ over all places $v$ of $K$.
+At a prime ideal $P\mid J$ the local symbol is
+$(q/P)_m^{-v_P(\beta)}$. At the other finite places away from
+$sq$ it is $1$. Hence
+\[
+(q/J)_m =
+\biggl(\prod_{P\mid q}(\beta,q)_{m,P}\biggr)
+\biggl(\prod_{P\mid s}(\beta,q)_{m,P}\biggr)
+\biggl(\prod_{v\mid\infty}(\beta,q)_{m,v}\biggr).
+\]
+This is the product formula used in Sharifi's calculation with
+cyclotomic norms \cite[\S3, eq.~(5) and \S\S4,8]{SharifiCycl}.
+
+The archimedean factors are $1$. For $m=2$ this follows from $q>0$,
+and for $m>2$ all the archimedean places are complex. The
+congruences on $q$ also make the factors above $s$ equal $1$.
+
+\paragraph{Odd $s$.}
+Since $s\mid r\mid q-1$ and $s\nmid N$, the gap equations give
+$v_s(A)=v_s(q-1)>0$. By \eqref{eq:valuation-coupling},
 \[
 v_s(q-1)=v_s(2^{\operatorname{ord}_s(2)}-1)+v_s(M)
-  \ge 1+v_s(r).
+  \ge b+1.
 \]
-Hence $q$ is an $m$-th power in $\mathbb Q_s$ by the $s$-adic logarithm.
-For $s=2$, $q\equiv1\pmod8$ gives $r\mid(q-1)/2$, so
-$q\equiv1\pmod{2m}$. Write $q=u^{m/2}$ in $\mathbb Q_2$ with
-$u\in1+4\mathbb Z_2$, using the logarithm on $1+4\mathbb Z_2$.
-Adjoining an $m$-th root of $q$ to $K$ locally at $2$ amounts to
-adjoining $\sqrt u$, giving a trivial or unramified extension.
-Since $\beta$ is a unit there, the local symbol equals $1$.
-Together the congruences give $E\operatorname{rad}(r)\mid q-1$,
-where $\operatorname{rad}(r)$ is the product of the distinct primes dividing $r$.
+The $s$-adic logarithm sends $1+s\mathbb Z_s$ to $s\mathbb Z_s$
+and sends $q$ into $s^{b+1}\mathbb Z_s$. Dividing $\log q$ by
+$s^b$ gives the logarithm of an $m$-th root of $q$ in $\mathbb Q_s$.
+Thus the factors above $s$ equal $1$.
 
-With the symbol convention of Sharifi \cite[\S3, eq.~(5)]{SharifiCycl},
-global reciprocity expresses $(q/J)_m$ as the product of
-$(\beta,q)_m$ over the primes above $q$. The local contribution above
-$s$ is trivial by the preceding calculation, and for $m=2$ the real
-contribution is trivial by positivity. This adapts the norm and
-reciprocity calculation in Sharifi \cite[\S\S4,8]{SharifiCycl}.
+\paragraph{$s=2$.}
+Since $q\equiv1\pmod8$, we have $r\mid(q-1)/2$ by quadratic
+reciprocity, so $q\equiv1\pmod{2m}$. The logarithm on
+$1+4\mathbb Z_2$ gives $q=u^{m/2}$ for $u\in1+4\mathbb Z_2$.
+Adjoining an $m$-th root of $q$ over a completion of $K$ at $2$
+amounts to adjoining $\sqrt u$. Over $\mathbb Q_2$ this gives
+the trivial extension for $u\equiv1\pmod8$ and the unramified
+quadratic extension for $u\equiv5\pmod8$. The extension remains
+unramified after passing to the completion of $K$. Units are
+norms in an unramified extension, and $\beta=B-\zeta_m$ is a unit
+at $2$ because $B$ is even. Thus the factors above $2$ equal $1$.
 
-Reduce the resulting symbol modulo the prime where $\zeta_m$ maps
-to $B$. For $1<i<m$ with $\gcd(i,m)=1$, let $u_i i\equiv1\pmod m$.
-The result is
+The residue-symbol product has now reduced to
 \[
+(q/J)_m=\prod_{P\mid q}(\beta,q)_{m,P}.
+\]
+The congruences used at $s$, taken at the largest power $s^b\mid r$
+for every prime $s\mid r$, also give $E\operatorname{rad}(r)\mid q-1$.
+Here $\operatorname{rad}(r)$ is the product of the distinct primes
+dividing $r$.
+
+\subsection{Evaluating the product modulo q}
+
+The primitive $m$-th roots in $\mathbb F_q$ are the $B^i$ with
+$1\le i<m$ and $\gcd(i,m)=1$. Use these values of $i$ throughout
+this calculation. The prime ideals above $q$ are
+\[
+P_i=(q,\zeta_m-B^i)
+    =q\mathcal O_K+(\zeta_m-B^i)\mathcal O_K.
+\]
+Indeed, reducing $\mathcal O_K=\mathbb Z[\zeta_m]$ modulo $q$
+gives $\mathbb F_q[X]/(\Phi_m(X))$. The distinct linear factors
+$X-B^i$ give one copy of $\mathbb F_q$ each, with reduction
+$\zeta_m\mapsto B^i$ at $P_i$. Thus $\mathcal O_K/P_i\simeq
+\mathbb F_q$ and $(q)=\prod_i P_i$. In particular $v_{P_i}(q)=1$,
+so $q$ is a uniformizer at each $P_i$.
+
+\paragraph{The residues of the unit parts.}
+At $P_i$, the residue of $\beta$ is $B-B^i$. Among the primes
+above $q$, only $P_1$ divides $(\beta)$. Because its ideal norm
+is $q$, the norm identity $\operatorname{Norm}_{K/\mathbb Q}(\beta)
+=H_s$ gives $v_{P_1}(\beta)=v_q(H_s)=\rho$.
+
+In the completion at $P_i$, dividing $\beta$ by
+$q^{v_{P_i}(\beta)}$ leaves a unit. Let $U_i\in\mathbb F_q^\times$
+be its residue. For $i\ne1$ the valuation is zero, so $U_i=B-B^i$.
+At $P_1$, $U_1$ is the residue of $\beta/q^\rho$.
+
+To find $U_1$, divide the norm identity $H_s=\prod_i(B-\zeta_m^i)$
+by $q^\rho$ and reduce at $P_1$. This gives
+\[
+a_s=U_1\prod_{i\ne1}(B-B^i)\qquad\text{in }\mathbb F_q.
+\]
+The product on the right is $\Phi_m'(B)$, the formal derivative
+of $\Phi_m(X)$ evaluated at $B$. Indeed, over $\mathbb F_q$,
+$\Phi_m(X)=(X-B)\prod_{i\ne1}(X-B^i)$, so at $B$ only the term
+from differentiating $X-B$ survives. The factors $B-B^i$ are
+nonzero, and we obtain
+\[
+U_1=\frac{a_s}{\Phi_m'(B)}\qquad\text{in }\mathbb F_q.
+\]
+
+\paragraph{Multiplying the symbols.}
+At $P_i$ the tame formula reduces $(\beta,q)_{m,P_i}$ to
+$\bigl((-1)^{v_{P_i}(\beta)}U_i\bigr)^{(q-1)/m}$.
+The sign is $1$ since $v_{P_i}(\beta)$ is $0$ or the even $\rho$.
+To multiply these symbols in $\mathbb F_q$, use the same reduction
+for all of them. A symbol $\zeta_m^k$ gives $B^{ik}$ at $P_i$
+and $B^k$ at $P_1$. Thus raising the residue at $P_i$ to the
+inverse $u_i$ of $i$ modulo $m$ gives its residue at $P_1$.
+Use $u_1=1$. The reduction of $(q/J)_m$ at $P_1$ is therefore
+\begin{equation}\label{eq:reciprocity-test}
 T_m=
 \left(
 \frac{a_s}{\Phi'_m(B)}
-\prod_{\substack{1<i<m\\ \gcd(i,m)=1}} (B-B^i)^{u_i}
-\right)^{(q-1)/m}\pmod q.
-\]
-Indeed, at the prime above $q$ where $\zeta_m$ maps to $B$, $\beta$
-has valuation $\rho$ and $\beta/q^\rho$ reduces to
-$a_s/\Phi'_m(B)$, by dividing the norm by the other conjugate factors.
-The tame symbol uses this unit with sign $(-1)^\rho=1$.
-At the other primes the unit is $B-B^i$. Raising the corresponding
-residue symbol to $u_i$ expresses it in the common reduction
-$\zeta_m\mapsto B$. Thus every remaining solution must have $T_m=1$
-for all prime powers $m\mid r$.
+\prod_{\substack{1<i<m\\ \gcd(i,m)=1}}(B-B^i)^{u_i}
+\right)^{(q-1)/m}
+\quad\text{in }\mathbb F_q^\times.
+\end{equation}
+Every solution requires $T_m=1$ for each prime power $m\mid r$.
+This test uses $a_s$ only modulo $q$. Compute $\Phi_m(B)$ modulo
+$q^{\rho+1}$, then divide by $q^\rho$.
 
-For $m=2$ this requires $a_2$ to be a square modulo $q$.
-For $m=3$ it requires $a_3(2B+1)$ to be a cube modulo $q$.
-For example, $q=3511$ has $r=1755$ and $\rho=2$.
-Here $a_3(2B+1)\equiv-14\pmod q$ and $T_3=756$.
-This prime is already excluded by earlier congruences.
-The open question is whether the remaining hypotheses force some
-$T_m\ne1$, or an individual order obstruction when the symbols cancel.
+\subsection{The quadratic and cubic tests}
+
+If $2\mid r$, take $m=2$. The product in \eqref{eq:reciprocity-test} is empty
+and $\Phi'_2(B)=1$. The condition $T_2=1$ says that $a_2$ is a
+square modulo $q$.
+
+If $3\mid r$, take $m=3$. The two residues of $\zeta_3$ above $q$ are $B$ and $B^2$,
+with $u_2=2$. Since $B^2+B+1=0$ in $\mathbb F_q$,
+\[
+B-B^2=2B+1=\Phi'_3(B).
+\]
+The expression raised to $(q-1)/3$ in \eqref{eq:reciprocity-test}
+is therefore $a_3(2B+1)$. In a solution this must be a cube modulo $q$.
+
+This condition also restricts $h=M/E$. Since $a_3=a/(B-1)$ and
+$2B+1=B-B^2$, the cubic expression is $-Ba$ modulo $q$.
+The two gap equations give
+\[
+A=a\sum_{j=0}^{h-1}2^{jE}\equiv ah\pmod q,\qquad
+A2^{m_2}\equiv-1\pmod q.
+\]
+Thus $-Ba\equiv B2^{-m_2}h^{-1}\pmod q$.
+By \eqref{eq:cubic-return}, $2^{(q-1)/3}\equiv1\pmod q$, so
+$2$ is a cube modulo $q$, as are $B$ and $2^{m_2}$.
+Consequently, if $3\mid r$, then $h$ must be a cube modulo $q$.
+
+For a numerical check, take $q=3511$, which already fails
+the earlier congruences on $q$. It has $r=1755$, $\rho=2$ and
+$E=3510$. At $m=3$ the local calculation applies since
+$3511\equiv1\pmod9$. Using $B=2^{1170}$ gives
+\[
+B\equiv2754,\qquad
+a_3=\frac{B^2+B+1}{3511^2}\equiv2302\pmod{3511}.
+\]
+Thus $a_3(2B+1)\equiv-14$ and $T_3=(-14)^{1170}\equiv756\pmod{3511}$.
+The test therefore predicts a factor of $a_3$ at which $3511$ has
+order divisible by $3$. One such prime is $262657$.
+Indeed, $2$ has order $27$ there, so $B$ has order $3$ and
+$262657\mid a_3$. Directly, $3511^{87552}\equiv512\pmod{262657}$.
+
+The product can equal $1$ by cancellation. For $q=433$ and $m=8$,
+the symbols at $\ell=17,241,38737$ are $\zeta_8^6,\zeta_8^2,1$.
+Their product is $1$. The first two symbols each give an order
+obstruction. These primes occur in $\Phi_8(2)$, $\Phi_{24}(2)$
+and $\Phi_{72}(2)$, respectively. Keeping the relative norms
+of $2-\zeta_t$ for $t=8,24,72$ separate recovers the two nontrivial
+products. Use compatible roots $\zeta_t^{E/m}=\zeta_m$ to compare
+them with the grouped product. In general the roots of
+$X^{E/m}-\zeta_m$ that have order $t$ form the conjugates over
+$K$ of such a $\zeta_t$. Their factors in $B-\zeta_m$ give the
+relative norm from $\mathbb Q(\zeta_t)$ to $K$.
+
+The open step is to prove that some such product is nontrivial
+for every remaining $q$, or to control the primes for which all
+products equal $1$. At $\ell$, the $s^b$-th power-residue
+symbol is nontrivial precisely when
+$v_s(\operatorname{ord}_\ell(q))>v_s(\ell-1)-b$.
+For example, at $\ell=38737$ in the preceding calculation,
+$\operatorname{ord}_{38737}(433)=4842$. Its $2$-valuation is $1$,
+and $v_2(38737-1)=4$. The eighth-power symbol therefore equals $1$
+although the order is even. Keeping the factors separate resolves
+cancellation between them. This example exhibits a second reason
+for a product to equal $1$.
+
+\subsection{Restrictions on the multiplier h}
+\label{sec:reciprocity-h}
+
+Write $h=M/E$ and $c=m_2$. The cubic calculation is one instance
+of a general simplification. Since $B$ is a root of $\Phi_m$
+modulo $q$, formal differentiation of
+$X^m-1=(X^{m/s}-1)\Phi_m(X)$ gives
+\[
+(B^{m/s}-1)\Phi'_m(B)=mB^{-1}\qquad\text{in }\mathbb F_q.
+\]
+Together with $a_s=a/(B^{m/s}-1)$ and
+$a\equiv-(2^ch)^{-1}\pmod q$, this expresses the quantity inside
+the parentheses in \eqref{eq:reciprocity-test} as
+\[
+-\frac{B}{m\,2^c h}
+\prod_{\substack{1<i<m\\\gcd(i,m)=1}}(B-B^i)^{u_i}.
+\]
+Thus the grouped test prescribes a power-residue class for $h$
+given by a function of the root $B$ and the known $2^c$.
+
+For $m=2$ the expression is $(2^{c+1}h)^{-1}$. Since $2$ is
+a square modulo $q$, we obtain that $h$ is a square whenever
+$2\mid r$. For $m=4$, $B^2=-1$ and $u_3=3$, so the expression is
+$-2/(2^ch)$. Here $4\mid M$, hence $4\mid c$ by
+Lemma~\ref{lem:mod-five-split}. Also $-1$ is a fourth power since
+$q\equiv1\pmod8$. The quartic test is therefore equivalent to
+$2h$ being a fourth power modulo $q$.
+In particular, if $v_2(r)=v_2(q-1)-1$, then $4\mid r$ and $2$ is
+a square but not a fourth power. This excludes every $h$ which
+is a fourth power modulo $q$, including $h=1$.
+
+\paragraph{Recovering $h$ from $q$.}
+Put $Q=q^\rho$. Since $2^E\equiv1\pmod Q$, the geometric sum for
+$A/a$ is $h$ modulo $Q$. Lemma~\ref{lem:sharp-h} gives $N>\rho$,
+so the gap equation yields
+\[
+h\equiv-(2^ca)^{-1}\pmod Q,\qquad 1\le h<q^2\le Q.
+\]
+There is at most one possible $h$ for each $q$. Computing
+$2^E\bmod Q^2$ suffices to recover $a\bmod Q$ and hence this
+candidate. The independent bound $h<q^2$ in Lemma~\ref{lem:sharp-h}
+is what singles out one integer in the residue class. The bound
+\eqref{eq:number-of-returns} and its sharpening instead give
+lower bounds on $N$ for this $h$. If $h\ge2$, then
+$N>(2h-1)\rho\ge3\rho$, so the next
+necessary congruence is
+\[
+1+2^ca\left(h+Q a\binom h2\right)\equiv0\pmod{Q^2}.
+\]
+It follows by writing $2^E=1+Qa$ in the geometric sum and retaining
+the constant and linear terms in $Q$. If $h=1$, the corresponding
+test is $1+2^ca\equiv0\pmod{q^{\rho+1}}$.
+
+\paragraph{Recovering $N$ at the prime $2$.}
+Put $u=(q-1)/2^c$. Once $h$ is known, $M=hE$ is known, and the
+two gap equations give
+\[
+q^N\equiv 1-2^c q^{-\rho}\pmod{2^{M+c}}.
+\]
+Already modulo $2^{2c}$, expansion of $q^N=(1+2^cu)^N$ gives
+$Nu\equiv-1\pmod{2^c}$. In particular, $Nu+1\ge2^c$.
+Combining this with $N\log q<M\log2$ gives
+\[
+\frac{2^c-1}{u}\log q<hE\log2.
+\]
+For fixed odd $u$, this excludes large $c$, since the left
+side grows exponentially in $c$ and the logarithmic estimate
+bounds $M$ by a polynomial in $\log q$.
+
+More generally take $j=\lceil\log_2 M\rceil$. The order of $q$
+modulo $2^{c+j}$ is $2^j$ by lifting, and the subgroup generated
+by $q$ is the full subgroup congruent to $1$ modulo $2^c$.
+Thus the displayed congruence determines $N$ modulo $2^j$ by
+lifting one bit at a time. Since $0<N<M\le2^j$, there is at most
+one candidate $N$. It must satisfy both the height window and
+the congruence at $q$ that follows from the gap equation.
+
+The reconstruction of $h$ gives a different uniform question. How small
+can the least positive residue of $-(2^ca)^{-1}$ modulo $q^\rho$
+be when the next congruence and the power-residue conditions hold?
+The logarithmic bound \eqref{eq:baker-M} bounds $Eh$ by
+$O((\log q)^2(\log\log q)^2)$ as $q$ varies. Thus a lower bound
+on this residue beyond the logarithmic range would suffice.
+The residue tests and the lifted gap equation give conditions on
+the same candidate, and a proof excluding all such candidates
+remains open.
 
 \subsection{Computational supplements}
 
 \begin{itemize}
-\item \path{mersenne-tables.md} gives orders, the factors used in $D_E$,
+\item \path{md/mersenne-tables.md} gives orders, the factors used in $D_E$,
 and Frobenius in the cyclotomic fields for illustrative $q$.
-The GAP source is \path{mersenne_tables.g}. For the cyclotomic
+The GAP source is \path{scripts/mersenne_tables.g}. For the cyclotomic
 Frobenius formula see Milne \cite{MilneANT}.
-\item \path{order-obstructions.md} checks all prime choices with
-$E\le256$ using \path{check_order_obstruction.g} and
-\path{mersenne-factors-256.g}. There are 395 certificates among
+\item \path{md/order-obstructions.md} checks all prime choices with
+$E\le256$ using \path{scripts/check_order_obstruction.g} and
+\path{scripts/mersenne-factors-256.g}. There are 395 certificates among
 396 choices, with $q=3$, $a=1$ the exception. All have $\rho=1$.
-\item \path{cyclotomic-reciprocity.md} gives the derivation and examples.
-\path{cyclotomic-reciprocity-tables.md} compares the calculation at $q$
+\item \path{md/cyclotomic-reciprocity.md} gives the derivation and examples.
+\path{md/cyclotomic-reciprocity-tables.md} compares the calculation at $q$
 with direct symbols at the prime factors and includes examples
 with $\rho=2$. The PARI/GP functions are in
-\path{cyclotomic_reciprocity.gp}. Run
-\path{check_cyclotomic_reciprocity.gp} to regenerate the tables.
+\path{scripts/cyclotomic_reciprocity.gp}. The tables come from
+\path{scripts/check_cyclotomic_reciprocity.gp}.
+\item \path{scripts/inspect_reciprocity.sage} compares the grouped
+product with its separate cyclotomic factors and optionally checks
+the individual prime orders. It distinguishes cancellation from
+an order that the symbol misses. Its function \texttt{gap\_candidate}
+computes the candidate $h$ and checks the next gap congruence.
 \end{itemize}
 
 \section{Exercises and remaining questions}

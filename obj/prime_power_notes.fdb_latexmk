@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex obj/prime_power_notes"] 1795025947.11488 "obj/prime_power_notes.aux" "obj/prime_power_notes.bbl" "obj/prime_power_notes" 1795025947.67408 0
-  "./prime_power_notes.bib" 1795022883.10237 5821 d8c124e46e78a1dc41c29497db80c1f2 ""
+["bibtex obj/prime_power_notes"] 1795137771.15925 "obj/prime_power_notes.aux" "obj/prime_power_notes.bbl" "obj/prime_power_notes" 1795137771.77217 0
+  "./prime_power_notes.bib" 1795102741.31156 5821 d8c124e46e78a1dc41c29497db80c1f2 ""
   "/usr/local/texlive/2026/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "obj/prime_power_notes.aux" 1795025947.50009 14161 58536e34d62fb79e4dac628cc08aa318 "pdflatex"
+  "obj/prime_power_notes.aux" 1795137771.58697 15658 1c1f7b6484dec7b94bffea6bc71cc314 "pdflatex"
   (generated)
   "obj/prime_power_notes.bbl"
   "obj/prime_power_notes.blg"
   (rewritten before read)
-["pdflatex"] 1795025947.18076 "prime_power_notes.tex" "obj/prime_power_notes.pdf" "prime_power_notes" 1795025947.67423 0
+["pdflatex"] 1795137771.22978 "prime_power_notes.tex" "obj/prime_power_notes.pdf" "prime_power_notes" 1795137771.77234 0
   "/home/erpage159/.texlive2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1786665642 129113 155963928c6b12e44e870a1edf54731c ""
   "/home/erpage159/.texlive2026/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1788367071.7831 12644 efbc10444bb127d4b7521d722641fd1b ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -110,11 +110,11 @@
   "/usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf" 1782667392 43815 bcd8835056a2dfac260166a1c9541261 ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1788095136 3526181 a9ab2611bc2d157019a95ae62f987d7c ""
   "/usr/local/texlive/2026/texmf.cnf" 1788095110.25099 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "obj/prime_power_notes.aux" 1795025947.50009 14161 58536e34d62fb79e4dac628cc08aa318 "pdflatex"
-  "obj/prime_power_notes.bbl" 1795025947.17506 4285 fee010d8491f01719adfd79f4da4682d "bibtex obj/prime_power_notes"
-  "obj/prime_power_notes.out" 1795025947.50109 2782 81b1c824547af78aa79570f8dba03cb8 "pdflatex"
-  "obj/prime_power_notes.toc" 1795025947.50109 5272 e709e638f10f2c35ab1ac3e2ecfdcf49 "pdflatex"
-  "prime_power_notes.tex" 1795025319.33261 82998 971ae3f5bb758d552e2bc3e3a1b85e74 ""
+  "obj/prime_power_notes.aux" 1795137771.58697 15658 1c1f7b6484dec7b94bffea6bc71cc314 "pdflatex"
+  "obj/prime_power_notes.bbl" 1795137771.22395 4285 fee010d8491f01719adfd79f4da4682d "bibtex obj/prime_power_notes"
+  "obj/prime_power_notes.out" 1795137771.58797 2783 99cd27bca698f71754609cc8520b62cc "pdflatex"
+  "obj/prime_power_notes.toc" 1795137771.58797 6146 c67bcea83c09617fb5f5f9dadffb5cfa "pdflatex"
+  "prime_power_notes.tex" 1795137770.44392 95686 2fca8c227ccc762e01151e0e9fbcbda1 ""
   (generated)
   "obj/prime_power_notes.aux"
   "obj/prime_power_notes.log"
