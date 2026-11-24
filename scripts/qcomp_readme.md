@@ -157,8 +157,8 @@ to `reciprocity_summary` for the next comparison.
 From the repository root:
 
 ```sh
-g++ -O3 -std=c++17 -pthread scripts/scan_q_native.cpp -lflint -lgmpxx -lgmp -o /tmp/scan_q_native
-/tmp/scan_q_native 2038074743 12 > q-native-100m.csv
+make scan_q_native
+./build/bin/scan_q_native 2038074743 12 > q-native-100m.csv
 ```
 
 The numeric limit is inclusive. The scanner prints the prime count and
@@ -175,13 +175,128 @@ without the first six flags. Both modes compute the exact ρ on a hit.
 For q above the 32-bit range the square-modulus calculation uses GMP.
 
 ```sh
-/tmp/scan_q_native 100000000000 12 candidate > q-native-candidates-1e11.csv
-/tmp/scan_q_native 10000 1 wieferich > q-native-rho-controls.csv
+./build/bin/scan_q_native 100000000000 12 candidate > q-native-candidates-1e11.csv
+./build/bin/scan_q_native 10000 1 wieferich > q-native-rho-controls.csv
 ```
 
 The optional fourth argument sets the inclusive lower bound. To extend
 the completed scan through q = 10¹¹ without rechecking it:
 
 ```sh
-/tmp/scan_q_native 1000000000000 12 candidate 100000000001 > q-native-candidates-1e11-to-1e12.csv
+./build/bin/scan_q_native 1000000000000 12 candidate 100000000001 > q-native-candidates-1e11-to-1e12.csv
 ```
+
+## Scan the large-base exponent pairs
+
+Use the native build command above. Run from the repository root.
+
+```sh
+./build/bin/scan_q_native prefix 7 3300 3400 --compare > candidates.csv 2> comparison.log
+./build/bin/scan_q_native prefix 7 3321924 3321929 > million-digit-band.csv
+./build/bin/scan_q_native factor-candidates < candidates.csv > mersenne-factors.csv
+```
+
+Each run fixes the odd exponent n₂ ≥ 7. The two endpoints are inclusive
+values of j = floor(m₁/n₂). A forced odd q at position j has j+1 bits.
+The second command samples a narrow band near one million decimal digits.
+Leave stderr on the terminal to see the progress bar, or use
+`tail -f comparison.log` in another terminal.
+
+For m₁ = j n₂ + s, the scan takes one exact GMP integer root per reduced
+residue s to read the bits of 2^(s/n₂). It extends the prefix if the
+last run crosses the computed boundary. The default mode first looks for
+a single zero that excludes the whole band. A reported exclusion_zero
+is a fractional bit position, numbered from one. Otherwise the scan
+checks the individual runs. The required length is (N_min−1)j, where
+N_min is the least n₂−e with e positive and even, 2e < n₂, n₂−e ≥ 5,
+and gcd(n₂−e,6) = 1.
+
+With `--compare` the scan counts all odd forced bases with even m₁ and
+reports the longest run and its position within each mod 240 branch per
+s. Ties use the largest j. A count of zero means the branch had no
+positions. The passing branch requires M divisible by four and q ≡ 1
+modulo 240, or M ≡ 2 modulo four and q ≡ 97 or 193 modulo 240.
+
+Both modes write a candidate CSV row for every qualifying run, including
+controls that fail mod 240. The last three flags record the residue test,
+q² dividing 2^M−1, and an exact equality of the two power sums with
+admissible exponents. The exact check is run only on q² survivors.
+Primality of p and q requires separate verification.
+
+The factor command uses the candidate's M = m₁−m₂. It factors each
+distinct 2^M−1 once, verifies primality of the factors and checks the
+product with multiplicities. For even M it factors the two coprime
+halves separately. Each completed M is marked on stderr. Complete
+factorization of a million-digit Mersenne number may be computationally
+out of reach. You can select one exponent with `./build/bin/scan_q_native factor 60`.
+
+Prefix scans and both factor commands default to the detected logical CPU
+count (one if detection is unavailable). Use `--threads K` to limit
+concurrent jobs and their memory use. Each prefix worker holds its own
+root calculation. With n₂ = 7 there are six independent prefixes, so
+six workers cover that scan. An even M provides two independent factor
+jobs, and additional exponents can run alongside them. CSV rows arrive
+in worker completion order. Progress counts completed prefixes.
+
+```sh
+./build/bin/scan_q_native prefix 7 3321924 3321929 --compare --threads 6 > candidates.csv
+./build/bin/scan_q_native factor-candidates --threads 12 < candidates.csv > mersenne-factors.csv
+```
+
+For counts by residue class, run `./build/bin/scan_q_native 10000000000 24 branch`.
+The CSV counts primes passing the original cheap filters, then those also
+passing the branch condition. For q ≡ 1 mod 240 this requires 4 | c,
+where c = v₂(q−1). For q ≡ 97 or 193 it requires 2^(2u/3) ≡ 1 mod q,
+where u = (q−1)/2^c. Candidate mode now applies the branch condition
+before testing modulo q². Its stderr cheap count includes that condition.
+
+For class 1 modulo 240, `final_pass` also requires
+2^((q−1)/30) ≡ 1 modulo q. This combines the order conditions at 3
+and 5. The other two classes retain their `branch_pass` counts.
+Candidate mode applies this extra test before the square-modulus test.
+
+## Recover the residue of N modulo q−1
+
+From the project root run `pixi run sage`. To reproduce the saved comparison:
+
+```python
+load("scripts/inspect_reciprocity.sage")
+qs = set()
+for name in ("q-native-100m", "q-native-rho-controls", "q-native-candidates-1e11", "q-native-candidates-1e11-to-1e13"):
+    with open("data/" + name + ".csv") as stream:
+        qs.update(ZZ(row["q"]) for row in csv.DictReader(stream))
+rows = n_remainder_summary(sorted(qs), formal=True, orders=True, silent=True,
+                           csv_path="data/q-n-remainders.csv")
+```
+
+For one calculation use `n_remainder_window(54001, 2167200, 24079)`.
+The arguments are q, M, and a strict integer lower bound on N. The
+returned upper bound is inclusive. The first possible N above the lower
+bound is recorded only if it lies in the window. Successive values
+differ by q−1. Other conditions on N can eliminate further values.
+
+Without `formal=True` the summary skips the window for odd ρ. Formal
+rows use the least positive h residue for comparison. With `orders=True`
+it also computes the multiplicative order of 2 modulo the odd part u
+of q−1. The mandatory divisor of h is ord_u(2)/gcd(ord_u(2), E).
+The window test itself uses no order computation modulo u.
+
+## Reverse lift and interactive lab
+
+Start `pixi run jupyter lab labs/prime-power.ipynb` from the project
+root. Run Setup and then the section for the calculation of interest.
+The notebook includes the reverse and forward lifts, prime scans,
+comparison reports, reciprocity checks, Mersenne tables and Lua proofs.
+
+In Sage, after loading `scripts/inspect_reciprocity.sage`:
+
+```python
+rows = reverse_n_experiment(reverse_n_branch_primes(10^7), formal=True,
+                            csv_path="reverse-n.csv")
+trace = reverse_n_lift(54001, 2167200, 1, 24079, 137856, trace=True)
+```
+
+The trace stops at the first unique representative or empty interval.
+The real-window test checks its representative separately at the
+reported precision. first_failed_bit is numbered from 1, so a value
+of 9 denotes failure modulo 512. Formal odd-ρ rows are controls.

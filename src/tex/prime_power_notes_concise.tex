@@ -18,6 +18,9 @@ For a fixed prime $q$, can a prime $p>5$ have two partitions
 as $2^m+q^n$ with $m,n\ge1$? For $q=3$ the only example is
 $11=2^3+3=2+3^2$. The question for $q>3$ remains open.
 
+See \path{src/tex/prime_power_roadmap.tex} for the uniform bound on $N$,
+the reduction to one multiplier per $q$, and the outline for a Lean proof.
+
 \section{Subtracting the partitions}
 
 Since $p$ is odd, so is $q$. Write the two partitions as
@@ -128,6 +131,9 @@ The two larger terms in \eqref{eq:partitions} satisfy
 Using \eqref{eq:size} and $q^N\ge27$ gives
 $0<\Lambda<(27/26)q^{-N}$. Set $\lambda=\log q$ and
 $H_\lambda(x)=\max\{\log(x/\lambda)+0.38,10\}$.
+The use of a two-logarithm bound here was prompted by
+Miyazaki--Scott--Styer's treatment of exponential equations
+\cite[Proposition~6.1]{MSS}.
 Apply Laurent's bound \cite[Corollary~2, $(m,C_2)=(10,25.2)$]{Laurent}
 to the multiplicatively independent rational numbers $2,q$, taking
 both logarithmic height parameters equal to $\lambda$. Thus
@@ -169,7 +175,7 @@ if $L$ is divisible by $4$, $3$, or $5$, the order of $q$ modulo $5$,
 $7$, or $31$, respectively, must divide $1$, $1$, or $5$.
 The bases $5,7,31$ fail the initial conditions.
 
-The script \path{scripts/check_q_divides_gap.lua} checks these
+The script \path{scripts/exp-gcd/check_q_divides_gap.lua} checks these
 conditions with integer arithmetic. Of $4347$ primes passing the
 initial conditions, $4332$ fail $L<4\cdot10^6$, the next $5$ fail the
 valuation at $3$, and the tests modulo $5$, $7$, and $31$ remove the
@@ -241,7 +247,12 @@ The order condition follows because the order divides $N$.
 Both $a$ and $E$ are determined by $q$, so one failure of
 \eqref{eq:order-test} excludes that $q$ for all $M,N$.
 
-Power reciprocity can sometimes detect a failure without factoring $a$.
+Pomerance's \emph{Cyclotomic primes} \cite[\S2]{PomCycl} is the
+starting point for examining $2^E-1$ one cyclotomic factor at a
+time. A primitive prime divisor of $\Phi_d(2)$ has binary order
+$d$. The intrinsic prime, when present, has smaller order.
+The next calculation adapts Sharifi's use of power reciprocity
+on cyclotomic norms to detect failures without factoring $a$.
 Take a prime power $m=s^b$ dividing $r$ and put
 \[
 B=2^{E/m},\qquad

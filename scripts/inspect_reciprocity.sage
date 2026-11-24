@@ -406,6 +406,68 @@ def reciprocity_summary(qs, silent=False, csv_path=None, workers=1, batch_size=8
     return rows
 
 
+def _floor_power_log(q, M):
+    # The strict upper endpoint is nonintegral: q^k cannot equal 2^M.
+    precision = 96
+    while True:
+        I = RealIntervalField(precision)
+        endpoint = M * I(2).log() / I(q).log()
+        upper = ZZ(endpoint.upper().floor())
+        if upper == endpoint.lower().floor():
+            return upper
+        precision *= 2
+
+
+def n_remainder_window(q, M, lower):
+    """Intersect N modulo q-1 with lower < N < M log(2)/log(q), for odd q > 1."""
+    q, M, lower = map(ZZ, (q, M, lower))
+    if q <= 1 or q.is_even() or M <= 0 or lower < 0:
+        raise ValueError("Use odd q > 1, M > 0 and a nonnegative integer lower bound.")
+    u = (q-1).odd_part()
+    z = (power_mod(2, M, u*(q-1)) - 1) % (u*(q-1))
+    upper = _floor_power_log(q, M)
+    result = dict(u=u, z=z, lower=lower, upper=upper, count=0)
+    if z % u:
+        return dict(result, status="u does not divide")
+    R = z//u or q-1
+    first = lower + 1 + (R-lower-1) % (q-1)
+    count = max(0, 1 + (upper-first)//(q-1))
+    return dict(result, R=R, first=first if count else None, count=count,
+                status="in window" if count else "outside window")
+
+
+def n_remainder_summary(qs, formal=False, silent=False, csv_path=None, orders=False):
+    """One row per prime. formal=True also evaluates the least h residue for odd rho."""
+    columns = ("q", "rho", "E", "h", "M", "input_status", "u", "z", "R",
+               "lower", "upper", "first", "count", "status")
+    if orders:
+        columns += ("ord_u_2", "required_h_divisor", "N_lower_from_u")
+    rows = []
+    for q in _prime_list(qs):
+        data = gap_candidate(q)
+        E, rho = data["E"], data["rho"]
+        row = dict(q=q, E=E, rho=rho)
+        if rho % 2:
+            row["input_status"] = "odd rho"
+            if formal:
+                h, _, _ = _h_residue(q, E, rho, data["m2"])
+                row.update(h=h, M=h*E, input_status="formal odd rho")
+                row.update(n_remainder_window(q, h*E, (2*h-1)*rho))
+        else:
+            row.update(h=data["h"], M=data["M"],
+                       input_status="fails prior checks" if data["prior_failures"] else "passes prior checks")
+            row.update(data["n_window"])
+        if orders:
+            u = (q-1).odd_part()
+            order = ZZ(1) if u == 1 else Zmod(u)(2).multiplicative_order()
+            divisor = order // gcd(order, E)
+            row.update(ord_u_2=order, required_h_divisor=divisor,
+                       N_lower_from_u=(2*divisor-1)*rho)
+        rows.append(row)
+    _write_rows(columns, [[row.get(k) for k in columns] for row in rows], silent, csv_path)
+    return rows
+
+
 def gap_candidate(q, exact_bits=0):
     """Recover h=M/E modulo q^rho and check one higher congruence.
 
@@ -457,6 +519,11 @@ def gap_candidate(q, exact_bits=0):
     result.update(next_modulus=modulus, gap_residue=residue)
     if residue:
         failures.append(f"q^N would not be 0 modulo q^{digits}")
+    result["prior_failures"] = list(failures)
+    window = n_remainder_window(q, M, (2*h-1)*rho)
+    result["n_window"] = window
+    if window["count"] == 0:
+        failures.append("N remainder: " + window["status"])
     result["failures"] = failures
     if exact_bits and h*E + c + 1 <= exact_bits:
         gap = 1 + 2^c * ((2^(h*E) - 1) // Q)
@@ -464,3 +531,129 @@ def gap_candidate(q, exact_bits=0):
         result["exact_gap"] = f"q^{N}" if gap == q^N else "not a power of q"
         result["N"] = N if gap == q^N else None
     return result
+
+
+def reverse_n_lift(q, M, e, lower, upper, remainder=None, trace=False):
+    """Lift odd N in lower < N <= upper. Optionally impose N mod (q-1).
+    Return after the interval empties or holds a unique representative.
+    A singleton still requires checking the equation at higher precision.
+    """
+    q, M, e, lower, upper = map(ZZ, (q, M, e, lower, upper))
+    if q <= 1 or q.is_even() or min(M,e) < 1 or lower < 0:
+        raise ValueError("Require odd q > 1, positive M and e, and lower >= 0.")
+    c = (q-1).valuation(2)
+    bits = (q^2-1).valuation(2)
+    stride, residue = ZZ(2), ZZ(1)
+    steps = []
+    while True:
+        modulus = 1 << bits
+        # Keep the 2^M term even if the requested precision exceeds M+c.
+        target = (1 + (1 << c)*(power_mod(2, M, modulus)-1)
+                  * inverse_mod(power_mod(q, e, modulus), modulus)) % modulus
+        if power_mod(q, residue, modulus) != target:
+            if stride == 2:
+                return dict(status="no odd exponent", bits=bits, N=None, steps=steps)
+            residue += stride//2
+        period, representative = stride, residue
+        if remainder is not None:
+            common = gcd(period, q-1)
+            if (representative-remainder) % common:
+                return dict(status="incompatible residues", bits=bits, N=None, steps=steps)
+            representative = crt(representative, ZZ(remainder), period, q-1)
+            period = lcm(period, q-1)
+        first = lower+1 + (representative-lower-1) % period
+        count = max(0, 1 + (upper-first)//period)
+        if trace:
+            steps.append(dict(bits=bits, N_mod_2power=residue, stride=stride,
+                              combined_period=period, first=first, count=count))
+        if count <= 1:
+            return dict(status="singleton" if count else "empty", bits=bits,
+                        N=first if count else None, steps=steps)
+        bits += 1
+        stride *= 2
+
+
+def reverse_n_branch_primes(limit):
+    """Primes through limit passing the native branch tests preceding rho."""
+    for q in Primes():
+        if q > limit:
+            break
+        residue = q % 240
+        if residue not in (1,97,193):
+            continue
+        c = (q-1).valuation(2)
+        if c % 2 or (residue == 1 and c % 4):
+            continue
+        exponent = (q-1)//30 if residue == 1 else 2*(q-1).odd_part()//3
+        if power_mod(2,exponent,q)==1:
+            yield q
+
+
+def reverse_n_case(q, M, e, lower):
+    """Compare each restriction on the same supplied M and e."""
+    q, M, e, lower = map(ZZ,(q,M,e,lower))
+    window = n_remainder_window(q,M,lower)
+    c = (q-1).valuation(2)
+    upper = window["upper"]
+    lift = reverse_n_lift(q,M,e,lower,upper)
+    # 2^(M+c) < q^(N+e) < 2^(M+c+1), hence at most one N.
+    real_lower = max(lower, _floor_power_log(q,M+c)-e)
+    real_upper = min(upper, _floor_power_log(q,M+c+1)-e)
+    real_N = real_upper if real_upper>real_lower else None
+    result = dict(q=q,M=M,e=e,lower=lower,upper=upper,N_real=real_N,
+                  N_mod_q_minus_one=window.get("R"),remainder_count=window["count"],
+                  lift_bits=lift["bits"],lift_first_unique=lift["N"])
+    # Test the real candidate at log-sized precision even when the window
+    # is already a singleton. No integer with M+c bits is constructed.
+    if real_N is not None:
+        bits = min(M+c, max(1,(upper-lower).nbits())+(q^2-1).valuation(2))
+        mod = 1 << bits
+        diff = power_mod(q,e,mod)*(power_mod(q,real_N,mod)-1) + (1<<c)
+        error = (diff-power_mod(2,M+c,mod)) % mod
+        result["real_admissible_gap"] = real_N >= 5 and gcd(real_N,6)==1
+        result["real_passes_linear"] = (real_N*window["u"]+1) % (1<<min(c,M)) == 0
+        result["real_test_bits"] = bits
+        result["real_passes_2"] = error == 0
+        if error:
+            result["first_failed_bit"] = error.valuation(2)+1
+        result["real_passes_q_minus_one"] = ("R" in window and
+                                              (real_N-window["R"])%(q-1)==0)
+    if window["count"]:
+        joint = reverse_n_lift(q,M,e,lower,upper,window["R"])
+        result.update(joint_bits=joint["bits"],joint_first_unique=joint["N"])
+    return result
+
+
+def reverse_n_experiment(qs, formal=False, csv_path=None):
+    """Use reconstructed h; odd-rho controls require formal=True."""
+    rows = []
+    for source in n_remainder_summary(qs, formal=formal, silent=True):
+        row = {k:source[k] for k in ("q","rho","input_status")}
+        if "M" in source:
+            row.update(reverse_n_case(row["q"],source["M"],row["rho"],source["lower"]))
+        rows.append(row)
+    if csv_path is not None:
+        columns = list(dict.fromkeys(k for row in rows for k in row))
+        _write_rows(columns, [[row.get(k) for k in columns] for row in rows],True,csv_path)
+    return rows
+
+
+def reverse_n_even_controls(limit=10^6, max_h=32, csv_path=None):
+    """Set e=2 and vary h, relaxing e=rho and the reconstruction of h."""
+    rows = []
+    for q in reverse_n_branch_primes(limit):
+        E = lcm(2, Zmod(q)(2).multiplicative_order())
+        c = (q-1).valuation(2)
+        for h in range(1,max_h+1):
+            M = h*E
+            if (M % 4 == 0) != (q % 5 == 1):
+                continue
+            if M % 4 == 2 and (c+2)%4 != 2:
+                continue
+            row = reverse_n_case(q,M,2,(2*h-1)*2)
+            row.update(E=E,h=h,input_status="imposed e=2 and trial h")
+            rows.append(row)
+    if csv_path is not None:
+        columns = list(dict.fromkeys(k for row in rows for k in row))
+        _write_rows(columns, [[row.get(k) for k in columns] for row in rows],True,csv_path)
+    return rows

@@ -1,3 +1,17 @@
 # pixi environments
 .pixi/*
 !.pixi/config.toml
+
+# Local research files
+/data/
+/chat/
+
+# Build products
+/build/
+
+# SyncTeX output
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+docs/ref

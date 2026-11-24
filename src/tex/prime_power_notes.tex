@@ -39,7 +39,14 @@ $\rho=v_q(2^r-1)$. Lifting gives $n_1=\rho+v_q(M)$.
 
 The two large powers yield
 $0<n_2\log q-m_1\log 2<(27/26)q^{-N}$.
-Laurent's lower bound gives an effective bound on $M$ for fixed $q$.
+The fixed-$q$ estimate bounds $M$. Keeping the two logarithmic heights
+separate also gives the uniform bound $N\le2519$ in the remaining
+case (Lemma~\ref{lem:uniform-N}). This leaves finitely many
+dyadic approximation problems; Roth's theorem gives finiteness
+over all $q$. For bounded $m_2$, Schinzel--Tijdeman gives an
+effective bound on $q$.
+Lemma~\ref{lem:odd-gap-part} excludes $M=2^a$ and $M=3\cdot2^a$
+for every $a$ by computing the odd part of $q-1$ modulo $1024$.
 If $q\mid M$, then $qr\mid M$, giving absolute bounds $q<10^6$
 and $M<4\cdot10^6$. The finite check in
 Section~\ref{sec:q-divides-exclusion} excludes this branch.
@@ -47,7 +54,7 @@ Section~\ref{sec:q-divides-exclusion} excludes this branch.
 It remains to consider $q\nmid M$ and $n_1=\rho\ge2$ even.
 The modulo-$5$ argument gives $q\equiv1\pmod{48}$
 (Lemma~\ref{lem:q-one-mod-eight}). The size and residue arguments
-in Section~\ref{sec:additional-returns} give $\gcd(M,N)=1$ for $N<49$.
+in Section~\ref{sec:additional-returns} give $7\nmid\gcd(M,N)$ and $\gcd(M,N)=1$ for $N<65$.
 With $E=\operatorname{lcm}(2,r)$, we have
 \[
 E\mid M,\qquad \gcd(E,N)=1,\qquad
@@ -791,8 +798,9 @@ each other; the gap powers need not.
 
 \subsection{\texorpdfstring{An effective bound for fixed $q$}{An effective bound for fixed q}}
 
-Laurent's estimate \cite[Corollary 2]{Laurent}, quoted in Miyazaki--Scott--Styer
-\cite{MSS} (\texttt{prop-comp} in the local source), gives
+Miyazaki--Scott--Styer \cite[Proposition~6.1]{MSS}
+(\texttt{prop-comp} in the local source) prompted the use of
+Laurent's estimate here. Laurent \cite[Corollary~2]{Laurent} gives
 \[
 \log|b_2\log\alpha_2-b_1\log\alpha_1|
 >-25.2H_1H_2\bigl(\max\{\log b'+0.38,10\}\bigr)^2,
@@ -804,8 +812,8 @@ The bases are multiplicatively independent because they are distinct primes.
 For a conservative application choose $H_1=H_2=\log q>1$;
 these dominate both rational heights, both logarithms, and $1$.
 This choice also avoids any issue with the mismatched index in the height
-condition printed in the local copy. Sharper admissible heights could
-improve the constants, but are not needed for the deduction below.
+condition printed in the local copy. The asymmetric heights in Lemma~\ref{lem:uniform-N} give an absolute
+bound on $N$. We keep this weaker estimate for the earlier finite check.
 
 Put $\lambda=\log q$ and
 \[
@@ -1399,16 +1407,89 @@ q^{N+e}>2^{c+hE}\ge2^c(Q-1)^{2h}>Q^{2h}.
 Thus $(2h-1)e<N$. Now use $e\ge2$ and $g\mid h$.
 \end{proof}
 
-For $N=49$, a nontrivial common divisor would have to be $g=7$.
-The modulo-$7$ table and the size bounds give
+\subsection{A uniform bound on the odd gap}
+\begin{lemma}\label{lem:uniform-N}
+In the remaining case $N\le2519$, $n_2\le5037$, $h\le630$, and
+$M<5037\log_2 q$.
+\end{lemma}
+\begin{proof}
+Use Laurent's Corollary~2 with $D=1$, $m=10$, $C_2=25.2$.
+Its hypothesis is
+$H_i=\log A_i\ge\max\{\mathrm h(\alpha_i),|\log\alpha_i|,1\}$
+for each $i$ separately \cite[p.~328]{Laurent}. For
+$(\alpha_1,\alpha_2)=(2,q)$ take $H_1=1$ and $H_2=\log q$.
+The bases are multiplicatively independent. Since
+$2^{m_1}<q^{n_2}$ and $n_2=N+\rho<2N$ by Lemma~\ref{lem:sharp-h},
 \[
-n_1=2,\qquad M=7E,\qquad
-q\equiv5\pmod7,\qquad m_2\equiv4\pmod{12},\qquad M\equiv4\pmod6.
+ b'=\frac{m_1}{\log q}+n_2
+ <(1+1/\log2)n_2<5N.
 \]
-Here $(2g-1)n_1<49$ forces $n_1=2$, and $7\mid h<51/4$
-forces $h=7$. The congruence on $m_2$ follows by combining
-$m_2\equiv4\pmod6$ with Lemma~\ref{lem:mod-five-split}.
-These restrictions have not yet excluded the family $N=49$, $g=7$.
+Applying the corollary to $n_2\log q-m_1\log2$, then
+\eqref{eq:lambda-upper}, and dividing by $\log q$ gives
+\[
+ N <25.2\max\{10,\log(5N)+0.38\}^2+1.
+\]
+The function $(x-1)/\max\{10,\log(5x)+0.38\}^2$ is increasing
+for $x\ge2521$. On the logarithmic branch this follows from
+$\log(5x)+0.38>2(1-1/x)$. At $x=2521$ the maximum is $10$
+and the ratio is $25.2$. Hence $N<2521$. Now $N$ is odd,
+$\rho<N$, and $h<(N+2)/4$. The bound on $M$ follows from
+$M<m_1<n_2\log_2q$.
+\end{proof}
+
+\paragraph{Finiteness as $q$ varies.}
+Put $n=n_2$ and write $m_1=jn+s$, $0\le s<n$. Then
+$\alpha=2^{s/n}$, $y=2^j$ and $x=y\alpha$ satisfy
+\[
+ 0<q^n-x^n=q^\rho-2^c<q^\rho,
+ \qquad 0<q-x<q^{1-N}<1.
+\]
+Indeed the quotient of $q^n-x^n$ by $q-x$ exceeds $q^{n-1}$.
+Thus $s\ne0$, and $\alpha$ is irrational by its $2$-valuation
+(or by taking the $n$th power of a rational in lowest terms).
+As $q>y$ this gives
+\[
+ 0<q/y-\alpha<y^{-N}.
+\]
+The fractions are reduced. There are only finitely many $(n,s)$
+by Lemma~\ref{lem:uniform-N}, and $N\ge5$. Roth's theorem
+\cite{Roth1955} gives finitely many such fractions for each
+$\alpha$ (the case $y=1$ is immediate from $q-x<1$).
+Hence the remaining system has finitely many solutions over all $q$.
+This proof supplies no computable last denominator. An effective
+inequality $|\alpha-q/y|>C y^{-\mu}$ with explicit $C>0$ and
+$\mu<N$ would give $y<C^{-1/(N-\mu)}$ for that exponent family.
+
+\begin{lemma}\label{lem:cubic-large-exponent}
+If $3\mid n_2$, then $n_2<6\rho$, $h\le2$, and $\gcd(M,N)=1$.
+Consequently $7\nmid\gcd(M,N)$ for all remaining solutions.
+\end{lemma}
+\begin{proof}
+Write $n_2=3k$, $Y=q^k$, $m_1=3j+s$ and $X=2^{m_1/3}$.
+Then $0<Y-X<q^\rho/Y^2$. Since $\rho<n_2/2$,
+if $s=0$ the distinct integers $Y,X$ would give
+$Y^3-X^3>Y^2=q^{2k}>q^\rho$.
+Write $T=2^j$ and $\theta=\sqrt[3]2$. For $s=1$, apply Bennett's
+$|\theta-P/D|>1/(4D^{5/2})$ \cite[eq.~(4)]{BennettCubic}
+to $P/D=Y/T$. This gives
+$q^\rho>Y^2/(4T^{3/2})>Y^{1/2}/4$.
+For $s=2$, use $P/D=2T/Y$ and $\theta X=2T$. Then
+$0<\theta-2T/Y<\theta q^\rho/Y^3$, so
+$q^\rho>Y^{1/2}/(4\theta)$.
+In either case $q^{k/2-\rho}<4\theta<\sqrt{97}\le\sqrt q$.
+Thus $k\le2\rho$ and, since $k$ is odd, $k<2\rho$.
+Now $2h\rho<n_2$ gives $h<3$. Since $g\mid h$ and $g$ is odd,
+$g=1$. Finally the modulo-$7$ table above forces $3\mid n_2$
+whenever $7\mid g$.
+\end{proof}
+In particular $N<65$ implies $g=1$. Otherwise $N\ge5g$ and all
+prime factors of $g$ are at least $11$. Below $65$ this leaves
+$g=11$ and $N=55$, for which $N=5g$ gives $\rho=2$ and $n_2=57$,
+contrary to Lemma~\ref{lem:cubic-large-exponent}. More generally
+$N=5g$, $g>1$, requires $g\equiv1\pmod3$, since $n_2=5g+2$.
+Also $g\le\lfloor2519/5\rfloor=503$. Since $11^3>503$, a
+nontrivial $g$ is a prime or a product of two primes counted
+with multiplicity.
 
 \begin{lemma}\label{lem:aurifeuillean-height}
 Suppose $r\equiv4\pmod8$. If
@@ -1416,8 +1497,7 @@ Suppose $r\equiv4\pmod8$. If
 \frac{8h}{q^{n_1/2}-1}\le m_2\log2,
 \]
 then $(4h-1)n_1<N$. The hypothesis holds whenever $h\le32$.
-Consequently the noncoprime $N=49$ family requires
-$r\not\equiv4\pmod8$.
+
 \end{lemma}
 \begin{proof}
 Write $r=8a+4$. Since $q^{n_1}\mid2^r-1$ and
@@ -1445,11 +1525,12 @@ q^{N+e}>2^{c+hr}
 \]
 For $h\le32$, use $q\ge97$, $e\ge2$, $c\ge4$:
 $8h/(q^{e/2}-1)\le8/3<4\log2$.
-For $N=49$ we have $h=7$, $e=2$, which would require $54<49$.
+
 \end{proof}
-This uses the Aurifeuillean identity before factoring its integer
-values. Its relation to grouping roots of unity is developed in
-Brent \cite[\S\S2--3]{Brent}.
+Pomerance \cite[\S2, (1)]{PomCycl} records the corresponding
+Aurifeuillean factorization for $\Phi_r(2)$ when $r\equiv4\pmod8$.
+Brent \cite[\S\S2--3]{Brent} develops its relation to grouping
+roots of unity.
 
 For a fixed prime $d\mid g$, retain the even values $e=n_1$ and
 multiples $h$ of $d$ satisfying $(2h-1)e<N$.
@@ -1474,7 +1555,8 @@ N&d&n_1&h&q\bmod d\\\hline
 121&11&2&11,22&6
 \end{array}
 \]
-These are the survivors of this residue test, not asserted solutions.
+These rows record the residue test alone. Lemma~\ref{lem:cubic-large-exponent}
+now excludes all the rows with $d=7$ and the row $N=55$, $d=11$.
 For $N=5d$, the same test proves coprimality for
 \[
 d\in\{7,17,29,41,43,73,89,109,113\}.
@@ -1506,7 +1588,7 @@ If $\gcd(j,N)=1$, then
 Indeed, $\ell\mid A$ gives $\operatorname{ord}_\ell(q)\mid N$,
 while the order also divides $\ell-1=jM$. Coprimality with $j$
 forces it to divide $M$, and $1<q<\ell$ excludes order $1$.
-Thus such a factor contradicts $N<49$. A multiplier $j$ supported
+Thus such a factor contradicts $N<65$. A multiplier $j$ supported
 on $2,3$ automatically passes the coprimality test; if $4\mid M$,
 then $5\nmid N$, so factors of $5$ in $j$ are allowed as well.
 The missing general step is to force a primitive factor with this
@@ -1542,10 +1624,7 @@ Each such $\ell$ divides $q-1$, and lifting gives
 \boxed{D_E\mid uN.}
 \]
 Thus a lower bound $D_E>uN$ would exclude that family without
-first proving the gaps coprime. In the surviving $N=49$ case,
-$3\nmid E$, so $7\nmid2^E-1$. Here $D_E$ is exactly the part
-supported on primes $\ell\not\equiv1\pmod7$, after removing $q^2$,
-and the stronger conclusion is $D_E\mid u$.
+first proving the gaps coprime.
 
 For $j=2$, necessarily $4\mid M$: otherwise $\ell=2M+1\equiv5\pmod8$
 and $2^M\equiv-1\pmod\ell$.
@@ -2180,9 +2259,138 @@ $-2/(2^ch)$. Here $4\mid M$, hence $4\mid c$ by
 Lemma~\ref{lem:mod-five-split}. Also $-1$ is a fourth power since
 $q\equiv1\pmod8$. The quartic test is therefore equivalent to
 $2h$ being a fourth power modulo $q$.
-In particular, if $v_2(r)=v_2(q-1)-1$, then $4\mid r$ and $2$ is
-a square but not a fourth power. This excludes every $h$ which
-is a fourth power modulo $q$, including $h=1$.
+
+\paragraph{Quadratic reciprocity on divisors of $A$.}
+Every positive divisor of $A$ is a square modulo $q$.
+Indeed, for each prime $\ell\mid A$, the order of $q$ modulo $\ell$
+divides the odd integer $N$. Thus $(q/\ell)=1$, and
+$(\ell/q)=1$ since $q\equiv1\pmod4$. This also gives $h$ square
+modulo $q$ for odd $r$: apply it to $a\mid A$ and use
+$2^cah\equiv-1\pmod q$.
+
+In fact $2$ is a fourth power modulo $q$. If $4\nmid r$, then
+$r\mid(q-1)/4$ since $16\mid q-1$. Otherwise put $x=2^{r/4}$.
+Its residue $i$ has order four. The positive integer $x+1$ divides
+$2^r-1$ and is prime to $q$, so $x+1\mid A$. Hence $1+i$ is a
+square. Also $i$ is a fourth power since $16\mid q-1$. The identity
+$(1+i)^2=2i$ gives the assertion. Consequently
+\[
+ v_2(r)\le c-2,\qquad 4\mid r\ \Longrightarrow h\in(\mathbb F_q^\times)^4 .
+\]
+The second assertion uses the preceding quartic test on $2h$.
+
+At $8\mid r$ the grouped test goes one step further. For $m=8$
+put $i=B^2$, so $B^4=-1$. The inverse residues of $1,3,5,7$
+are themselves modulo eight. Cancelling the derivative in
+\eqref{eq:reciprocity-test}, the element tested for an eighth power is
+\[
+ \frac{a}{B^4-1}(B-B^3)^2(B-B^5)^4(B-B^7)^6
+      =-8a(1-i)^8 .
+\]
+Here $1+i=i(1-i)$. Using $2^cah=-1$ and $4\mid c$, this
+condition is equivalent to $2h$ being an eighth power: the quotient
+$2^{c-4}$ is an eighth power since $2$ is a square.
+Thus if $8\mid r$ and $v_2(r)=c-2$, an eighth-power multiplier
+(in particular $h=1$) is excluded. In this case $2$ is a fourth
+power and has no eighth root modulo $q$.
+
+\paragraph{An odd conductor and the two factors of its norm.}
+Let $m=s^b\mid r$ with $s$ odd, $D=2^{E/(2m)}$, and $B=D^2$.
+Choose $C=D$ or $-D$ so its residue $z$ has order $m$ modulo $q$:
+$D^2$ has order $m$ and $m$ is odd. Then $z^2=B$. The factorization
+\[
+ B-\zeta_m^2=(C-\zeta_m)(C+\zeta_m)
+\]
+takes place over $\mathbb Q(\zeta_m)$. At the prime given by
+$\zeta_m\mapsto z$, the first factor vanishes and the second is a unit.
+In fact $C+\zeta_m$ is a unit at \emph{every} prime above $q$, since
+$-z$ has order $2m$. Its norm $\Phi_m(-C)$ divides
+$C^{2m}-1=2^E-1$, hence divides $a$.
+
+Apply the product formula of Section~\ref{sec:reciprocity} to
+$C+\zeta_m$. The local symbol at $s$ is trivial since $q$ is an
+$m$-th power in $\mathbb Q_s$. Away from $sq$, the primes dividing
+the element have residue field $\mathbb F_\ell$ by reduction
+$\zeta_m\mapsto-C$. The order of $q$ there divides $N$, prime to
+$s$, so their symbols are trivial as well. At the primes above $q$
+the unit residues are $z+z^i$. Transporting all symbols to the
+embedding $\zeta_m\mapsto z$ gives the necessary condition
+\begin{equation}\label{eq:plus-factor-symbol}
+ \prod_{i\in(\mathbb Z/m)^\times}(z+z^i)^{u_i}
+       \in (\mathbb F_q^\times)^m,\qquad u_i i\equiv1\pmod m .
+\end{equation}
+This is a separate-factor test of the type above. This particular
+factor has no $q$-adic unit part involving $a$ or $h$.
+
+\begin{lemma}\label{lem:fifth-multiplier}
+Suppose $5\mid r$. With $F_0=0$, $F_1=1$ and
+$F_{k+2}=F_{k+1}+F_k$, one has
+\[
+       q\mid F_{(q-1)/5},\qquad h\in(\mathbb F_q^\times)^5.
+\]
+\end{lemma}
+\begin{proof}
+Use $m=5$ above. Both $2$ and $z$ are fifth powers modulo $q$:
+$r\mid(q-1)/5$ by \eqref{eq:ordinary-q-minus-one}, and $25\mid q-1$.
+The inverse exponents at $i=1,2,3,4$ are $1,3,2,4$. Thus the
+product in \eqref{eq:plus-factor-symbol} equals
+\[
+ 2(1+z)^3(1+z^2)^2(1+z^3)^4
+   = -2z(1+z)^2(1+z^2)^5 .
+\]
+Here $1+z^3=z^3(1+z^2)$ and $(1+z)(1+z^2)=-z^4$.
+Consequently $1+z$ is a fifth power, and so is $1+B=1+z^2$.
+
+Put $w=-z^2(1+z)$. Then $w^2=w+1$ and its conjugate root is
+$-1/w$. For $t=(q-1)/5$, which is even,
+\[
+ F_t=0\pmod q\quad\Longleftrightarrow\quad w^{2t}=1
+ \quad\Longleftrightarrow\quad w^t=1 .
+\]
+Indeed the two roots are distinct and $w^t$ has order dividing $5$.
+This gives the Fibonacci criterion, equivalent to $1+z$ being a
+fifth power.
+
+Finally, write the expression inside the parentheses of
+\eqref{eq:reciprocity-test} as
+$a_5\prod_{i\ne1}(B-B^i)^{u_i-1}$, where $a_5=a/(B-1)$.
+Using $1-B^3=-B^3(1-B^2)$ gives exactly
+\[
+ \frac{a}{B-1}(B-B^2)^2(B-B^3)(B-B^4)^3
+   = a\,\frac{(1-B^2)^5}{1+B}.
+\]
+Its being a fifth power now says that $a$ is a fifth power. Since
+$2^cah=-1$ in $\mathbb F_q$, so is $h$.
+\end{proof}
+
+At conductor five the two tests together are equivalent to the two
+conditions in Lemma~\ref{lem:fifth-multiplier}. Failure of the
+Fibonacci condition excludes every $h$. When it holds, $h=1$
+satisfies both tests. The higher congruence at $q$ below is a separate condition.
+
+\paragraph{A lower gap bound when $h=1$ and $5\mid r$.}
+In this case $q\equiv1\pmod5$ forces $4\mid M$. Since
+$M=E=\operatorname{lcm}(2,r)$, we have $4\mid r$, $M=r=20t$.
+Put $x=2^t$. Its residue has order $20$ modulo $q$, so the full
+$q^\rho$ in $2^r-1$ divides
+\[
+ \Phi_{20}(x)=x^8-x^6+x^4-x^2+1<x^8.
+\]
+It follows from $q^{N+\rho}>2^{r+c}$ that $N>3\rho/2$.
+
+For $t$ odd this improves to $N>4\rho$. The case $t=1$ is
+excluded by $q^\rho\le\Phi_{20}(2)=205$ and $q\ge97$.
+Otherwise $x\ge8$ and $z=2^{(t+1)/2}$ satisfies $z^2=2x$.
+For $\epsilon=\pm1$ define
+\[
+ P_\epsilon=x^4+\epsilon x^3z+x^3-x^2+x+\epsilon z+1.
+\]
+Multiplication gives
+$(x+1-\epsilon z)P_\epsilon=x^5+1+\epsilon x^2z$
+and $P_+P_-=\Phi_{20}(x)$. No odd prime divides both factors:
+it would divide the difference $2x^2z$ of the two numerators.
+Thus $q^\rho\le P_+<x^4(1+\sqrt{2/x}+1/x)\le(13/8)x^4$.
+Since $(13/8)^5<16\le2^c$, we get $q^{5\rho}<2^{r+c}<q^{N+\rho}$.
 
 \paragraph{Recovering $h$ from $q$.}
 Put $Q=q^\rho$. Since $2^E\equiv1\pmod Q$, the geometric sum for
@@ -2206,6 +2414,36 @@ It follows by writing $2^E=1+Qa$ in the geometric sum and retaining
 the constant and linear terms in $Q$. If $h=1$, the corresponding
 test is $1+2^ca\equiv0\pmod{q^{\rho+1}}$.
 
+\paragraph{What lifting the fifth-power test can detect.}
+For $q\ne5$ and $k\ge1$, reduction gives an isomorphism
+\[
+ (\mathbb Z/q^k)^\times/((\mathbb Z/q^k)^\times)^5
+ \ \simeq\ \mathbb F_q^\times/(\mathbb F_q^\times)^5 .
+\]
+Indeed, the kernel of reduction on units is a $q$-group, on which
+taking fifth powers is an automorphism. Equivalently, every fifth
+root of a nonzero residue lifts uniquely by Hensel's lemma.
+When $h=1$, knowing $1+2^ca\equiv0\pmod{q^\rho}$ fixes $a$
+modulo $q^\rho$. Its $q$ lifts modulo $q^{\rho+1}$ have identical
+fifth-power class, while exactly one gives
+$1+2^ca\equiv0\pmod{q^{\rho+1}}$. Thus lifting those same
+fifth-power characters cannot distinguish the required lift.
+The integer $a=(2^E-1)/q^\rho$ is fixed; the question is which
+lift that specific integer realizes.
+
+More exactly the original equality gives
+$2^{Eh}-(1-q^\rho/2^c)=q^{N+\rho}/2^c$. Both units on the
+left belong to $1+q^\rho\mathbb Z_q$. Write $\ell_q$ for the
+$q$-adic logarithm. It preserves valuations of differences there,
+and $v_q(\ell_q(2^E))=\rho$. Consequently
+\[
+ v_q\!\left(h-
+ \frac{\ell_q(1-q^\rho/2^c)}{\ell_q(2^E)}\right)=N.
+\]
+This identifies the precision required of the actual multiplier.
+It uses the full gap equation; an independent estimate for this
+valuation could be compared with the real gap bounds.
+
 \paragraph{Recovering $N$ at the prime $2$.}
 Put $u=(q-1)/2^c$. Once $h$ is known, $M=hE$ is known, and the
 two gap equations give
@@ -2218,9 +2456,7 @@ Combining this with $N\log q<M\log2$ gives
 \[
 \frac{2^c-1}{u}\log q<hE\log2.
 \]
-For fixed odd $u$, this excludes large $c$, since the left
-side grows exponentially in $c$ and the logarithmic estimate
-bounds $M$ by a polynomial in $\log q$.
+For fixed odd $u$ this now gives $2^c\le2519u+1$ directly.
 
 More generally take $j=\lceil\log_2 M\rceil$. The order of $q$
 modulo $2^{c+j}$ is $2^j$ by lifting, and the subgroup generated
@@ -2230,15 +2466,229 @@ lifting one bit at a time. Since $0<N<M\le2^j$, there is at most
 one candidate $N$. It must satisfy both the height window and
 the congruence at $q$ that follows from the gap equation.
 
-The reconstruction of $h$ gives a different uniform question. How small
-can the least positive residue of $-(2^ca)^{-1}$ modulo $q^\rho$
-be when the next congruence and the power-residue conditions hold?
-The logarithmic bound \eqref{eq:baker-M} bounds $Eh$ by
-$O((\log q)^2(\log\log q)^2)$ as $q$ varies. Thus a lower bound
-on this residue beyond the logarithmic range would suffice.
-The residue tests and the lifted gap equation give conditions on
-the same candidate, and a proof excluding all such candidates
-remains open.
+For the congruence at $q$, Lemma~\ref{lem:uniform-N} reduces the
+required lower bound to a constant: if the least positive residue
+of $-(2^ca)^{-1}$ modulo $q^\rho$ exceeds $630$, the case is excluded.
+
+\paragraph{A size bound from successive lifts at $2$.}
+Put $T=2^c$ and $n=N+\rho$. The same gap equation reads
+$q^\rho(1-q^N)=T-2^{m_1}$. The first lift gave $2^c\le Nu+1$.
+The next one gives
+\[
+ T^3\mid N^2(q-1)+NT+\tfrac12(n+\rho-1)T^2.
+\]
+Every term on the right is positive. The same sign persists at all
+orders, giving the following uniform inequality.
+\begin{lemma}\label{lem:lift-size}
+For $c\ge28$, put $k=\lfloor(c-2)/26\rfloor$. Then
+\[
+ \log_2 q>c+(c-23)k-1.
+\]
+\end{lemma}
+\begin{proof}
+Write the formal solution of $X^\rho(1-X^N)=t$ at $X(0)=1$
+as $X(t)=1-\sum_{i\ge1}b_i t^i$. To compute the coefficients,
+put $W=1-X^N$. Then $W=t(1-W)^{-\rho/N}$ and
+$1-X=1-(1-W)^{1/N}$. Lagrange inversion gives
+\[
+ b_i=\frac{\prod_{j=1}^{i-1}(i\rho-1+jN)}{i!\,N^i}>0 .
+\]
+In particular $b_1=1/N$, $b_2=(n+\rho-1)/(2N^2)$,
+giving the displayed congruence since $m_1\ge3c$.
+Also $N^{2i-1}b_i$ is an integer: in the equation for $1-X$
+the linear coefficient is $N$ and all coefficients are integers.
+For $i>1$ each nonlinear term contributing to $Nb_i$ is a
+product of $j\ge2$ earlier coefficients with indices summing to $i$.
+Induction bounds its denominator by $N^{2i-j}$.
+Since $\rho<N$, the product formula and $i!\ge(i/\exp(1))^i$
+give $b_i\le6^i$.
+
+For $1\le l\le k$ set $D=N^{2l-1}$. Whenever $m_1\ge(l+1)c$,
+substitution at $t=T-2^{m_1}$ gives
+\[
+ T^{l+1}\mid D(q-1)+D\sum_{i=1}^l b_iT^i.
+\]
+Indeed the series converges at this even $t$ in $\mathbb Z_2$;
+its value is $q$ by uniqueness of the odd root (the derivative
+at $1$ is $-N$). Now $6N^2<2^{26}$ and $4(6N^2)^l\le T$.
+The sum including its factor $D$ is at most
+$2(6N^2)^lT^l\le T^{l+1}/2$. Positivity and divisibility yield
+$q>T^{l+1}/(2N^{2l-1})$.
+
+The precision hypothesis holds successively. Initially
+$2^{m_1}=q^n-q^\rho+T>q^{n-1}>T^{n-1}$, with $n\ge7$.
+After step $l$ we have $q>T^l$ since $2N^{2l-1}<T$.
+Thus $2^{m_1}>T^{l(n-1)}\ge T^{l+2}$ for the next step.
+Take $l=k$ and use $N^2<2^{23}$.
+\end{proof}
+
+\paragraph{An effective bound for a prescribed range of $c$.}
+For fixed $N,\rho,c$ put $P(X)=X^{N+\rho}-X^\rho+2^c$.
+A multiple root $z$ would be nonzero and satisfy both
+$z^N=\rho/(N+\rho)$ and $2^c=Nz^\rho/(N+\rho)$, impossible
+since $|z|<1$. Schinzel and Tijdeman's theorem
+\cite{SchinzelTijdeman} therefore gives an effectively computable bound
+on $m_1$ in $P(q)=2^{m_1}$. Since $q^{n-1}<2^{m_1}$ and
+there are finitely many $(N,\rho)$, this bounds $q$ effectively
+for every prescribed range $c\le c_0$. The bound depends on $c_0$.
+Lemma~\ref{lem:lift-size} gives $c=O(\sqrt{\log q})$ for the
+complement. The explicit Schinzel--Tijdeman estimate of
+Bérczes, Evertse and Győry \cite[Thm.~2.3]{BEG} specializes to
+$m_1\le (10n^2)^{40n}2^{11nc}$: the ground field is $\mathbb Q$,
+the only place in $S$ is real, and the coefficient height is $c\log2$.
+This grows too fast to meet Lemma~\ref{lem:lift-size}.
+
+\subsection{The odd part of the binary gap}
+\begin{lemma}\label{lem:odd-gap-part}
+In the remaining case the odd part of $M$ is neither $1$ nor $3$.
+\end{lemma}
+\begin{proof}
+Write $M=2^a b$ with $b=1$ or $3$, and set $D=2^{256b}-1$.
+The only possible repeated prime factor of $D$ is $3$.
+For $b=1$ this follows from the factorizations of the Fermat numbers
+$F_i=2^{2^i}+1$, $0\le i\le7$ \cite{BrentFermat}.
+For $b=3$ the additional factors are those of
+$\Phi_{3\cdot2^i}(2)$, $0\le i\le8$ \cite{CunTables}.
+The certificate below verifies both products and the primality of every factor.
+
+Since $q^\rho\mid2^M-1$, $\rho\ge2$ and $q\nmid M$, the order
+$r=\operatorname{ord}_q(2)$ cannot divide $256b$: otherwise lifting
+at $r$ gives $q^\rho\mid D$. Thus $512\mid r$ and $256b\mid M$.
+Any prime $\ell$ with $512\mid\operatorname{ord}_\ell(2)$
+is $1$ modulo $1024$. Indeed $\ell\equiv1\pmod{512}$, so $2$ is
+a quadratic residue modulo $\ell$ and its order divides $(\ell-1)/2$.
+In particular $c\ge10$. Every prime factor of $2^M-1$ outside $D$
+has order divisible by $512$, so it contributes $1$ to $u\bmod1024$,
+where $u=(q-1)/2^c$. We have $Nu\equiv-1\pmod{1024}$.
+
+For $\ell^e\Vert D$, lifting across the power of two $M/(256b)$
+gives $v_\ell(A)=e$, since $q\nmid D$.
+If $\gcd(N,\ell-1)=1$, then $q^N\equiv1\pmod\ell$ forces $\ell\mid u$.
+Whenever $\ell\mid u$, its exponent in $u$ is exactly $e-v_\ell(N)$
+and must be positive. Otherwise its contribution is $1$.
+
+For $b=1$ the calculation can be done by hand. All factors of
+$F_0\cdots F_5$ must occur in $u$ exactly once: for $F_0,\ldots,F_4$
+the predecessors are powers of two; $F_5=641\cdot6700417$ and the
+odd parts of their predecessors are $5$ and $3\cdot17449$, respectively.
+Here $17449$ is prime, $N\le2519$, and $\gcd(N,30)=1$ since $4\mid M$.
+The factors of $F_i$ for $i\ge6$ are $1$ modulo $256$ by the same
+quadratic-residue argument. Hence $u\equiv2^{64}-1\equiv-1\pmod{256}$.
+So $N\equiv1\pmod{256}$, leaving $769,1537,1793$ (the value
+$257$ is excluded by $v_{257}(u)=1$ and $e=1$).
+For each of these three integers, each prime factor $\ell$ of
+$F_6F_7$ has $\gcd(N,\ell-1)=1$. Thus all occur in $u$ and
+$u\equiv2^{256}-1\equiv-1\pmod{1024}$, contrary to all three values of $N$.
+
+For both $b$ the same finite calculation starts with the residue $1$,
+multiplies by the permitted contributions of each $\ell^e\Vert D$,
+and retains $N$ if $-N^{-1}$ occurs. The full factorization of $D$
+is used in each column, including primes whose presence rules out
+$N$ by valuation alone.
+\[
+\begin{array}{c|c|c|c}
+b & \bmod 256 & \bmod 512 & \bmod 1024\\ \hline
+1&769,1537,1793&1537&\varnothing\\
+3&1537,1793&1537,1793&\varnothing
+\end{array}
+\]
+The PARI/GP certificate is \path{scripts/check_odd_part.gp}.
+\end{proof}
+
+For general odd $b$, $2^{256b}-1$ still contains every prime of
+$2^M-1$ that can affect $u\bmod1024$ when $256\mid M$.
+If the order of $q$ divides $256b$, first retain the possible
+$q>3$ whose square divides $2^{256b}-1$. Otherwise $c\ge10$
+and the same residue calculation applies. For varying $b$,
+the missing step is to control the factors of this smaller Mersenne
+number uniformly.
+
+The necessary factor can sometimes be located at a smaller exponent.
+Put $K=(q^N-1)/(q-1)$ and let $H$ be the product of the full
+$\ell$-powers in $N$ for primes $\ell\mid q-1$. Lifting shows that
+$K/H$ has only primes at which $q$ has order greater than $1$.
+Also $K/H\equiv N/H\pmod{2^c}$. If $N/H\not\equiv1\pmod{2^s}$
+for some $s\le c$, at least one $\ell\mid K/H$ differs from $1$
+modulo $2^s$. For $s\ge4$, quadratic residuosity as above gives
+$v_2(\operatorname{ord}_\ell(2))\le s-2$. Thus already
+\[
+ \ell\mid 2^{\,b\,2^{\min(a,s-2)}}-1,\qquad
+ 1<\operatorname{ord}_\ell(q)\mid\gcd(N,\ell-1).
+\]
+Here $\ell\mid K\mid A$ supplies $\operatorname{ord}_\ell(2)\mid M$.
+This identifies which factors could prevent the product argument
+from excluding another odd part $b$.
+
+In fact $H=1$ except possibly when $N=1093$ and $1093\mid q-1$.
+For a shared odd prime $\ell$, we have $\ell\nmid M$ by
+$\gcd(g,q-1)=1$. Then $v_\ell(2^M-1)=v_\ell(q-1)+v_\ell(N)\ge2$,
+so $2^{\ell-1}\equiv1\pmod{\ell^2}$. Checking this congruence at
+the odd primes up to $2519$ gives just $1093$ (same certificate);
+its only odd multiple in the range is itself. In particular, if
+$4\mid M$, $c\ge10$, and $H=1$, take
+$s=\max(4,1+v_2(N-1))$. This is at most $10$: the only integers
+in $[5,2519]$ congruent to $1$ modulo $1024$ are $1025$ and
+$2049$, both excluded by $\gcd(N,30)=1$.
+
+\paragraph{Using the same multiplier for several orders.}
+Let $t\mid N$ be prime, $t\ne q$, $t\nmid q-1$, and
+$\gcd(t-1,N)=1$. Then $\operatorname{ord}_t(2)\nmid M$:
+otherwise $t\mid A$, so the order of $q$ modulo $t$ divides
+$\gcd(N,t-1)=1$. The gcd hypothesis holds in particular for
+the least prime divisor of $N$.
+
+More generally, suppose $d\nmid M$. For every odd prime $P$
+with $d\mid\operatorname{ord}_P(2)$, we have $P\nmid q-1$:
+if $P\mid q-1$, then $P\mid u\mid A$ and
+$\operatorname{ord}_P(2)\mid M$. Since $E\mid q-1$, the full
+power of every such $P$ in $M=hE$ must divide $h$. Their product
+therefore divides $h$.
+
+Take $N=1793=11\cdot163$. Neither prime divides $q-1$ by the
+preceding valuation check, and neither can be $q$ since
+$q\equiv1\pmod{48}$. Their predecessors are coprime to $N$,
+so $10=\operatorname{ord}_{11}(2)\nmid M$ and
+$162=\operatorname{ord}_{163}(2)\nmid M$. As $M$ is even,
+$5\nmid M$ and $81\nmid M$. In particular $331$ cannot divide
+$A$, since $\operatorname{ord}_{331}(2)=30$.
+
+For each $t=11,163$, the factor $\Phi_t(q)\equiv t\equiv3\pmod4$
+requires a prime $\ell\equiv3\pmod4$ with $\operatorname{ord}_\ell(q)=t$.
+Consider assigning $23$ to $11$ and $13367$ to $163$. Both are
+primes in the required classes ($13367-1=82\cdot163$).
+Their orders at base $2$ are $11$ and $41$, forcing $11\cdot41\mid M$.
+Since $5$ divides both $\operatorname{ord}_{11}(2)=10$ and
+$\operatorname{ord}_{41}(2)=20$, the preceding argument gives
+$451\mid h$, whereas $h<(1793+2)/4$. Thus $451\nmid M$ for this
+$N$, and in particular this assignment is impossible.
+
+\paragraph{How much of $q-1$ can come from primes dividing $M$?}
+Let $V$ be the largest divisor of $u$ coprime to $M$ and $L=\log_2 q$.
+Then
+\[
+ L<1+c+\log_2 V+\sqrt M+2\log_2 M,\qquad M<5037L.
+\]
+Indeed, for each prime $\ell\mid\gcd(u,M)$ put $j=v_\ell(M)$ and
+$d=\gcd(\ell-1,M/\ell^j)$. Its order at base $2$ divides the even
+integer $d$. Lifting gives
+$v_\ell(u)+v_\ell(N)=v_\ell(2^d-1)+j$. The full $\ell$-power
+in $2^d-1$ belongs to one of $2^{d/2}\pm1$, so its binary
+logarithm is at most $1+d/2$. Put $z=\sqrt M$. For $3\le\ell\le z$
+use that $x/\log x$ increases on $[3,\infty)$; for $\ell>z$
+use $M/\ell\le z$. In both cases $d\le z\log\ell/\log z$.
+Summing over $\ell$ gives $\sum d\le2\sqrt M$, and both
+$\sum j\log_2\ell$ and the number of terms are at most $\log_2 M$.
+This proves the bound since $q=1+2^c u$.
+
+For example, $V\le2^c$ implies $c<448$ and $L<7168$.
+For $L\ge7168$ one has
+$1+\sqrt{5037L}+2\log_2(5037L)<0.85L$ (divide by $L$;
+each term decreases). Hence $L<(40/3)c$ in this range.
+If $c\ge448$, Lemma~\ref{lem:lift-size} gives $L>17c>7168$,
+a contradiction. With $c<448$, $L\ge7168$ is then impossible as well.
+In general the same inequality gives $\log_2 V\ge L-O(\sqrt L)$
+using Lemma~\ref{lem:lift-size}. There is no upper bound on $V$
+in terms of $c$ here.
 
 \subsection{Computational supplements}
 
@@ -2309,17 +2759,16 @@ as avoidance of splitting in $\mathbb Q(\zeta_s,2^{1/s})$, $s\mid N$.
 Open target: force $D\nmid(q-1)/2^{m_2}$ for a specified family of $M,N$.
 
 \item \textbf{Common gaps: full cyclotomic factorization.}
-Compute the least initial product of primes $7,11,13,\ldots$ for which
-$\varphi(d)\leq d/2$. Compare the exact bound from $H_d\mid A$ with
+For $d\le503$ with at most two prime factors, both at least $11$,
+compare the exact bound from $H_d\mid A$ with
 Section~\ref{sec:full-gcd}, retaining $2^{m_2/2}q^{n_1/2}$ in the
 denominator. Identify the prime-power common divisors untouched by
 this size argument.
 Use Section~\ref{sec:additional-returns}, where $dE\mid M$ is now
 necessary. Use $(2h-1)n_1<N$ and extend the residue table beyond
 $N=121$. For $N=5d$, compute the finite-field polynomial gcd and
-look for a condition on $d$ making it $1$. For the surviving
-$N=49$ family, combine further moduli while retaining the common
-exponent classes. Use \eqref{eq:ordinary-q-minus-one} to impose
+look for a condition on $d$ making it $1$ when $d\equiv1\pmod3$.
+Use \eqref{eq:ordinary-q-minus-one} to impose
 the additional restrictions from odd prime factors of $q-1$.
 
 \item \textbf{Descent and carries.}
@@ -2344,7 +2793,7 @@ Check the analytic bounds and the integer certificate in
 Section~\ref{sec:q-divides-exclusion}. For the remaining case,
 $q\nmid M$ and $\rho=n_1$ is even. Use the other cyclotomic factors
 to restrict multiples of $r$, retaining
-$2^{(q-1)/3}\equiv1\pmod{q^2}$. An absolute bound on $q$ remains open.
+$2^{(q-1)/3}\equiv1\pmod{q^2}$. An effective absolute bound on $q$ remains open.
 \end{enumerate}
 
 \appendix
@@ -2415,15 +2864,16 @@ $2^M$&$1$&$1$\\
 $2^{q-1}$&$1$&$1$\\
 $2^{(q-1)/2}$&$1$&$1$\\
 $2^{(q-1)/3}$&$1$&$1$\\
+$2^{(q-1)/12}$&$1$&$1$\\
 $2^{(q-1)/6}$&$1$&$1$\\
 $2^{(q-1)/\ell}$, $\ell\mid q-1$ odd and $\eta_\ell=1$&$1$&$1$\\
 $2^k$, if $r\mid k$&$1$&$1$\\
 $2^k$, if $r\nmid k$&$-1$&$-1$\\\hline
 \end{longtable}}
-Since $q\equiv1\pmod8$, $r\mid(q-1)/2$. Together with
-$r\mid(q-1)/3$, this gives $r\mid(q-1)/6$.
+By quadratic reciprocity on divisors of $A$, $r\mid(q-1)/4$.
+Together with $r\mid(q-1)/3$, this gives $r\mid(q-1)/12$.
 The order remains $r$ modulo $q^2$, so the signs in the last two
-rows agree. Also $v_2(r)\le c-1$.
+rows agree. Also $v_2(r)\le c-2$.
 
 For each prime power $\ell^f\mid A$,
 \[
@@ -2447,16 +2897,20 @@ $p$ modulo $5$&$2,3$; if $4\mid M$, the residue is $2$\\
 $p$ modulo $480$&$257,353$\\
 $p$ modulo $g$&$1$\\\hline
 Exponents&$m_1,m_2,n_1$ even; $n_2$ odd; $n_1\ge2$\\
-Gaps&$M\ge6$ even; $N\ge5$ and $\gcd(N,6)=1$\\
+Gaps&$M\ge6$ even; $5\le N\le2519$ and $\gcd(N,6)=1$\\
+Odd part of $M$&At least $5$ (Lemma~\ref{lem:odd-gap-part})\\
 $4\mid M$&$m_2\equiv0\pmod4$, $5\nmid N$\\
 $M\equiv2\pmod4$&$m_2+n_1\equiv2\pmod4$, $q^N\equiv3\pmod5$\\
-Common divisor&$\gcd(g,510q(q-1))=1$, $\gcd(g,E)=1$, $gE\mid M$\\
-$h=M/E$&$(2h-1)n_1<N$, $h<(N+2)/4$\\
+Common divisor&$\gcd(g,3570q(q-1))=1$, $\gcd(g,E)=1$, $gE\mid M$\\
+$h=M/E$&$h\le630$, $(2h-1)n_1<N$, $h<(N+2)/4$\\
+$4\mid r$&$h$ is a fourth power modulo $q$\\
+$8\mid r$&$2h$ is an eighth power modulo $q$\\
+$5\mid r$&$q\mid F_{(q-1)/5}$ and $h$ is a fifth power modulo $q$\\
 $r\equiv4\pmod8$, $h\le32$&$(4h-1)n_1<N$\\
-$g>1$&$N\ge5g$, every prime factor of $g$ is at least $7$,
-$\varphi(g)>g/2$\\
+$g>1$&$N\ge5g$, $g\le503$, at most two prime factors with
+multiplicity, each at least $11$\\
 $N=5g$, $g>1$&$n_1=2$, $M=gE$\\
-Guaranteed $g=1$&$N<49$; any prime $N$; $N=5^a17^b$\\
+Guaranteed $g=1$&$N<65$; $3\mid n_2$; any prime $N$; $N=5^a7^b17^j$\\
 $N=5d$, $d$ prime&$g=1$ for $d=7,17,29,41,43,73,89,109,113$\\\hline
 \end{longtable}}
 Section~\ref{sec:forcing-common-factor} gives a way to force $g>1$

@@ -1,0 +1,3 @@
+[submodule "lean/DiophantineBinaryExp"]
+	path = lean/DiophantineBinaryExp
+	url = ../DiophantineBinaryExp.git

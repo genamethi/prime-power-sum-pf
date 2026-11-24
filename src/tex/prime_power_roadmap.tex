@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in,top=0.85in,bottom=0.85in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+
+\title{Two partitions of a prime\protect\\Proof roadmap}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+The case $q=3$ gives $11=2^3+3=2+3^2$. For $q>3$, the main
+reductions are a uniform bound on the odd gap, exclusion of $q\mid M$,
+and recovery of the only possible multiplier $h$ from $q$. The remaining
+problem is to exclude the resulting candidate as $q$ varies.
+The initial square argument and the later use of quadratic reciprocity
+belong at different points in the proof.
+
+\section{The integer reduction}
+
+Write $p=2^{c+M}+q^e=2^c+q^{e+N}$ as in the concise notes. The
+identities to carry forward are
+\[
+ Aq^e=2^M-1,\qquad A2^c=q^N-1,\qquad Ap=2^Mq^N-1.
+\]
+Reduction modulo $3$ gives $2\mid M$. If $N$ is even, write
+$Ap=(X-1)(X+1)$ with $X^2=2^Mq^N$. Both factors exceed $A$,
+contrary to primality of $p$. This is the work done by the initial
+quadratic form. With $N$ odd, $Ap=qX^2-1$ can be read as a signed
+norm in $\mathbb Q(\sqrt q)$ and gives $(q/p)=1$. That residue
+condition can stay as an auxiliary congruence.
+
+Factoring $2^M-1$ gives $q^e\le 2^{M/2}+1$ and $A\ge 2^{M/2}-1$.
+Keep the short arguments for $A=1$, $N=1$, and $q=3$ together.
+The rest of the integer reduction gives
+\[
+ c=v_2(q-1)\text{ even},\quad e\ge2\text{ even},\quad
+ \gcd(N,6)=1,\quad N\ge5,\qquad 2^{M/2}<q^N<2^M.
+\]
+In particular, $3\nmid N$ uses the common divisor argument at $d=3$.
+With $r=\ord_q(2)$ and $\rho=v_q(2^r-1)$, lifting gives
+$e=\rho+v_q(M)$ and $r\mid(q-1)/3$. Keep the modulo $8$ and
+$5$ arguments, which give $q\equiv1,97,193\pmod{240}$
+in the remaining branch.
+
+For later use, if a prime $d$ divides both $M$ and $N$, put
+$Y=2^{M/d}q^{N/d}$. The size of $p$ gives $\ord_p(Y)=d$
+and $Y-1\mid A$. If $d\mid q-1$, the second partition then gives
+$1\equiv 2^c+1\pmod d$, a contradiction. Thus with
+$E=\lcm(2,r)$ we have $E\mid M$, $E\mid q-1$ and $\gcd(E,N)=1$.
+This is the coprimality used below.
+
+\section{Laurent's bound and the finite branch}
+
+The following ordering shortens the bound in the long notes.
+First $q^{e+N}>2^{c+M}$, since $q^e>2^c$. Also $q^e\le2^{M/2}+1$,
+so
+\[
+ q^{e+N}>2^{c+M}\ge 2^c(q^e-1)^2>q^{2e},
+ \qquad\text{hence } e<N.
+\]
+Here $c\ge2$ and $q^e>2$. This step applies also when $q\mid M$.
+
+Set $m_1=c+M$, $n_2=e+N$ and $\Lambda=n_2\log q-m_1\log 2$.
+The gap equations give $0<\Lambda<(27/26)q^{-N}$.
+The starting point was Miyazaki--Scott--Styer's use of this
+estimate for exponential equations \cite[Proposition~6.1]{MSS}.
+From Laurent's Corollary~2
+\cite{Laurent}, take $D=1$, $(m,C_2)=(10,25.2)$ and heights
+$H_1=1$, $H_2=\log q$. Then
+\[
+ b'=\frac{m_1}{\log q}+n_2
+ <(1+1/\log 2)n_2<5N.
+\]
+The factor $\log q$ in Laurent's bound cancels the one in
+$N\log q$. The resulting inequality is
+\[
+ N<25.2\max\{10,\log(5N)+0.38\}^2+1.
+\]
+At $N=2521$ there is equality in the numerical comparison.
+The ratio $(x-1)/\max\{10,\log(5x)+0.38\}^2$ increases
+for $x\ge2521$. Thus $N\le2519$ by oddness, $n_2\le5037$,
+and $M<5037\log_2 q$.
+
+If $q\mid M$, then $qr\mid M$, and $r>\log_2 q$.
+Consequently $q<5037$ and $M<5037\cdot13=65481$.
+The existing finite check in \path{scripts/exp-gcd/check_q_divides_gap.lua}
+works with these cutoffs. It leaves 31 primes after the initial
+conditions, rejects 28 by the minimum $M$, one by $v_3(M)$, and
+two modulo $5$. The script with its original, larger limits also
+returns zero. This closes the $q\mid M$ branch.
+
+\section{The multiplier determines the candidate}
+
+Now $q\nmid M$, $e=\rho$, and $q\ge97$. Set
+\[
+ Q=q^\rho,\qquad M=hE,\qquad a=\frac{2^E-1}{Q}.
+\]
+The full power $Q$ belongs to one of the coprime factors $2^{E/2}\pm1$.
+Thus $2^E\ge(Q-1)^2>Q$. From
+$q^{n_2}>2^{c+hE}>q^{\rho h}$ we get $h\le1260$.
+Since $Q\ge97^2$ and $2h\le2520$, Bernoulli's inequality gives
+$(1-1/Q)^{2h}\ge1-2h/Q>1/2$. Hence
+\[
+ q^{n_2}>2^{c+hE}\ge 2^c(Q-1)^{2h}>Q^{2h},
+ \qquad (2h-1)\rho<N,\qquad h\le630.
+\]
+In particular $h<Q$. These bounds use the single application
+of Laurent above.
+
+Since $2^E\equiv1\pmod Q$, the geometric sum gives
+\[
+ A=a\sum_{j=0}^{h-1}2^{jE}\equiv ah\pmod Q,
+ \qquad
+ h\equiv-(2^ca)^{-1}\pmod Q.
+\]
+The last congruence uses $A2^c=q^N-1$ and $N>\rho$.
+Thus $h$ is the least positive residue on the right, and a residue
+above $630$ excludes $q$. This gives a function of $q$ even before
+factoring $a$.
+
+For the candidate $h$ in range define the integer
+\[
+ F(q)=1+2^c\frac{2^{hE}-1}{Q}.
+\]
+The remaining equation is $F(q)=q^N$. In particular $N=v_q(F(q))$
+and the candidate must satisfy
+\[
+ 5\le v_q(F(q))\le2519,\qquad
+ (2h-1)\rho<v_q(F(q)),\qquad \gcd(v_q(F(q)),6E)=1.
+\]
+These are necessary conditions on the actual integer $F(q)$.
+Showing that it always fails one of them would close the proof.
+More generally it suffices to rule out $F(q)=q^N$ in this range
+under the standing hypotheses. The original problem also requires
+$p=2^{c+hE}+Q$ prime. The bound on $N$ reduces the exponent choices
+to a finite list. The Roth argument in the long notes proves
+finiteness as $q$ varies without an effective cutoff.
+
+\section{Where reciprocity enters}
+
+The full order condition on the part of $A$ fixed by $q$ is
+$\ord_a(q)\mid N$, because $a\mid A$ and $q^N\equiv1\pmod A$.
+In particular an order sharing a prime factor with $E$, or exceeding
+$2519$, excludes that $q$. For a surviving $h$, the valuation above
+also fixes the exponent to use in this condition.
+
+\paragraph{Quadratic reciprocity.}
+The supplement for $2$ already enters in the modulo $8$ reduction.
+For each prime $\ell\mid A$, the order of $q$ modulo $\ell$ is odd,
+so $(q/\ell)=1$. Since $q\equiv1\pmod4$, we get $(\ell/q)=1$.
+Thus every positive divisor of $A$ is a square modulo $q$. Taking
+$a$ and using $2^cah\equiv-1\pmod q$ shows that $h$ is a square.
+This is a short lemma worth keeping. A quadratic field also occurs
+through the unit in $\mathbb Q(\sqrt5)$ in the conductor-five test.
+That belongs with the cyclotomic argument.
+
+\paragraph{Cyclotomic fields and power reciprocity.}
+Pomerance \cite[\S2]{PomCycl} gives the starting point for studying
+the prime divisors of $\Phi_d(2)$ by their orders at base $2$.
+Brent \cite[\S\S2--3]{Brent} develops the Gauss and Aurifeuillean
+factorizations used in the longer notes.
+For a prime power $m=s^b\mid r$, put $B=2^{E/m}$.
+The norm of $B-\zeta_m$ selects $\Phi_m(B)$, whose prime factors
+away from $q,s$ divide $a$. The power-residue symbol at each such
+prime ideal must be $1$ by the order condition. The reciprocity
+product computes their product from local terms above $q$
+after the terms at $s$ have been shown trivial. A nontrivial product
+proves an order obstruction without factoring $a$. The concise
+notes give the explicit formula, adapted from Sharifi's use of
+reciprocity on cyclotomic norms \cite[\S3, (5)]{SharifiCycl}.
+Equality to $1$ can come from cancellation or from the exponent
+of the symbol failing to detect the full $s$-part of an order.
+
+The test can also prescribe a power class for $h$.
+At conductor five, the separate factor gives the Fibonacci
+condition $q\mid F_{(q-1)/5}$ (here $F_j$ is the Fibonacci
+sequence), and the grouped test then requires $h$ to be a fifth
+power modulo $q$. When the Fibonacci condition holds, $h=1$
+passes both. A general reciprocity proof still needs to show
+that some product is nontrivial, or that the primes passing the
+products fail a further necessary condition such as the required
+valuation of $F(q)$.
+
+\section{Working proof and Lean}
+
+\begin{enumerate}
+\item Formalize the integer reduction through $e<N$, including the
+$q=3$ case. Use the ordered partitions as the input and keep the
+three equations for $A$ together.
+\item State the specialization of Laurent as an explicit dependency.
+Prove the integer consequences of the bound and replace the Lua
+check by a certified finite calculation if using Lean for the
+whole argument. The smaller check needs only the valuation at $3$
+and the order test at $5$ after the size test.
+\item Prove the multiplier bound, inverse congruence, and reduction
+to $F(q)=q^N$. This is the endpoint of the current proof.
+\item Keep the elementary quadratic lemma available. Add the
+general cyclotomic reciprocity calculation to the formal proof
+when a final argument uses it.
+\end{enumerate}
+
+For a shorter natural-language proof, retain the common-divisor
+lemmas needed for $3\nmid N$ and $\gcd(E,N)=1$. Keep the wider
+coprimality casework, forbidden odd divisors, pair scans, conductor
+examples and alternative approximation bounds in the research notes.
+Their main role so far is to exclude families or to test candidate
+arguments for the last step.
+
+\bibliographystyle{alpha}
+\bibliography{prime_power_notes}
+\end{document}

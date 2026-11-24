@@ -1,5 +1,5 @@
-// Build: g++ -O3 -std=c++17 -pthread scripts/scan_q_native.cpp -lflint -lgmpxx -lgmp -o scan_q_native
-// Run: ./scan_q_native MAX_Q THREADS > q-native.csv
+// Build: make scan_q_native
+// Run: ./build/bin/scan_q_native MAX_Q THREADS > q-native.csv
 #include <flint/ulong_extras.h>
 #include <gmpxx.h>
 #include <algorithm>
@@ -13,8 +13,8 @@
 #include <vector>
 
 using U = unsigned long;
-using Counts = std::array<U, 6>;
-enum class Mode { Both, Candidate, Wieferich };
+using Counts = std::array<U, 15>;
+enum class Mode { Both, Candidate, Wieferich, Branch };
 
 static U valuation(U x, U p) {
     U v = 0;
@@ -58,7 +58,34 @@ static void scan(U limit, Mode mode, std::atomic<U>& next, std::mutex& output, C
             U c = valuation(q-1, 2);
             bool c_ok = c >= 4 && c % 2 == 0;
             if (!c_ok && mode != Mode::Wieferich) continue;
-            bool order_ok = (q-1)%6 == 0 && n_powmod2(2, (q-1)/6, q) == 1;
+            if (mode == Mode::Branch || mode == Mode::Candidate) {
+                U i = residue == 1 ? 0 : residue == 97 ? 1 : 2;
+                bool branch_ok, cheap, fifth_ok = true;
+                if (residue == 1) {
+                    if (mode == Mode::Candidate && c % 4 != 0) continue;
+                    U x = n_powmod2(2, (q-1)/30, q);
+                    fifth_ok = x == 1;
+                    // x^5 gives the former order test without another large exponent.
+                    cheap = fifth_ok || (mode == Mode::Branch && n_powmod2(x,5,q)==1);
+                    branch_ok = cheap && c % 4 == 0;
+                } else {
+                    U exponent = 2*((q-1)>>c)/3;
+                    U x = n_powmod2(2, exponent, q);
+                    branch_ok = x == 1;
+                    // Recover the old test by c-2 squarings only for comparison.
+                    if (mode == Mode::Branch && !branch_ok) {
+                        U inv = n_preinvert_limb(q);
+                        for (U k=2; k<c && x!=1; ++k)
+                            x=n_mulmod2_preinv(x,x,q,inv);
+                    }
+                    cheap = x == 1;
+                }
+                if (cheap) ++counts[6+i];
+                if (branch_ok) ++counts[9+i];
+                if (branch_ok && fifth_ok) ++counts[12+i];
+                if (mode == Mode::Branch || !branch_ok || !fifth_ok) continue;
+            }
+            bool order_ok = mode == Mode::Candidate || ((q-1)%6 == 0 && n_powmod2(2, (q-1)/6, q) == 1);
             bool structural = mod240 && c_ok && order_ok;
             if (!structural && mode != Mode::Wieferich) continue;
             if (structural) ++counts[1];
@@ -117,9 +144,66 @@ static void scan(U limit, Mode mode, std::atomic<U>& next, std::mutex& output, C
     flint_cleanup();
 }
 
+#include "q_prefix_scan.hpp"
+
 int main(int argc, char** argv) {
+    try {
+        std::string command=argc>1 ? argv[1] : "";
+        U workers=std::max(1u,std::thread::hardware_concurrency());
+        if (command=="prefix" || command=="factor" || command=="factor-candidates") {
+            int kept=2;
+            for (int i=2;i<argc;++i) {
+                if (std::string(argv[i])=="--threads") {
+                    if (++i==argc) throw std::runtime_error("--threads requires a count");
+                    workers=prefix_scan::number(argv[i]);
+                    if (workers>256) throw std::runtime_error("maximum is 256 workers");
+                } else argv[kept++]=argv[i];
+            }
+            argc=kept;
+        }
+        if (argc==2 && command=="factor-candidates") return prefix_scan::factor_candidates(workers);
+        if ((argc==2 && command=="--help") ||
+            (argc==3 && std::string(argv[2])=="--help")) {
+            std::cout << R"(Large-base prefix scan
+  ./build/bin/scan_q_native prefix N2 J_MIN J_MAX [--compare] [--threads K]
+
+  N2 is the larger exponent of q (odd, at least 7).
+  j = floor(m1/N2) = bit length of q minus 1. Both endpoints are inclusive.
+  For 1000-bit bases use J_MIN = J_MAX = 999.
+  Default: use a shared zero bit to exclude a whole band when possible.
+  --compare measures runs at every eligible position and reports the longest
+  for bases passing and failing the mod 240 test, separately for each s = m1 mod N2.
+  Candidates go to stdout as CSV. Progress and comparison counts go to stderr.
+  --threads K limits concurrent jobs (default: detected logical CPUs).
+
+  Example: ./build/bin/scan_q_native prefix 7 3300 3400 --compare > hits.csv 2> runs.log
+
+Prime scan
+  ./build/bin/scan_q_native MAX_Q THREADS [branch|candidate|wieferich [MIN_Q]]
+  branch counts old and branch-specific filter survivors for each q mod 240.
+  candidate applies structural filters before testing repeated factors.
+  wieferich tests odd primes q for q^2 dividing 2^(q-1)-1.
+  The prefix scan independently checks q^2 dividing 2^M-1 on run survivors.
+
+Full Mersenne factorization
+  ./build/bin/scan_q_native factor-candidates [--threads K] < hits.csv
+  ./build/bin/scan_q_native factor M [M ...] [--threads K]
+  Writes prime factors of 2^M-1 and their multiplicities as CSV.
+)";
+            return 0;
+        }
+        if (argc>=2 && std::string(argv[1])=="prefix") return prefix_scan::scan(argc,argv,workers);
+        if (argc>=2 && std::string(argv[1])=="factor") {
+            if (argc<3) throw std::runtime_error("usage: scan_q_native factor M [M ...] [--threads K]");
+            int i=2;
+            workers=std::min(workers,2UL*(argc-2));
+            return prefix_scan::factor_jobs(workers,[&]() -> U {
+                return i<argc ? prefix_scan::number(argv[i++]) : 0;
+            });
+        }
+    } catch (const std::exception& error) { std::cerr<<error.what()<<"\n"; return 2; }
     if (argc < 3 || argc > 5) {
-        std::cerr << "usage: scan_q_native MAX_Q THREADS [candidate|wieferich [MIN_Q]]\n";
+        std::cerr << "usage: scan_q_native MAX_Q THREADS [branch|candidate|wieferich [MIN_Q]]\n";
         return 2;
     }
     U limit = std::stoul(argv[1]), workers = std::stoul(argv[2]);
@@ -127,13 +211,14 @@ int main(int argc, char** argv) {
     Mode mode = Mode::Both;
     if (argc >= 4) {
         std::string option = argv[3];
-        if (option == "candidate") mode = Mode::Candidate;
+        if (option == "branch") mode = Mode::Branch;
+        else if (option == "candidate") mode = Mode::Candidate;
         else if (option == "wieferich") mode = Mode::Wieferich;
         else return 2;
     }
     U first = argc == 5 ? std::stoul(argv[4]) : 2;
     if (first < 2 || first > limit) return 2;
-    std::cout << "q,q_gt_3,mod_3,mod_8,mod_240,c_even_ge_4,r_divides_q_minus_1_over_6,"
+    if (mode != Mode::Branch) std::cout << "q,q_gt_3,mod_3,mod_8,mod_240,c_even_ge_4,r_divides_q_minus_1_over_6,"
                  "rho_ge_2,rho_even,E_rad_r_divides_q_minus_1,ordinary_divisors_q_minus_1,"
                  "E_multiple_3_implies_q_mod_9,E_multiple_3_implies_q_mod_7,"
                  "E_multiple_4_implies_q_mod_5,E_multiple_8_implies_q_mod_17,"
@@ -150,6 +235,15 @@ int main(int argc, char** argv) {
     Counts total{};
     for (auto& count : counts)
         for (std::size_t i = 0; i < total.size(); ++i) total[i] += count[i];
+    if (mode == Mode::Branch) {
+        std::cout << "min_q,max_q,q_mod240,cheap,branch_pass,final_pass\n";
+        std::array<U,3> residues{1,97,193};
+        for (U i=0;i<3;++i)
+            std::cout << first << ',' << limit << ',' << residues[i] << ','
+                      << total[6+i] << ',' << total[9+i] << ',' << total[12+i] << '\n';
+        std::cerr << "primes=" << total[0] << '\n';
+        return !std::cout;
+    }
     std::cerr << "primes=" << total[0] << " cheap=" << total[1] << " repeated=" << total[2]
               << " even_rho=" << total[3] << " exploratory=" << total[4]
               << " all_flags=" << total[5] << '\n';
