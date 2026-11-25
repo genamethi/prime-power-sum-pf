@@ -32,7 +32,7 @@
 ```
 
 - Start with the [proof roadmap](docs/notes/prime_power_roadmap.pdf). The [concise notes](docs/notes/prime_power_notes_concise.pdf) give the arithmetic reductions, and the [long notes](docs/notes/prime_power_notes.pdf) include the supporting calculations and alternative arguments.
-- The Lean project maps the written argument to prospective Lean statements and library dependencies. Its outline and proof plan are in `lean/DiophantineBinaryExp/README.md`. [Lean project](https://github.com/genamethi/DiophantineBinaryExp#readme)
+- The Lean project proves that the only prime pair admitting two such partitions is (11, 3). Its proof outline is in `lean/DiophantineBinaryExp/README.md`. [Lean project](https://github.com/genamethi/DiophantineBinaryExp#readme)
 - The [notebook](labs/prime-power.ipynb) collects interactive experiments. The [q-comparison guide](scripts/qcomp_readme.md) documents the scans and their outputs.
 
 ## Usage

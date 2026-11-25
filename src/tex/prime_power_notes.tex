@@ -22,8 +22,12 @@ We know of a single example where $p$ has two solutions, $p =  11$. Do others ex
 considering basic arithmetic obstructions that prevent certain solutions. This breaks down to two main cases,
 based on whether a common factor of putative solutions, $A$, is either greater than or equal to 1.
 
-\section*{Proof sketch}
-\addcontentsline{toc}{section}{Proof sketch}
+\section*{Earlier proof route}
+\addcontentsline{toc}{section}{Earlier proof route}
+
+The classification is proved in Section~\ref{sec:quadratic-norm}.
+Section~\ref{sec:proof-reading} lists its prerequisites. The argument
+below records the route through orders and reciprocity.
 
 Write $M=m_1-m_2$ and $N=n_2-n_1$. Subtracting the partitions
 gives $Aq^{n_1}=2^M-1$ and $A2^{m_2}=q^N-1$, with $\gcd(A,2q)=1$.
@@ -2795,6 +2799,132 @@ $q\nmid M$ and $\rho=n_1$ is even. Use the other cyclotomic factors
 to restrict multiples of $r$, retaining
 $2^{(q-1)/3}\equiv1\pmod{q^2}$. An effective absolute bound on $q$ remains open.
 \end{enumerate}
+
+
+\section{An effective cutoff for the prime base}
+\label{sec:effective-q-cutoff}
+
+Use the branch $A>1$, $q>3$, $q\nmid M$. Write $c=m_2$, $e=n_1=\rho$,
+$n=n_2=e+N$, $T=2^c$, and $Q=q^e$. Here $e\ge2$ is even, $n$ is odd,
+$e<N\le2519$, and $T\le q-1$. With $M=hE$, take the square root
+$X=2^{hE/2}$ in the gap equation:
+\[
+X^2=1-\frac{Q}{T}+\frac{q^n}{T}.
+\]
+This is the equation underlying the congruence that recovers $h$
+in Section~\ref{sec:reciprocity-h}. The square root works also for $h=1$.
+
+Set $k=\lfloor n/(2e)\rfloor$, so $1\le k\le630$ and
+\[
+2ek\le n-1,\qquad (n+1)/2\le (k+1)e\le n.
+\]
+The truncated square root
+\[
+S=\sum_{i=0}^{k}\binom{1/2}{i}(-Q/T)^i
+\]
+satisfies $S^2\equiv1-Q/T\equiv X^2\pmod{Q^{k+1}}$. The
+denominators are powers of two. Since $S\equiv1\pmod q$, exactly
+one of $X-S$ and $X+S$ is divisible by $q$. For the corresponding
+sign $\varepsilon$, $X-\varepsilon S\equiv0\pmod{Q^{k+1}}$.
+
+Put $B=Q/T>q$. The binomial coefficients have absolute value at
+most one, so $|S|<2B^k$. Also $X^2>q^n/(2T)$, and hence
+\[
+\frac{X^2}{B^{2k}}
+>\frac{q^{n-2ek}T^{2k-1}}2>4.
+\]
+Thus $X>|S|$. The integer $L=(4T)^k$ clears the denominators of $S$,
+since $4^i\binom{1/2}{i}$ is integral. The nonzero integer
+$L(X-\varepsilon S)$ is divisible by $Q^{k+1}$. Using $X<q^{n/2}$
+gives
+\[
+q^{(k+1)e}\le |L(X-\varepsilon S)|<2(4T)^kq^{n/2},
+\qquad
+\log_2 q<2+2k(c+2)\le1260c+2522.
+\]
+
+Lemma~\ref{lem:lift-size} gives
+\[
+\log_2 q>c+(c-23)\left\lfloor\frac{c-2}{26}\right\rfloor-1
+\quad(c\ge28).
+\]
+If $c\ge32768$, the floor is at least $1260$ and the lower bound
+is at least $1261c-28981>1260c+2522$. Therefore $c<32768$, giving
+\[
+\boxed{q<2^{41\,290\,202}.}
+\]
+Section~\ref{sec:q-divides-exclusion} treats the other branch of the
+effective argument.
+
+\section{Quadratic norms modulo two}
+\label{sec:quadratic-norm}
+
+\begin{lemma}\label{lem:quadratic-norm}
+For primes $p,q$, two distinct partitions with positive exponents
+force $(p,q)=(11,3)$.
+\end{lemma}
+\begin{proof}
+Lemmas~\ref{lem:Aone} and~\ref{lem:qthree} treat $A=1$ and $q=3$.
+Suppose $q>3$. Write $e=n_1$ and $n=n_2$. By
+Lemma~\ref{lem:new-parities}, $m_1,m_2,e$ are even and $n$ is odd. Set
+\[
+x=2^{m_1/2},\qquad y=2^{m_2/2},\qquad D=q^e-2^{m_2}.
+\]
+Then $D$ is odd and $D>1$, since $2^{m_2}\le q-1$ by
+Lemma~\ref{lem:valuations} and $e\ge2$. The two partitions give
+\[
+x^2+D=q^n,\qquad y^2+D=q^e.
+\]
+
+Work in $R=\mathbb Z[w]$ with $w=\sqrt{-D}$. Choose the sign of $y$
+so that $q\nmid x+y$. Such a sign exists since $q\nmid2x$. Take
+$\alpha=x+w$ and $\beta=y+w$, with respective norms $q^n$ and $q^e$.
+Put $H=q^{ne}$ and $U=\alpha^e\overline\beta^{\,n}$.
+In $R/HR$, the sum $\overline\alpha+\beta=x+y$ is a unit by
+Bézout over $\mathbb Z$. Thus $\overline\alpha^{\,e}$ and
+$\beta^n$ generate the unit ideal in $R/HR$. Both annihilate $U$
+there, because
+\[
+\alpha^e\overline\alpha^{\,e}=\beta^n\overline\beta^{\,n}=H.
+\]
+It follows that $U=Hz$ for some $z\in R$. Taking norms gives
+$\operatorname{Norm}(z)=1$. Since $D>1$, the equation
+$a^2+Db^2=1$ for $z=a+bw$ forces $z=\pm1$.
+
+Modulo $2R$, both $\alpha$ and $\overline\beta$ reduce to $w$.
+We have $w^2=1$ in this quotient, so $U$ reduces to $w^{e+n}=w$.
+But $Hz$ reduces to $1$ because $H$ is odd and $z=\pm1$.
+The basis $1,w$ of $R$ gives $w\ne1$ modulo $2R$, a contradiction.
+The pair $(11,3)$ is attained by $11=2^3+3=2+3^2$.
+\end{proof}
+
+This is the quadratic-order argument formalized in \path{Quadratic.lean}.
+It works with $D$ itself, even when $D$ has square factors.
+
+\section{Reading the proof}
+\label{sec:proof-reading}
+
+\begin{enumerate}
+\item Section~\ref{sec:setup} gives the common factor $A$, the
+identity for $Ap$, the gap parities, and the case $A=1$.
+\item From Section~\ref{sec:bounds}, use $m_2=v_2(q-1)$ from
+Lemma~\ref{lem:valuations} and the half-gap bound
+$q^{n_1}\le2^{M/2}+1$ from Lemma~\ref{lem:bounds}.
+Also use $q\equiv1\pmod3$ for $q>3$: since $M$ is even,
+$3\mid A$ when $q\ne3$, so $q^N\equiv1\pmod3$. The gap $N$ is odd.
+\item In Section~\ref{sec:parities}, read the proof of the base
+$3$ case and the parity argument for $m_1,m_2,n_1,n_2$.
+\item Section~\ref{sec:quadratic-norm} closes the $q>3$ case.
+\end{enumerate}
+
+The rest of the size and residue estimates in
+Sections~\ref{sec:bounds} and~\ref{sec:parities}, and the route
+from Sections~\ref{sec:mersenne} through~\ref{sec:exercises}, are
+unused in the classification. This includes the common-divisor
+analysis, Laurent's bound, the finite check for $q\mid M$, and the
+order and reciprocity tests. The effective cutoff in
+Section~\ref{sec:effective-q-cutoff} and the appendices are also
+independent of the classification proof.
 
 \appendix
 \clearpage
